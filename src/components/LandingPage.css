@@ -1,0 +1,147 @@
+.login-main-lp {
+  /* align-items: center;
+  justify-content: center;
+  display: flex; */
+}
+
+.image-container-lp {
+  /* position: relative;
+  display: inline-block; */
+  /* overflow: hidden; */
+   /* Hide the cropped circular area */
+}
+
+.image-lp {
+  display: block;
+width: 100%;
+  height: 100%;
+  /* margin-top: 3px; */
+}
+
+.image_container_scurve {
+  /* display: block; */
+  /* width: 100px; */
+  /* height: 400px; */
+  /* margin-top: -290px; */
+  /* z-index: -1; */
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.image-lp_scurve {
+  display: block;
+  width: 100%; /* Set the width of your image */
+  height: auto;
+  
+}
+
+.image-crop-lp {
+  position: absolute;
+  width: 99%;
+  height: 240px;
+  bottom: 0;
+  left: 2px;
+  border-top-left-radius: 40%;
+  background-color: white;
+}
+
+.image-crop-right-lp {
+  position: absolute;
+  width: 40%;
+  height: 50px;
+  top: 53%;
+  left: 60%;
+  background-color: white;
+}
+
+.line-lp{
+  height:5px;
+  width:40px;
+  background-color:black;
+  margin-top:15px;
+}
+
+.indicators-lp {
+  position: absolute;
+  bottom: 12px;
+left: 0;
+right: 0;
+bottom: 10;
+text-align: center;
+}
+
+.indicator-lp {
+  /* background-color: gray; */
+  height: 9px;
+  width: 9px;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 5px #555;
+  margin: 3px;
+  cursor: none;
+}
+
+.indicator-inactive-lp {
+  background-color: black;
+}
+
+/* .image-message-lp {
+  display: flex;
+  justify-content: center;
+  margin-top: -50px;
+}  */
+
+.marTop20-lp {
+  /* margin-top: -210px; */
+  /* border: 1px solid red; */
+  font-weight: bold;
+  /* width: 90%; */
+  text-align: center;
+  margin: 0 auto;
+}
+
+.login-button-lp {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 35%;
+  right: 0;
+
+}
+
+.button_oval_style_login-lp {
+  background-color: #E50F32;
+  border-radius: 30px/18px;
+  color: white;
+  text-align: center;
+  border: 1px;
+  width: 60px;
+  cursor: pointer;
+  height: 35px;
+}
+
+.image_container_controls {
+  height: 209px;
+  /* margin-top: -200px; */
+  position: absolute;
+  /* z-index: 10; */
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+span.image-message-lp {
+  display: table;
+  text-align: center;
+  font-weight: bold;
+  font-weight: bold;
+    margin: 0 auto;
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 425px) {
+
+}

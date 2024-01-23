@@ -1,0 +1,23 @@
+.post_icon {
+    margin-left:-9px; 
+    margin-top:-3px;
+    width: 90px;
+    height: 90px; 
+    border-radius: 50px;
+    border: 1px solid black;
+}
+
+.fijoli_skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading{
+    0%{
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}
