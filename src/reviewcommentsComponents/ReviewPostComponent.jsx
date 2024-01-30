@@ -14,7 +14,7 @@ import postuserreviewcomment from '../actions/postuserreviewcomment';
 import ProfilepicSelectionComponent from '../profilepiccontrols/ProfilepicSelectionComponent';
 import PostReviewController from '../viewModels/PostReviewController';
 import RatingComponent from './RatingComponent';
-import { Label } from '@material-ui/icons';
+// import { Label } from '@material-ui/icons';
 
 
 const ReviewPostComponent = ({reviewcomment}) =>{

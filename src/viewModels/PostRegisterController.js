@@ -36,6 +36,7 @@ class PostRegisterController {
             lstoffiles.map((item)=>{
                 tmpoffiles.push(item.image);
                 documentDesc[lstofFoldersnames[fldrIndex]].push(item.document_desc);
+                return item;
             })
             allfiles = [...allfiles, ...tmpoffiles];
             mergefilesInfo[lstofFoldersnames[fldrIndex]] = lstoffiles.length;

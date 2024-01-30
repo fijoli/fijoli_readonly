@@ -14,6 +14,7 @@ import userreviewType from '../actions/userreviewType';
 import deletereviewcomment from '../actions/deletereviewcomment';
 
 //component to display submitter review comment
+let g = {};
 const SubmitterReview = ({reviewComment, menuoption}) =>{
 
     //set default objects
@@ -25,12 +26,12 @@ const SubmitterReview = ({reviewComment, menuoption}) =>{
         if(reviewComment){
             setuserid(reviewComment.user_id);
         }
-    },[reviewComment]);
+    },[reviewComment,setuserid]);
 
     //event which performs edit/delete operations 
     //of the review comment
     const handleClick = (eventtype)=>{
-
+        g.user_id = userid
         //initialize the rating visible type
         reviewComment["rating_visible"] = (eventtype === "reply")?false:true;
         if("delete" === eventtype){
@@ -46,7 +47,7 @@ const SubmitterReview = ({reviewComment, menuoption}) =>{
   return (
     <div className="comment_container">
     <div className="comment_header">
-        <img src={img2} className="comment_image_pic" />
+        <img src={img2} className="comment_image_pic" alt="" />
         <div className="comment_username">
             <span>{reviewComment.user_id}</span>
             <RatingComponent rating={reviewComment.user_rating} isenable={true} />
@@ -54,25 +55,32 @@ const SubmitterReview = ({reviewComment, menuoption}) =>{
         <div className="comment_icons">
             {reviewComment.ismenuvisible &&
                 menuoption.map((item, index) => {
-                    if (item === "edit") {
-                        return (
-                            <IconButton onClick={() => handleClick("edit")}>
-                                <EditIcon />
-                            </IconButton>
-                        );
-                    } else if (item === "delete") {
-                        return (
-                            <IconButton onClick={() => handleClick("delete")}>
-                                <DeleteIcon />
-                            </IconButton>
-                        );
-                    } else if (item === "reply") {
-                        return (
-                            <IconButton onClick={() => handleClick("reply")}>
-                                <ReplyIcon />
-                            </IconButton>
-                        );
-                    }
+                    return (
+                        <React.Fragment>
+                            {(()=>{
+                                if (item === "edit") {
+                                    return (
+                                        <IconButton onClick={() => handleClick("edit")}>
+                                            <EditIcon />
+                                        </IconButton>
+                                    );
+                                } else if (item === "delete") {
+                                    return (
+                                        <IconButton onClick={() => handleClick("delete")}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    );
+                                } else if (item === "reply") {
+                                    return (
+                                        <IconButton onClick={() => handleClick("reply")}>
+                                            <ReplyIcon />
+                                        </IconButton>
+                                    );
+                                }
+                            })()
+                            }
+                        </React.Fragment>
+                    )
                 })}
         </div>
     </div>

@@ -1,5 +1,6 @@
 
 import './App.css';
+import './css/fw.css';
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LandingPage } from './components/LandingPage';
@@ -10,8 +11,8 @@ import { ErrorComponent } from './childComponents/CustomError';
 import { SuccessComponent } from './childComponents/SuccessComponent';
 import SignupFormFinal from "./childComponents/signupFormfinal";
 import HomePage from './childComponents/HomePage';  
-import TmpSemiCircle from './tmpcomponents/tmpsemicircle';
-import TempComponent from './tmpcomponents/TempComponent';
+// import TmpSemiCircle from './tmpcomponents/tmpsemicircle';
+// import TempComponent from './tmpcomponents/TempComponent';
 import MenuComponent from './childComponents/MenuComponent';
 import ForgotPasswordComponent from './LoginLogout/ForgotPasswordComponent';
 import CreatePasswordComponent from './LoginLogout/CreatePasswordComponent';
@@ -20,7 +21,7 @@ import DisplayUsers from './tmpcomponents/DisplayUsers';
 // import ViewPostCommentComponent from './PostCommentComponents/ViewPostCommentComponent';
 // import ProfilepicSelectionComponent from './profilepiccontrols/ProfilepicSelectionComponent';
 // import PostCommentContainer from './PostCommentComponents/PostCommentContainer';
-import LogoComponent from './logoComponent/LogoComponent';
+// import LogoComponent from './logoComponent/LogoComponent';
 
 
 class App extends Component {

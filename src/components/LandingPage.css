@@ -81,7 +81,7 @@ text-align: center;
   outline: none;
   box-shadow: 0px 0px 5px #555;
   margin: 3px;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .indicator-inactive-lp {

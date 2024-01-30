@@ -24,7 +24,7 @@ const ReviewerReviewComponent =({reviewer_user_id}) =>{
   //default use Effect which fetches reviewer review comments
   useEffect(()=>{
     dispatch(getReviewerReviews(reviewer_user_id));
-  },[]);
+  },[dispatch,reviewer_user_id]);
 
   //add the review post user type to the post item 
   useEffect(()=>{

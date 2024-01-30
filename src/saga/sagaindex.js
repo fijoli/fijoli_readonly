@@ -7,7 +7,7 @@ import EnumPostCommentType from "../singletonControllers/PostReviewTypes";
 
 const serv = new ApiService();
 
-const postsignupfromData = (signupformdata) => {
+export const postsignupfromData = (signupformdata) => {
     const response = serv
       .register(signupformdata)
       .then((result) => result);
@@ -823,7 +823,7 @@ function* actiongefollowCount(){
 function* hidePost(action){
 
     const resp = yield call(postAPI, action.posthideData, "post_hide");
-    const response = JSON.parse(JSON.stringify(resp.data));
+    action.response = JSON.parse(JSON.stringify(resp.data));
 
     yield put({
         type: "post_hide_success",

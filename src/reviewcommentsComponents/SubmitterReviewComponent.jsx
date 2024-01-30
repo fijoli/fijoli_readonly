@@ -35,7 +35,7 @@ const SubmitterReviewComponent = ({reviewer_user_id}) =>{
         "reviewer_user_id": reviewer_user_id, 
         "user_id": loggedInUser.user_id}));
     }
-  },[reviewer_user_id, loggedInUser]);
+  },[reviewer_user_id, loggedInUser,dispatch]);
 
     
   //add the review post user type to the post item 
@@ -60,7 +60,7 @@ const SubmitterReviewComponent = ({reviewer_user_id}) =>{
       setreviewcomments([...lstofreviewComments]);
     }
  
-  },[lstofreviewComments]);
+  },[lstofreviewComments,loggedInUser.user_id]);
 
   const handleRatingClick = (rate) =>{
         //structure to create new review comment

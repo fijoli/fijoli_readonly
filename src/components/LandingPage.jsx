@@ -15,42 +15,42 @@ export const LandingPage = () => {
 
     const navigate = useNavigate();
 
-    const [slide, setslide] = useState(-1);
-    
-    const [lstofImages, setlstofImages] = useState([
-            {
-                "src": image1,
-                "scurve": scurve,
-                "alt": "image 1 for caurosel",
-                "msg": ["CONNECT WITH FITNESS","PROFESSIONALS & ENTHUSIASTS","ACROSS THE GLOBE"]
-            },
-            {
-                "src": image2,
-                "scurve": scurve,
-                "alt": "image 2 for caurosel",
-                "msg": ["GET FITNESS TIPS"," "," "]
-            },            
-            {
-                "src": image3,
-                "scurve": scurve,
-                "alt": "image 3 for caurosel",
-                "msg": ["TRY NEW FIT RECIPES"," "," "]
-            },
-            {
-                "src": image4,
-                "scurve": scurve,
-                "alt": "image 4 for caurosel",
-                "msg": ["TRANSFORM YOURSELF"," "," "]
-            },            
-            {
-                "src": image5,
-                "scurve": scurve,
-                "alt": "image 5 for caurosel",
-                "msg": ["BUY | SELL","FITNESS PRODUCTS AND","AVAIL SERVICES"]
-            }
-        ]);
- 
-    useEffect(()=>{
+    const [slide, setslide] = useState(0);
+
+    const [lstofImages] = useState([
+        {
+            "src": image1,
+            "scurve": scurve,
+            "alt": "image 1 for caurosel",
+            "msg": ["CONNECT WITH FITNESS", "PROFESSIONALS & ENTHUSIASTS", "ACROSS THE GLOBE"]
+        },
+        {
+            "src": image2,
+            "scurve": scurve,
+            "alt": "image 2 for caurosel",
+            "msg": ["GET FITNESS TIPS", " ", " "]
+        },
+        {
+            "src": image3,
+            "scurve": scurve,
+            "alt": "image 3 for caurosel",
+            "msg": ["TRY NEW FIT RECIPES", " ", " "]
+        },
+        {
+            "src": image4,
+            "scurve": scurve,
+            "alt": "image 4 for caurosel",
+            "msg": ["TRANSFORM YOURSELF", " ", " "]
+        },
+        {
+            "src": image5,
+            "scurve": scurve,
+            "alt": "image 5 for caurosel",
+            "msg": ["BUY | SELL", "FITNESS PRODUCTS AND", "AVAIL SERVICES"]
+        }
+    ]);
+
+    useEffect(() => {
         setslide(0);
         // if ("geolocation" in navigator) {
         //     navigator.geolocation.getCurrentPosition(
@@ -66,22 +66,22 @@ export const LandingPage = () => {
         //       }
         //     );
         //   }        
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        const interval = setInterval(()=>{
-            let slideVal = (slide === (lstofImages.length-1))?0:slide+1;
+    useEffect(() => {
+        const interval = setInterval(() => {
+            let slideVal = (slide === (lstofImages.length - 1)) ? 0 : slide + 1;
             setslide(slideVal);
         }, 5000);
-        return ()=> clearInterval(interval);
-    },[slide])
-    
+        return () => clearInterval(interval);
+    }, [slide])
 
-    const handleloginbtnClick = (evt) =>{
+
+    const handleloginbtnClick = (evt) => {
         navigate("/loginpage");
     }
 
-    const handlesignUpbtnClick = (evt) =>{
+    const handlesignUpbtnClick = (evt) => {
         navigate("/signupform1");
     }
 
@@ -89,52 +89,62 @@ export const LandingPage = () => {
         setslide(index);
     }
 
-  return (
-    <div className='login-main-lp'>
-        {
-		lstofImages.map((item, idx)=>{
-            if(slide === idx){  
-                return(
-                    <div key={idx}  className="image-container-lp">
-                        <div>
-                        <img  src={item.src} 
-                                alt="Circular Crop Image" className="image-lp" />
-                        </div>
-                        <div className='image_container_scurve'>
-                            <img src={item.scurve}
-                                alt="scurve" className='image-lp_scurve'/>
-                        </div>
-
-                        <div className='image_container_controls'>
-                        
-                            <div className='marTop20-lp'>
-                                {
-                                    item.msg.map((msg, msgidx) =>{
-                                        return(
-                                            <span className='image-message-lp'>{msg}</span>
-                                        )
-                                    })
-                                }
+    return (
+        <div className='hinherit relative'>
+            <div className="abs trbl slide-change fixed">
+                {
+                    lstofImages.map((item, idx) => {
+                        return (
+                            <div key={idx} className={["abs trbl slide-item transition ease",((idx==slide)?"slide-img-on":"")].join(" ")}>
+                                <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
                             </div>
-
-                            <div className='login-button-lp'>
-                                <button onClick={handleloginbtnClick} 
-                                    className="button_oval_style_login-lp"> Login </button>
-                                <div className="line-lp"></div>
-                                <button onClick={handlesignUpbtnClick} 
-                                    className="button_oval_style_login-lp">SignUp</button>
+                        )
+                    })
+                }
+            </div>
+            <div className="image-container-lp relative hinherit zindexfront">
+                <div className="desktop flex align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
+                    <div className="flex--5 md--6 sm--8 xsm--12 relative">
+                        <div className="scruve-skin"></div>
+                        <div className="relative h">
+                            <div className="flex align-items-end justify-center hinherit">
+                                <div className="relative zindexfront">
+                                    <div className="flex justify-center pad padyf text-center">
+                                        <div className="flex--8 sm--12">
+                                            <h5 className='lead h7 nomargi pad padyb line-space-h6'>{lstofImages[slide].msg}</h5>
+                                        </div>
+                                    </div>
+                                    <div className="">
+                                        <div className='flex padoff justify-center'>
+                                            <div>
+                                                <button onClick={handleloginbtnClick} className="button_oval_style_login-lp"> Login </button>
+                                            </div>
+                                            <div>
+                                                <div className="line-lp"></div>
+                                            </div>
+                                            <div>
+                                                <button onClick={handlesignUpbtnClick} className="button_oval_style_login-lp">SignUp</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="pad padyf"></div>
+                                    <div className="relative">
+                                        <span className='flex justify-center'>
+                                            {lstofImages.map((_, idx) => {
+                                                return <React.Fragment key={idx}>
+                                                    <div>
+                                                        <button onClick={() => handleIndicator(idx)} className={[(slide === idx ? "indicator-lp" : "indicator-lp indicator-inactive-lp"),"cursor-pointer"].join(" ")} />
+                                                    </div>
+                                                </React.Fragment>
+                                            })}
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-
-                            <span className='indicators-lp'>
-                                {lstofImages.map((_,idx)=>{
-                                    return <button key={idx} onClick={() => handleIndicator(idx)} className={slide === idx? "indicator-lp" : "indicator-lp indicator-inactive-lp"}/>
-                                })}
-                            </span>
                         </div>
-                  </div>
-                )
-            }
-        } )}
+                    </div>
+                </div>
+            </div>
         </div>
-      )
-    }
+    )
+}

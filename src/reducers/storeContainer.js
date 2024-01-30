@@ -1,5 +1,5 @@
 
-import { act } from "react-dom/test-utils";
+// import { act } from "react-dom/test-utils";
 import PostCommentsController from "../Controllers/PostCommentsController";
 import initialState from "../models/initialState";
 import SysConfigData from "../models/sysConfigItems";

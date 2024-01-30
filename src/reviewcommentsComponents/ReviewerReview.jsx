@@ -51,7 +51,7 @@ const ReviewerReview = ({reviewComment, menuoption}) =>{
                 <td className='reviewer_reviewcomment_dummy_col'>
                  </td>
                 <td >
-                    <img src={img2} className='reviewer_reviewcomment_image_pic'/>
+                    <img src={img2} className='reviewer_reviewcomment_image_pic' alt=''/>
                 </td>
                 <td colSpan={3} >
                     <div className='reviewer_reviewcomment_username_div'>
@@ -64,11 +64,13 @@ const ReviewerReview = ({reviewComment, menuoption}) =>{
                   {
                       (reviewComment.ismenuvisible) &&
                         menuoption.map((item, index)=>{
-                            if(item === "edit"){
-                                return <IconButton key={index} onClick={()=>handleClick("edit")}><EditIcon/></IconButton>
-                            }else if(item === "delete"){
-                                return <IconButton key={index} onClick={()=>handleClick("delete")}><DeleteIcon/></IconButton>
-                            }
+                            return (()=>{
+                              if(item === "edit"){
+                                  return <IconButton key={index} onClick={()=>handleClick("edit")}><EditIcon/></IconButton>
+                              }else if(item === "delete"){
+                                  return <IconButton key={index} onClick={()=>handleClick("delete")}><DeleteIcon/></IconButton>
+                              }
+                            })()
                         })
                     }
                 </td>

@@ -3,7 +3,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Rating } from 'react-simple-star-rating'
 
 //holds the rating value
@@ -12,7 +12,7 @@ import { Rating } from 'react-simple-star-rating'
 const RatingComponent = (props) =>{
 
     //set default objects
-    const dispatch              = useDispatch();
+    // const dispatch              = useDispatch();
     const [rating, setrating]   = useState(0);
 
     //need to investigate how to set props to usestate variables
