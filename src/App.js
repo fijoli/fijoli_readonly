@@ -40,7 +40,7 @@ class App extends Component {
           <Route exact path="/users" element={<DisplayUsers/>} />
           <Route exact path="/signupform1" element={<SignUpFormFirst/>} />
           <Route exact path="/signupform2" element={<SignupformNext/>} />
-          <Route exact path="/loginpage" element={<LoginComponent/>} />
+          <Route exact path="/login" element={<LoginComponent/>} />
           <Route exact path="/error" element={<ErrorComponent/>} />
           <Route exact path="/signupsuccess" element={<SuccessComponent/>} />
           <Route exact path='/signupform3' element={<SignupFormFinal/>}/>

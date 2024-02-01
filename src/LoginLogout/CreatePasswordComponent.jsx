@@ -39,7 +39,7 @@ const CreatePasswordComponent = () =>{
             dispatch({"type":"reset_status"});
             setTimeout(() => {
                 setShowbackdrop(false);
-                navigate("/loginpage")
+                navigate("/login")
             }, 3000);
             // navigate("/signupsuccess");
             setShowbackdrop(true);

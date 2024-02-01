@@ -78,7 +78,7 @@ export const LandingPage = () => {
 
 
     const handleloginbtnClick = (evt) => {
-        navigate("/loginpage");
+        navigate("/login");
     }
 
     const handlesignUpbtnClick = (evt) => {
@@ -103,41 +103,54 @@ export const LandingPage = () => {
                 }
             </div>
             <div className="image-container-lp relative hinherit zindexfront">
-                <div className="desktop flex align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
+                <div className="desktop flex padoff align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
                     <div className="flex--5 md--6 sm--8 xsm--12 relative">
-                        <div className="scruve-skin"></div>
-                        <div className="relative h">
-                            <div className="flex align-items-end justify-center hinherit">
-                                <div className="relative zindexfront">
-                                    <div className="flex justify-center pad padyf text-center">
-                                        <div className="flex--8 sm--12">
-                                            <h5 className='lead h7 nomargi pad padyb line-space-h6'>{lstofImages[slide].msg}</h5>
-                                        </div>
-                                    </div>
-                                    <div className="">
-                                        <div className='flex padoff justify-center'>
-                                            <div>
-                                                <button onClick={handleloginbtnClick} className="button_oval_style_login-lp"> Login </button>
+                        <div className="relative zindexfront h">
+                            <div className="flex flex-container align-items-end justify-center hinherit padoff">
+                                <div className="flex--12">
+                                    <div className="scruve"></div>
+                                    <div className="scruve-content">
+                                        <div className="relative">
+                                            <div className="flex justify-center pad padyf text-center">
+                                                <div className="flex--8 sm--12">
+                                                    <h5 className='lead h7 nomargi pad padyb line-space-h6'>{lstofImages[slide].msg}</h5>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <div className="line-lp"></div>
-                                            </div>
-                                            <div>
-                                                <button onClick={handlesignUpbtnClick} className="button_oval_style_login-lp">SignUp</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="pad padyf"></div>
-                                    <div className="relative">
-                                        <span className='flex justify-center'>
-                                            {lstofImages.map((_, idx) => {
-                                                return <React.Fragment key={idx}>
+                                            <div className="">
+                                                <div className='flex padoff justify-center'>
                                                     <div>
-                                                        <button onClick={() => handleIndicator(idx)} className={[(slide === idx ? "indicator-lp" : "indicator-lp indicator-inactive-lp"),"cursor-pointer"].join(" ")} />
+                                                        <button onClick={handleloginbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme">
+                                                            <span className="flex text-center grow">
+                                                                <span><span className="pad padxd">Login</span></span>
+                                                            </span>
+                                                        </button>
                                                     </div>
-                                                </React.Fragment>
-                                            })}
-                                        </span>
+                                                    <div>
+                                                        <div className="line-lp"></div>
+                                                    </div>
+                                                    <div>
+                                                        <button onClick={handlesignUpbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme">
+                                                            <span className="flex text-center grow">
+                                                                <span><span className="pad padxd">SignUp</span></span>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="pad padyf"></div>
+                                            <div className="relative">
+                                                <span className='flex justify-center'>
+                                                    {lstofImages.map((_, idx) => {
+                                                        return <React.Fragment key={idx}>
+                                                            <div>
+                                                                <button onClick={() => handleIndicator(idx)} className={[(slide === idx ? "indicator-lp" : "indicator-lp indicator-inactive-lp"),"cursor-pointer"].join(" ")} />
+                                                            </div>
+                                                        </React.Fragment>
+                                                    })}
+                                                </span>
+                                            </div>
+                                            <div className="pad padyc"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

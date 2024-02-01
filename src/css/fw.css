@@ -16,11 +16,15 @@
   --lead-h9: 0.75rem;
   --theme-bg: #ff6900;
   --white: #ffffff;
-  --lightgrey: lightgrey;
+  --black: #000000;
+  --lightgrey: #8a8a8a;
   --black-skin: #2a2a2a;
 }
 #root {
   min-height: 100vh;
+}
+body {
+  overflow-x: hidden;
 }
 .lead {
   --lead-font-size: var(--body-font-size);
@@ -2886,22 +2890,17 @@
   text-align: center;
 }
 .desktop {
-  width: 96%;
+  width: 100%;
   margin: 0 auto;
-}
-@media (min-width: 576px) {
-  .desktop {
-    max-width: 540px;
-  }
 }
 @media (min-width: 768px) {
   .desktop {
-    max-width: 720px;
+    max-width: 80%;
   }
 }
 @media (min-width: 992px) {
   .desktop {
-    max-width: 960px;
+    max-width: 920px;
   }
 }
 @media (min-width: 1200px) {
@@ -2974,30 +2973,83 @@
 .line-space-h6 {
   line-height: 1.5rem;
 }
-.scruve-skin {
-  --scruve-skin-height: 55vh;
-  --scruve-skin-curve-height: 35vh;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: var(--scruve-skin-height);
+.scruve-content {
+  background-color: var(--white);
+  position: relative;
 }
-.scruve-skin:before {
+.scruve-content:before {
+  position: absolute;
   content: "";
-  bottom: 90%;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+}
+.scruve {
+  --scruve-skin-curve-height: 100%;
+  height: 250px;
+  position: relative;
+}
+.scruve:before {
+  position: absolute;
+  content: "";
+  bottom: -10%;
   left: 0;
   right: 0;
   height: var(--scruve-skin-curve-height);
-  clip-path: polygon(100% 100%, 0% 100%, 0% 54.57%, 1.67% 54.51%, 3.33% 54.36%, 5% 54.09%, 6.67% 53.73%, 8.33% 53.26%, 10% 52.7%, 11.67% 52.04%, 13.33% 51.29%, 15% 50.45%, 16.67% 49.52%, 18.33% 48.52%, 20% 47.45%, 21.67% 46.31%, 23.33% 45.1%, 25% 43.85%, 26.67% 42.54%, 28.33% 41.19%, 30% 39.81%, 31.67% 38.41%, 33.33% 36.98%, 35% 35.55%, 36.67% 34.11%, 38.33% 32.67%, 40% 31.25%, 41.67% 29.85%, 43.33% 28.47%, 45% 27.13%, 46.67% 25.83%, 48.33% 24.58%, 50% 23.39%, 51.67% 22.26%, 53.33% 21.19%, 55% 20.2%, 56.67% 19.29%, 58.33% 18.46%, 60% 17.73%, 61.67% 17.08%, 63.33% 16.53%, 65% 16.08%, 66.67% 15.73%, 68.33% 15.48%, 70% 15.34%, 71.67% 15.3%, 73.33% 15.37%, 75% 15.54%, 76.67% 15.82%, 78.33% 16.2%, 80% 16.68%, 81.67% 17.25%, 83.33% 17.93%, 85% 18.69%, 86.67% 19.54%, 88.33% 20.48%, 90% 21.49%, 91.67% 22.57%, 93.33% 23.73%, 95% 24.94%, 96.67% 26.2%, 98.33% 27.51%, 100% 28.86%);
-}
-.scruve-skin,
-.scruve-skin:before {
-  position: absolute;
+  clip-path: polygon(100% 100%, 0% 100%, 0% 43.68%, 2% 44.47%, 4% 45.22%, 6% 45.92%, 8% 46.59%, 10% 47.21%, 12% 47.78%, 14% 48.31%, 16% 48.79%, 18% 49.22%, 20% 49.61%, 22% 49.94%, 24% 50.22%, 26% 50.45%, 28% 50.63%, 30% 50.76%, 32% 50.83%, 34% 50.85%, 36% 50.82%, 38% 50.73%, 40% 50.6%, 42% 50.41%, 44% 50.16%, 46% 49.87%, 48% 49.53%, 50% 49.13%, 52% 48.69%, 54% 48.2%, 56% 47.66%, 58% 47.07%, 60% 46.45%, 62% 45.77%, 64% 45.06%, 66% 44.3%, 68% 43.51%, 70% 42.68%, 72% 41.81%, 74% 40.91%, 76% 39.98%, 78% 39.02%, 80% 38.04%, 82% 37.02%, 84% 35.99%, 86% 34.93%, 88% 33.86%, 90% 32.77%, 92% 31.66%, 94% 30.54%, 96% 29.42%, 98% 28.29%, 100% 27.15%);
   background-color: #ffffff;
 }
-@media (max-width: 800px) {
-  .scruve-skin {
-    --scruve-skin-height: 50vh;
-    --scruve-skin-curve-height: 150px;
-  }
+/* //button */
+button.anchor-outline {
+  border: 0 none;
+}
+.anchor-outline {
+  --ao-background-color: transparent;
+  --ao-color: var(--black);
+  --ao-border-color: var(--black);
+  --ao-border-size: 1px;
+  background-color: var(--ao-background-color);
+  color: var(--ao-color);
+}
+.anchor-outline.ao-border {
+  border: var(--ao-border-size) solid var(--ao-border-color);
+}
+.anchor-outline:hover {
+  --ao-color: var(--black-skin);
+  --ao-border-color: var(--black-skin);
+}
+.anchor-outline:focus {
+  --ao-background-color: var(--black-skin);
+  --ao-color: var(--white);
+}
+.anchor-outline.ao-fill-theme {
+  --ao-background-color: var(--theme-bg);
+  --ao-color: var(--white);
+  --ao-border-color: var(--white);
+}
+.anchor-outline.ao-fill-theme:hover {
+  --ao-color: var(--white);
+  --ao-border-color: var(--black-skin);
+  --ao-background-color: var(--black-skin);
+}
+.anchor-outline.ao-fill-theme:focus {
+  --ao-border-color: var(--black);
+  --ao-background-color: var(--black);
+}
+.anchor-outline.ao-link-lightblack {
+  --ao-color: var(--lightgrey);
+}
+.anchor-outline.ao-link-lightblack:hover {
+  --ao-color: var(--black-skin);
+}
+.anchor-outline.ao-link-lightblack:focus {
+  --ao-background-color: transparent;
+  --ao-color: var(--black);
+}
+a.anchor-outline,
+a.anchor-outline:hover,
+a.anchor-outline:focus {
+  text-decoration: none;
 }

@@ -52,7 +52,7 @@ const MenuComponent = (props) =>{
 
         if((undefined != deactivateStatus) && (200 === deactivateStatus.status)){
             dispatch({"type":"clear"});
-            navigate("/loginpage");
+            navigate("/login");
         }else if((undefined != deactivateStatus) && (200 !== deactivateStatus.status)){
             navigate("/error");
         }

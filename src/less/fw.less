@@ -18,12 +18,17 @@
   
     --theme-bg : #ff6900;
     --white : #ffffff;
-    --lightgrey : lightgrey;
+    --black : #000000;
+
+    --lightgrey : #8a8a8a;
     --black-skin : #2a2a2a;
   }
 
   #root{
     min-height: 100vh;
+  }
+  body{
+    overflow-x: hidden;
   }
   .lead {
     --lead-font-size: var(--body-font-size);
@@ -2902,7 +2907,7 @@
 
 
 .desktop{
-    width: 96%;;
+    width: 100%;;
     margin : 0 auto;
   }
   .container-res(@msize,@mxsize){
@@ -2913,9 +2918,8 @@
     }
   }
   
-  .container-res(576px,540px);
-  .container-res(768px,720px);
-  .container-res(992px,960px);
+  .container-res(768px,80%);
+  .container-res(992px,920px);
   .container-res(1200px,1140px);
   .container-res(1300px,1200px);
   .container-res(1400px,1300px);
@@ -2944,26 +2948,82 @@
 .line-space-h6{
     line-height: 1.5rem;
 }
-
-.scruve-skin{
-    --scruve-skin-height : 55vh;
-    --scruve-skin-curve-height : 35vh;
-    &:before{
-        content: ""; bottom:90%; left: 0; right: 0; height: var(--scruve-skin-curve-height);
-        clip-path: polygon(100% 100%, 0% 100% , 0.00% 54.57%, 1.67% 54.51%, 3.33% 54.36%, 5.00% 54.09%, 6.67% 53.73%, 8.33% 53.26%, 10.00% 52.70%, 11.67% 52.04%, 13.33% 51.29%, 15.00% 50.45%, 16.67% 49.52%, 18.33% 48.52%, 20.00% 47.45%, 21.67% 46.31%, 23.33% 45.10%, 25.00% 43.85%, 26.67% 42.54%, 28.33% 41.19%, 30.00% 39.81%, 31.67% 38.41%, 33.33% 36.98%, 35.00% 35.55%, 36.67% 34.11%, 38.33% 32.67%, 40.00% 31.25%, 41.67% 29.85%, 43.33% 28.47%, 45.00% 27.13%, 46.67% 25.83%, 48.33% 24.58%, 50.00% 23.39%, 51.67% 22.26%, 53.33% 21.19%, 55.00% 20.20%, 56.67% 19.29%, 58.33% 18.46%, 60.00% 17.73%, 61.67% 17.08%, 63.33% 16.53%, 65.00% 16.08%, 66.67% 15.73%, 68.33% 15.48%, 70.00% 15.34%, 71.67% 15.30%, 73.33% 15.37%, 75.00% 15.54%, 76.67% 15.82%, 78.33% 16.20%, 80.00% 16.68%, 81.67% 17.25%, 83.33% 17.93%, 85.00% 18.69%, 86.67% 19.54%, 88.33% 20.48%, 90.00% 21.49%, 91.67% 22.57%, 93.33% 23.73%, 95.00% 24.94%, 96.67% 26.20%, 98.33% 27.51%, 100.00% 28.86%);
-    }
-    &,&:before{
-        position: absolute;
-        background-color: fade(#ffffff,100);
-    }
-    left: 0; bottom: 0;
-    width: 100%;
-    height: var(--scruve-skin-height);
+.scruve-content{
+  background-color: var(--white);
+  position: relative;
+  &:before{
+    position: absolute;
+    content: ""; top:-10%; bottom:-10%; left: 0; right: 0;
+    background-color: fade(#ffffff,100);
+  }
+}
+.scruve{
+  --scruve-skin-curve-height : 100%;
+  height: 250px;
+  position: relative;
+  &:before{
+      position: absolute;
+      content: ""; bottom:-10%; left: 0; right: 0; height: var(--scruve-skin-curve-height);
+      clip-path: polygon(100% 100%, 0% 100% , 0.00% 43.68%, 2.00% 44.47%, 4.00% 45.22%, 6.00% 45.92%, 8.00% 46.59%, 10.00% 47.21%, 12.00% 47.78%, 14.00% 48.31%, 16.00% 48.79%, 18.00% 49.22%, 20.00% 49.61%, 22.00% 49.94%, 24.00% 50.22%, 26.00% 50.45%, 28.00% 50.63%, 30.00% 50.76%, 32.00% 50.83%, 34.00% 50.85%, 36.00% 50.82%, 38.00% 50.73%, 40.00% 50.60%, 42.00% 50.41%, 44.00% 50.16%, 46.00% 49.87%, 48.00% 49.53%, 50.00% 49.13%, 52.00% 48.69%, 54.00% 48.20%, 56.00% 47.66%, 58.00% 47.07%, 60.00% 46.45%, 62.00% 45.77%, 64.00% 45.06%, 66.00% 44.30%, 68.00% 43.51%, 70.00% 42.68%, 72.00% 41.81%, 74.00% 40.91%, 76.00% 39.98%, 78.00% 39.02%, 80.00% 38.04%, 82.00% 37.02%, 84.00% 35.99%, 86.00% 34.93%, 88.00% 33.86%, 90.00% 32.77%, 92.00% 31.66%, 94.00% 30.54%, 96.00% 29.42%, 98.00% 28.29%, 100.00% 27.15%);
+      background-color: fade(#ffffff,100);
+  }
 }
 
-@media (max-width:800px){
-    .scruve-skin{
-    --scruve-skin-height : 50vh;
-    --scruve-skin-curve-height : 150px;
+
+
+
+/* //button */
+
+button.anchor-outline{
+  border: 0 none;
+}
+
+.anchor-outline{
+  --ao-background-color : transparent;
+  --ao-color : var(--black);
+  --ao-border-color : var(--black);
+  --ao-border-size : 1px;
+  background-color: var(--ao-background-color);
+  color: var(--ao-color);
+  &.ao-border{
+    border:var(--ao-border-size) solid var(--ao-border-color);
+  }
+  &:hover{
+    --ao-color : var(--black-skin);
+    --ao-border-color : var(--black-skin);
+  }
+  &:focus{
+    --ao-background-color : var(--black-skin);
+    --ao-color : var(--white);
+  }
+  &.ao-fill-theme{
+    --ao-background-color : var(--theme-bg);
+    --ao-color : var(--white);
+    --ao-border-color : var(--white);
+    &:hover{
+      --ao-color : var(--white);
+      --ao-border-color : var(--black-skin);
+      --ao-background-color : var(--black-skin);
     }
+    &:focus{
+      --ao-border-color : var(--black);
+      --ao-background-color : var(--black);
+    }
+  }
+  &.ao-link-lightblack{
+    --ao-color : var(--lightgrey);
+    &:hover{
+      --ao-color : var(--black-skin);
+    }
+    &:focus{
+      --ao-background-color : transparent;
+      --ao-color : var(--black);
+    }
+  }
+}
+
+a.anchor-outline{
+  &,&:hover,&:focus{
+    text-decoration: none;
+  }
 }
