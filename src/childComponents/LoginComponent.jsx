@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import actionloginUser from "../actions/actionloginUser";
@@ -137,6 +137,9 @@ const LoginComponent = () => {
         }
     ]);
 
+    const handleIndicator = (index) => {
+        setslide(index);
+    }
     useEffect(() => {
         const interval = setInterval(() => {
             let slideVal = (slide === (lstofImages.length - 1)) ? 0 : slide + 1;
@@ -146,92 +149,111 @@ const LoginComponent = () => {
     }, [slide])
 
     return (
-        <div className='hinherit relative'>
-            <div className="abs trbl slide-change fixed">
-                {
-                    lstofImages.map((item, idx) => {
-                        return (
-                            <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
-                                <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
+        <div className="flex padoff align-items-stretch justify-center wrap hinherit ypad-off slide-container">
+            <div className="flex--8 xsm--12 slide-picture relative transition">
+                <div className="abs trbl slide-change slide-b-radius oh bg grey-skin">
+                    {
+                        lstofImages.map((item, idx) => {
+                            return (
+                                <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
+                                    <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="flex wrap align-items-stretch relative justify-center h">
+                    <div className="">
+                        <div className="flex justify-center">
+                            <div>
+                                <div className="slide-bullet">
+                                    <span className="flex justify-center align-items-center">
+                                        {lstofImages.map((_, idx) => {
+                                            return <React.Fragment key={idx}>
+                                                <div className="relative">
+                                                    <a href={null} onClick={() => handleIndicator(idx)} className={["circle", (slide === idx ? "bullet-item active" : "bullet-item")].join(" ")}></a>
+                                                </div>
+                                            </React.Fragment>
+                                        })}
+                                    </span>
+                                </div>
                             </div>
-                        )
-                    })
-                }
+                        </div>
+                    </div>
+                    <div className="flex--12">
+                        <div className="flex align-items-center h justify-center">
+                            <div>
+                                <h1 className='brand-h1'>Fijoli</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="image-container-lp relative hinherit zindexfront">
-                <div className="desktop flex padoff align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
-                    <div className="flex--5 md--6 sm--8 xsm--12 relative">
-                        <div className="relative zindexfront h">
-                            <div className="flex flex-container align-items-end justify-center hinherit padoff">
-                                <div className="flex--12">
-                                    <div className="scruve"></div>
-                                    <div className="scruve-content">
-                                        <div className="flex justify-center relative">
-                                            <div className="flex--8 xs--23">
-                                                {/* whatsapp number text field */}
-                                                <TextField
-                                                    fullWidth
-                                                    value={loginData.whatsapp_number}
-                                                    placeholder="whatsapp Number"
-                                                    helperText={(loginData.whatsapp_number_status) ? "Whatsapp Number is not correct or not entered" : ""}
-                                                    sx={{ '& fieldset': { borderRadius: 33 } }}
-                                                    InputProps={{
-                                                        sx: { height: 40 },
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <IconButton>
-                                                                <WhatsAppIcon />
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    }}
-                                                    variant="outlined"
-                                                    onChange={(evt) => handlechange(evt, "whatsapp_number")} />
+            <div className="flex--12 slide-card">
+                <div className="desktop flex justify-center">
+                    <div className="flex--5 md--6 sm--12 ">
+                        <div className="flex justify-center relative">
+                            <div className="flex--12">
+                                {/* whatsapp number text field */}
+                                <TextField
+                                    fullWidth
+                                    value={loginData.whatsapp_number}
+                                    placeholder="whatsapp Number"
+                                    helperText={(loginData.whatsapp_number_status) ? "Whatsapp Number is not correct or not entered" : ""}
+                                    sx={{ '& fieldset': { borderRadius: 33 } }}
+                                    InputProps={{
+                                        sx: { height: 40 },
+                                        startAdornment: <InputAdornment position="start">
+                                            <IconButton>
+                                                <WhatsAppIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }}
+                                    variant="outlined"
+                                    onChange={(evt) => handlechange(evt, "whatsapp_number")} />
 
-                                                {/* password control */}
-                                                <div className="credential-Item">
-                                                    <TextField type={eyeValue ? "text" : "password"}
-                                                        fullWidth
-                                                        value={loginData.encrypted_password}
-                                                        placeholder="Password"
-                                                        helperText={(loginData.encrypted_password_status) ? "password is not correct or not entered" : ""}
-                                                        variant="outlined"
-                                                        onChange={(evt) => handlechange(evt, "encrypted_password")}
-                                                        sx={{ '& fieldset': { borderRadius: 33 } }}
-                                                        InputProps={{
-                                                            sx: { height: 40 },
-                                                            startAdornment: <InputAdornment position="start">
-                                                                <IconButton>
-                                                                    <LockIcon />
-                                                                </IconButton>
-                                                            </InputAdornment>,
-                                                            endAdornment: <InputAdornment position="end">
-                                                                <IconButton onClick={handlePasswordVisibility}>
-                                                                    {
-                                                                        (eyeValue) ? <VisibilityIcon /> : <VisibilityOffIcon />
-                                                                    }
-                                                                </IconButton>
-                                                            </InputAdornment>
-                                                        }} />
-                                                </div>
-                                                <div className="text-center pad padtf">
-                                                    <button onClick={handleLoginClickEvent} className="anchor-outline rounded ao-theme ao-fill-theme">
-                                                        <span className="flex text-center grow">
-                                                            <span><span className="pad padxd">Login</span></span>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <div className="text-center pad padyf">
-                                                    <Link to="/forgetpassword" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Forget Password ?</Link>
-                                                </div>
-                                                <div className="text-center pad padyd">
-                                                    Don't have an account ? <Link to="/signupform1" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Create Account</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="pad padyc"></div>
+                                {/* password control */}
+                                <div className="credential-Item">
+                                    <TextField type={eyeValue ? "text" : "password"}
+                                        fullWidth
+                                        value={loginData.encrypted_password}
+                                        placeholder="Password"
+                                        helperText={(loginData.encrypted_password_status) ? "password is not correct or not entered" : ""}
+                                        variant="outlined"
+                                        onChange={(evt) => handlechange(evt, "encrypted_password")}
+                                        sx={{ '& fieldset': { borderRadius: 33 } }}
+                                        InputProps={{
+                                            sx: { height: 40 },
+                                            startAdornment: <InputAdornment position="start">
+                                                <IconButton>
+                                                    <LockIcon />
+                                                </IconButton>
+                                            </InputAdornment>,
+                                            endAdornment: <InputAdornment position="end">
+                                                <IconButton onClick={handlePasswordVisibility}>
+                                                    {
+                                                        (eyeValue) ? <VisibilityIcon /> : <VisibilityOffIcon />
+                                                    }
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }} />
+                                </div>
+                                <div className="text-center pad padtf">
+                                    <button onClick={handleLoginClickEvent} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                        <span className="flex text-center grow">
+                                            <span><span className="pad padxd">Login</span></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div className="text-center pad padya">
+                                    <Link to="/forgetpassword" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Forget Password ?</Link>
+                                    <div className="pad padtb">
+                                        Don't have an account ? <Link to="/signupform1" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Create Account</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div className="pad padyc"></div>
                     </div>
                 </div>
             </div>

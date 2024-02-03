@@ -90,71 +90,86 @@ export const LandingPage = () => {
     }
 
     return (
-        <div className='hinherit relative'>
-            <div className="abs trbl slide-change fixed">
-                {
-                    lstofImages.map((item, idx) => {
-                        return (
-                            <div key={idx} className={["abs trbl slide-item transition ease",((idx==slide)?"slide-img-on":"")].join(" ")}>
-                                <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <div className="image-container-lp relative hinherit zindexfront">
-                <div className="desktop flex padoff align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
-                    <div className="flex--5 md--6 sm--8 xsm--12 relative">
-                        <div className="relative zindexfront h">
-                            <div className="flex flex-container align-items-end justify-center hinherit padoff">
-                                <div className="flex--12">
-                                    <div className="scruve"></div>
-                                    <div className="scruve-content">
-                                        <div className="relative">
-                                            <div className="flex justify-center pad padyf text-center">
-                                                <div className="flex--8 sm--12">
-                                                    <h5 className='lead h7 nomargi pad padyb line-space-h6'>{lstofImages[slide].msg}</h5>
+        <div className="flex padoff align-items-stretch justify-center wrap hinherit ypad-off slide-container">
+            <div className="flex--8 xsm--12 slide-picture relative transition">
+                <div className="abs trbl slide-change slide-b-radius oh bg grey-skin">
+                    {
+                        lstofImages.map((item, idx) => {
+                            return (
+                                <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
+                                    <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="flex wrap align-items-stretch relative justify-center h">
+                    <div className="">
+                        <div className="flex justify-center">
+                            <div>
+                                <div className="slide-bullet">
+                                    <span className="flex justify-center align-items-center">
+                                        {lstofImages.map((_, idx) => {
+                                            return <React.Fragment key={idx}>
+                                                <div className="relative">
+                                                    <a href={null} onClick={() => handleIndicator(idx)} className={["circle",(slide === idx ? "bullet-item active" : "bullet-item")].join(" ")}></a>
                                                 </div>
-                                            </div>
-                                            <div className="">
-                                                <div className='flex padoff justify-center'>
-                                                    <div>
-                                                        <button onClick={handleloginbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme">
-                                                            <span className="flex text-center grow">
-                                                                <span><span className="pad padxd">Login</span></span>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <div className="line-lp"></div>
-                                                    </div>
-                                                    <div>
-                                                        <button onClick={handlesignUpbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme">
-                                                            <span className="flex text-center grow">
-                                                                <span><span className="pad padxd">SignUp</span></span>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="pad padyf"></div>
-                                            <div className="relative">
-                                                <span className='flex justify-center'>
-                                                    {lstofImages.map((_, idx) => {
-                                                        return <React.Fragment key={idx}>
-                                                            <div>
-                                                                <button onClick={() => handleIndicator(idx)} className={[(slide === idx ? "indicator-lp" : "indicator-lp indicator-inactive-lp"),"cursor-pointer"].join(" ")} />
-                                                            </div>
-                                                        </React.Fragment>
-                                                    })}
-                                                </span>
-                                            </div>
-                                            <div className="pad padyc"></div>
-                                        </div>
-                                    </div>
+                                            </React.Fragment>
+                                        })}
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="flex--12">
+                        <div className="flex align-items-center h justify-center">
+                            <div>
+                                <h1 className='brand-h1'>Fijoli</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex--12 slide-card">
+                <div className="desktop flex justify-center">
+                    <div className="flex--5 md--6 sm--12 ">
+                        <div className="flex justify-center text-center">
+                            <div className="flex--12 sm--8 xsm--12">
+                                <div className="slide-change slide-active-onoff slide-context">
+                                    {
+                                        lstofImages.map((item, idx) => {
+                                            return (
+                                                <div key={idx} className={["slide-item transition ease s2", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
+                                                    <h5 className='lead h6 nomargi pad padyb line-space-h6'>{item.msg.join("\n")}</h5>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div className="pad padtd">
+                            <div className='flex padoff justify-center'>
+                                <div>
+                                    <button onClick={handleloginbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                        <span className="flex text-center grow">
+                                            <span><span className="pad padxd">Login</span></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <div className="line-lp"></div>
+                                </div>
+                                <div>
+                                    <button onClick={handlesignUpbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                        <span className="flex text-center grow">
+                                            <span><span className="pad padxd">SignUp</span></span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="pad padyc"></div>
                     </div>
                 </div>
             </div>

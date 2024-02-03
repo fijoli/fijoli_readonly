@@ -116,6 +116,9 @@ const ForgotPasswordComponent = () => {
         }
     ]);
 
+    const handleIndicator = (index) => {
+        setslide(index);
+    }
     useEffect(() => {
         const interval = setInterval(() => {
             let slideVal = (slide === (lstofImages.length - 1)) ? 0 : slide + 1;
@@ -126,97 +129,116 @@ const ForgotPasswordComponent = () => {
 
     return (
 
-        <div className='hinherit relative'>
-            <div className="abs trbl slide-change fixed">
-                {
-                    lstofImages.map((item, idx) => {
-                        return (
-                            <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
-                                <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-            <div className="image-container-lp relative hinherit zindexfront">
-                <div className="desktop flex padoff align-items-stretch justify-center zindexfront relative wrap hinherit ypad-off">
-                    <div className="flex--5 md--6 sm--8 xsm--12 relative">
-                        <div className="relative zindexfront h">
-                            <div className="flex flex-container align-items-end justify-center hinherit padoff">
-                                <div className="flex--12">
-                                    <div className="scruve"></div>
-                                    <div className="scruve-content">
-                                        <div className="flex justify-center relative wrap">
-                                            <div className="flex--8 xs--10">
-                                                <TextField placeholder="EmailID"
-                                                    fullWidth
-                                                    value={forgetpwdData.user_email}
-                                                    helperText={(forgetpwdData.user_email_status) ? "email id is not valid" : ""}
-                                                    sx={{ '& fieldset': { borderRadius: 33 } }}
-                                                    InputProps={{
-                                                        sx: { height: 40 },
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <IconButton>
-                                                                <EmailIcon />
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    }}
-                                                    variant="outlined" onChange={(evt) => handleChange(evt, "user_email")} />
-                                            </div>
-                                            <div className="flex--8 xs--10">
-                                                <TextField placeholder="Whatsapp Number"
-                                                    value={forgetpwdData.whatsapp_number}
-                                                    fullWidth
-                                                    helperText={(forgetpwdData.whatsapp_number_status) ? "whatsapp number is not entered" : ""}
-                                                    sx={{ '& fieldset': { borderRadius: 33 } }}
-                                                    InputProps={{
-                                                        sx: { height: 40 },
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <IconButton>
-                                                                <WhatsAppIcon />
-                                                            </IconButton>
-                                                        </InputAdornment>
-                                                    }}
-                                                    variant="outlined" onChange={(evt) => handleChange(evt, "whatsapp_number")} />
-                                            </div>
-                                            <div className="flex--8 xs--10">
-                                                <TextField type="date"
-                                                    value={forgetpwdData.dob}
-                                                    fullWidth
-                                                    placeholder="Date Of Birth"
-                                                    helperText={(forgetpwdData.dob_status) ? "dob is not selected" : ""}
-                                                    variant="outlined" onChange={(evt) => handleChange(evt, "dob")}
-                                                    sx={{ '& fieldset': { borderRadius: 33 } }}
-                                                    InputProps={{
-                                                        sx: { height: 35 },
-                                                        startAdornment: <InputAdornment position="start">
-                                                            <IconButton>
-                                                                <CalendarMonthIcon />
-                                                            </IconButton>
-                                                        </InputAdornment>,
-                                                    }} />
-                                            </div>
-                                            <div className="flex--8 xs--10">
-                                                <div className="text-center pad padtf">
-                                                    <button onClick={handleSubmitClick} className="anchor-outline rounded ao-theme ao-fill-theme">
-                                                        <span className="flex text-center grow">
-                                                            <span><span className="pad padxd">Submit</span></span>
-                                                        </span>
-                                                    </button>
+        <div className="flex padoff align-items-stretch justify-center wrap hinherit ypad-off slide-container">
+            <div className="flex--8 xsm--12 slide-picture relative transition">
+                <div className="abs trbl slide-change slide-b-radius oh bg grey-skin">
+                    {
+                        lstofImages.map((item, idx) => {
+                            return (
+                                <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
+                                    <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="flex wrap align-items-stretch relative justify-center h">
+                    <div className="">
+                        <div className="flex justify-center">
+                            <div>
+                                <div className="slide-bullet">
+                                    <span className="flex justify-center align-items-center">
+                                        {lstofImages.map((_, idx) => {
+                                            return <React.Fragment key={idx}>
+                                                <div className="relative">
+                                                    <a href={null} onClick={() => handleIndicator(idx)} className={["circle", (slide === idx ? "bullet-item active" : "bullet-item")].join(" ")}></a>
                                                 </div>
-                                                <div className="text-center pad padyf">
-                                                    Remember Password?  <Link to="/login" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Login</Link>
-                                                </div>
-                                                {
-                                                    <DisplayMessage displayState={displaymsg} handleclose={handlecloseDisplayMsg} />
-                                                }
-                                            </div>
-                                        </div>
-                                        <div className="pad padyc"></div>
-                                    </div>
+                                            </React.Fragment>
+                                        })}
+                                    </span>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className="flex--12">
+                        <div className="flex align-items-center h justify-center">
+                            <div>
+                                <h1 className='brand-h1'>Fijoli</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex--12 slide-card">
+                <div className="desktop flex justify-center">
+                    <div className="flex--5 md--6 sm--12 ">
+                        <div className="flex justify-center relative wrap">
+                            <div className="flex--12">
+                                <TextField placeholder="EmailID"
+                                    fullWidth
+                                    value={forgetpwdData.user_email}
+                                    helperText={(forgetpwdData.user_email_status) ? "email id is not valid" : ""}
+                                    sx={{ '& fieldset': { borderRadius: 33 } }}
+                                    InputProps={{
+                                        sx: { height: 40 },
+                                        startAdornment: <InputAdornment position="start">
+                                            <IconButton>
+                                                <EmailIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }}
+                                    variant="outlined" onChange={(evt) => handleChange(evt, "user_email")} />
+                            </div>
+                            <div className="flex--12">
+                                <TextField placeholder="Whatsapp Number"
+                                    value={forgetpwdData.whatsapp_number}
+                                    fullWidth
+                                    helperText={(forgetpwdData.whatsapp_number_status) ? "whatsapp number is not entered" : ""}
+                                    sx={{ '& fieldset': { borderRadius: 33 } }}
+                                    InputProps={{
+                                        sx: { height: 40 },
+                                        startAdornment: <InputAdornment position="start">
+                                            <IconButton>
+                                                <WhatsAppIcon />
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }}
+                                    variant="outlined" onChange={(evt) => handleChange(evt, "whatsapp_number")} />
+                            </div>
+                            <div className="flex--12">
+                                <TextField type="date"
+                                    value={forgetpwdData.dob}
+                                    fullWidth
+                                    placeholder="Date Of Birth"
+                                    helperText={(forgetpwdData.dob_status) ? "dob is not selected" : ""}
+                                    variant="outlined" onChange={(evt) => handleChange(evt, "dob")}
+                                    sx={{ '& fieldset': { borderRadius: 33 } }}
+                                    InputProps={{
+                                        sx: { height: 35 },
+                                        startAdornment: <InputAdornment position="start">
+                                            <IconButton>
+                                                <CalendarMonthIcon />
+                                            </IconButton>
+                                        </InputAdornment>,
+                                    }} />
+                            </div>
+                            <div className="flex--12">
+                                <div className="text-center pad padtb">
+                                    <button onClick={handleSubmitClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                        <span className="flex text-center grow">
+                                            <span><span className="pad padxd">Submit</span></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div className="text-center pad padyd">
+                                    Remember Password?  <Link to="/login" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Login</Link>
+                                </div>
+                                {
+                                    <DisplayMessage displayState={displaymsg} handleclose={handlecloseDisplayMsg} />
+                                }
+                            </div>
+                        </div>
+                        <div className="pad padyc"></div>
                     </div>
                 </div>
             </div>
