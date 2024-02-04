@@ -11,8 +11,8 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import InfoIcon from '@mui/icons-material/Info';
 import PersonIcon from '@mui/icons-material/Person';
 
-import { IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { useNavigate } from 'react-router-dom';
 import { Menu, Button, MenuItem } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';

@@ -1,44 +1,65 @@
-.image-main{
-    height:450px;
-    background: url("./../asset/login.png");
-    margin-top: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
+.image-main {
+  height: 65%;
+  width: 100%;
+  background: url("./../asset/login-cropped.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .login-container {
-    margin: 0 auto;
-    width: 350px;
-    /* border: 1px solid; */
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+  /* border: 1px solid; */
 }
 
 .login-container-box {
-    width: 100%;
-    text-align: center;
-    margin: 20px 0;
+  text-align: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.credential-Item{
-    margin-top: 10px;
-    margin-bottom: 6px;
-    display: block;
+/* .credential-Item {
+  margin-top: 10px;
+  margin-bottom: 6px;
+  display: block;
+} */
+
+.input-field {
+  margin: 8px 0px !important;
+  border-radius: 33px;
+}
+
+.input-field .MuiOutlinedInput-root {
+  border-radius: 33px;
+  box-shadow: 1px 2px 12px #00000029;
 }
 
 .button_oval_style_login {
-    background-color:#E50F32;
-    border-radius:35px/25px;
-    color:white;
-    text-align: center;
-    border: 1px;
-    width: 94px;
-    height: 24px;
-    margin-top: 50px;
-    cursor: pointer;
+  background-color: #e50f32;
+  border-radius: 35px/25px;
+  color: white;
+  text-align: center;
+  border: 1px;
+  width: 94px;
+  height: 24px;
+  margin-top: 16px;
+  cursor: pointer;
 }
 
-.link_login{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    margin-top: 25px;
+.link_login {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+.link_login a {
+  color: #747171;
+  text-decoration: none;
 }

@@ -5,7 +5,7 @@ import {Box, checkboxClasses, IconButton, InputAdornment, MenuItem, Select, Stac
 import { useState } from "react";
 import uploadicon from "./../asset/uploadIcon.jpg";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import { VerticalAlignTop } from "@material-ui/icons";
+import { VerticalAlignTop } from "@mui/icons-material";
 import * as React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import FileUploadComponent from "../childComponents/FileUploadComponent";

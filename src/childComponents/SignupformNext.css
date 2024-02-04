@@ -1,86 +1,80 @@
 .signupformNext-container {
-    margin: 0 auto;
-    width: 450px;
+  margin: 0 auto;
+  height: 100vh;
 }
 
-.image-main-Next{
-    height:360px;
-    background: url("./../asset/profile.png");
-    margin-top: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
+.image-main-Next {
+  height: 40%;
+  background: url("./../asset/profile-cropped.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
 
-.signupformNext-container-box{
-    width: 100%;
-    text-align: center;
-    /* margin: 20px 0; */
+.signupformNext-container-box {
+  width: 100%;
+  text-align: center;
+  /* margin: 20px 0; */
 }
 
 .image-crop-next {
-    position: absolute;
-    width: 450px;
-    height: 460px;
-    top: 310px;
+  transform: translateY(-15%);
 }
 
-
 .text-align {
-    align-items: center;
-    justify-content: center;
-    display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .text-align-para {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin-top: -10px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: -10px;
 }
 
 .text-align-items {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 100px;
-    width: 60%;
+  width: 100%;
 }
 
 .button_oval_style_submit-signform2 {
-    background-color:#FF3434;
-    color:white;
-    height: 24px;
-    border-radius:12px/12px;
-    align-items: center;
-    justify-content: center;
-    display: flex;    
-    width: 78px;
-    cursor: pointer;
-    border: 0px;
+  background-color: #ff3434;
+  color: white;
+  height: 24px;
+  border-radius: 12px/12px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 78px;
+  cursor: pointer;
+  border: 0px;
+}
+.indicator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .indicators {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 55px;
 }
-    
+
 .indicator {
-    background-color: gray;
-    height: 9px;
-    width: 9px;
-    border-radius: 100%;
-    border: none;
-    outline: none;
-    box-shadow: 0px 0px 5px #555;
-    margin: 3px;
-    cursor: none;
-    }
-    
-    .indicator-inactive {
-    background-color: black;
-    }
-    
+  background-color: gray;
+  height: 9px;
+  width: 9px;
+  border-radius: 100%;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 5px #555;
+  margin: 3px;
+  cursor: none;
+}
+
+.indicator-inactive {
+  background-color: black;
+}

@@ -8,12 +8,12 @@
   /* position: relative;
   display: inline-block; */
   /* overflow: hidden; */
-   /* Hide the cropped circular area */
+  /* Hide the cropped circular area */
 }
 
 .image-lp {
   display: block;
-width: 100%;
+  width: 100%;
   height: 100%;
   /* margin-top: 3px; */
 }
@@ -34,7 +34,6 @@ width: 100%;
   display: block;
   width: 100%; /* Set the width of your image */
   height: auto;
-  
 }
 
 .image-crop-lp {
@@ -56,20 +55,20 @@ width: 100%;
   background-color: white;
 }
 
-.line-lp{
-  height:5px;
-  width:40px;
-  background-color:black;
-  margin-top:15px;
+.line-lp {
+  height: 5px;
+  width: 40px;
+  background-color: black;
+  margin-top: 15px;
 }
 
 .indicators-lp {
   position: absolute;
   bottom: 12px;
-left: 0;
-right: 0;
-bottom: 10;
-text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 10;
+  text-align: center;
 }
 
 .indicator-lp {
@@ -110,11 +109,10 @@ text-align: center;
   left: 0;
   bottom: 35%;
   right: 0;
-
 }
 
 .button_oval_style_login-lp {
-  background-color: #E50F32;
+  background-color: #e50f32;
   border-radius: 30px/18px;
   color: white;
   text-align: center;
@@ -138,10 +136,8 @@ span.image-message-lp {
   text-align: center;
   font-weight: bold;
   font-weight: bold;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
-
 @media only screen and (min-width: 320px) and (max-width: 425px) {
-
 }
