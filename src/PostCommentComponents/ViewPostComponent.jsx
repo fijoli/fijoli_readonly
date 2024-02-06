@@ -179,9 +179,6 @@ const ViewPostComponent = ({postkey}) => {
 
 
   return ( 
-    
-
-    
     <div className='postcomment_container'>
         {
             ("" === picinfo)?
@@ -199,8 +196,8 @@ const ViewPostComponent = ({postkey}) => {
                                 <td colSpan={4} className='postcomment_header_2ndcol'>
                                     <div>
                                         <Button variant='text' onClick={handleOtherProfile}>{postitem.user_name}</Button>
-                                        <br/>
-                                        <span className='postcomment_subname' >{postitem.user_category_type}</span>
+                                        {/* <br/> */}
+                                        <span className='postcomment_subname' >- {postitem.user_category_type}</span>
                                     </div>
                                 </td>
                                 <td className='postcomment_header_3rdcol'>
@@ -233,8 +230,6 @@ const ViewPostComponent = ({postkey}) => {
                                                 ((1 === postitem.is_active) && (0 === postitem.reaction))?
                                                 <img src={rdislikeHeart} className="view_image_pic" /> :
                                                 <img src={dislikeHeart} className="view_image_pic" />
-                                                    // <ThumbDownOffAltOutlinedIcon style = {selectediconStyle}/> :
-                                                    // <ThumbDownOffAltOutlinedIcon style = {iconStyle}/>
                                             }
                                         </IconButton>
                                         <br/>
@@ -251,9 +246,9 @@ const ViewPostComponent = ({postkey}) => {
                                     </div>
                                 </td>
                                 <td  style={{border: "0px solid red", width: "40px"}}>
-                                    <div style={{marginTop:"-15px"}}>
+                                    {/* <div style={{marginTop:"-15px"}}>
                                     <img src={share} className="view_image_pic" />
-                                    </div>
+                                    </div> */}
                                 </td>
                                 <td>
                                     <div>
@@ -264,7 +259,7 @@ const ViewPostComponent = ({postkey}) => {
                                 </td>
                                 <td  style={{textAlign:"right", paddingRight:"20px"}}>
                                 <div style={{marginTop:"-15px"}}>
-                                    <WhatsAppIcon key="whatsappkey" style={whatsappiconStyle}/>
+                                    {/* <WhatsAppIcon key="whatsappkey" style={whatsappiconStyle}/> */}
                                 </div>
                                 </td>
                             </tr>

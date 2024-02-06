@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Backdrop, CircularProgress, TextField } from "@mui/material";
+import { Avatar, Backdrop, CircularProgress, TextField } from "@mui/material";
 import "./SignupformFinal.css";
 
 import fitness_trainer      from "./../asset/trainer.jpg";
@@ -36,6 +36,7 @@ const SignUpFormFinal = () =>{
     const [imgsrc, setimgsrc]           = useState(null);
     const [profilepic, setprofilepic]   = useState(null);
     const [showbackdrop, setShowbackdrop] = useState(false);
+    const [validState, setvalidState]     = useState({"pic_status": false});
 
     const userInfo              = useSelector((state)=> state.storeComponent.configData.profileData);
     const lstoftrainingtypes    = useSelector((state)=> state.storeComponent.configData.user_category);
@@ -45,6 +46,7 @@ const SignUpFormFinal = () =>{
         if(confirmRegState){
             if(200 === confirmRegState.status){
                 dispatch({type:"reset_status"})
+                dispatch({type:"clear_credentials"});
                 navigate("/homepage");
             }else if(400 === confirmRegState.status){
                 dispatch({type:"reset_status"})
@@ -90,19 +92,35 @@ const SignUpFormFinal = () =>{
 
     const handleProfilePicChange = (picInfo) =>{
         setprofilepic(picInfo);
+        setvalidState({"pic_status": false});
     }
 
     const handleCompleteClick = (pcinfo, imagedata) =>{
-
-        setShowbackdrop(true);
-        const userinfokeys = Object.keys(pcinfo);
-        for (let index = 0; index < userinfokeys.length; index++) {
-            userInfo[userinfokeys[index]] = pcinfo[userinfokeys[index]];
+        if(!IsValid()){
+            setShowbackdrop(true);
+            const userinfokeys = Object.keys(pcinfo);
+            for (let index = 0; index < userinfokeys.length; index++) {
+                userInfo[userinfokeys[index]] = pcinfo[userinfokeys[index]];
+            }
+    
+            const postAsyncCtrl = new PostRegisterController();
+            const registrationData = postAsyncCtrl.getconfirmregisterData(userInfo, imagedata, profilepic);
+            dispatch({"type": "set_confirmregistrationinfo", registrationData});
         }
+    }
 
-        const postAsyncCtrl = new PostRegisterController();
-        const registrationData = postAsyncCtrl.getconfirmregisterData(userInfo, imagedata, profilepic);
-        dispatch({"type": "set_confirmregistrationinfo", registrationData});
+    const handlebackhandler = () =>{
+        const navigatelink  =  "/signupform2?whatsapp_number=" + userInfo.whatsapp_number;
+        navigate(navigatelink)
+    }
+
+    function IsValid(){
+        let isvalidstate = validState;
+        if(profilepic === null){
+            isvalidstate.pic_status = true;
+            setvalidState({...isvalidstate});
+        }
+        return isvalidstate.pic_status;
     }
     
     return(
@@ -110,10 +128,20 @@ const SignUpFormFinal = () =>{
             <div className="image_main_final_div" >  
                 <img src={imgsrc}/>
             </div>
+            <Avatar src="/images/back.jpeg"
+                    onClick = {(e) => handlebackhandler()}
+                    style={{marginTop: "10px", marginLeft:"25px", border: "1px solid black"}}
+                    sx={{ width: 32, height: 32}}/>
             <div className="profile">
                 <ProfilePicComponent 
-                        handleProfilePicChange={handleProfilePicChange}/> 
+                        handleProfilePicChange={handleProfilePicChange} isdelete = {true}/> 
             </div>
+            {
+                (validState.pic_status)&&
+                <>
+                    <div className="errmessage_validState">Please upload Profile pic</div>
+                </>
+            }
             {(undefined !== userInfo) && 
             <>
                 <TextField type="text" 

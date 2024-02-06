@@ -21,6 +21,7 @@ import DisplayUsers from './tmpcomponents/DisplayUsers';
 // import ProfilepicSelectionComponent from './profilepiccontrols/ProfilepicSelectionComponent';
 // import PostCommentContainer from './PostCommentComponents/PostCommentContainer';
 import LogoComponent from './logoComponent/LogoComponent';
+import SignupFormEdit from './childComponents/SignupFormEdit';
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           {/* <Route exact path="/" element={<LogoComponent/>} /> */}
           {/* <Route exact path="/" element={<TempComponent/>} /> */}
           <Route exact path="/" element={<LandingPage/>} />
+          <Route exact path='/signupformedit' element={<SignupFormEdit/>} />
           <Route exact path="/users" element={<DisplayUsers/>} />
           <Route exact path="/signupform1" element={<SignUpFormFirst/>} />
           <Route exact path="/signupform2" element={<SignupformNext/>} />

@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PersonIcon from '@mui/icons-material/Person';
 import UploadIcon from '@mui/icons-material/Upload';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import TransformIcon from '@mui/icons-material/Transform';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import CancelIcon from '@mui/icons-material/Cancel';
@@ -14,6 +15,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { Avatar, Backdrop, Box, Button, Dialog, DialogContent, DialogTitle, IconButton, InputAdornment, Skeleton, Slide, Snackbar, TextField } from '@mui/material'
 
 import ProfilepicCropComponent from './ProfilepicCropComponent';
+import ConfirmationDialog from '../childComponents/ConfirmationDialog';
 
 function TransitionDown(props) {
     return <Slide {...props} direction="up" />;
@@ -32,6 +34,7 @@ const ProfilepicSelectionComponent = ({
     const [selPicMessage,   setselPicMessage]     = useState({"open": false});
 
     const [transition, setTransition] = useState(undefined);
+    const [removedlgstate, setremovedlgstate ]  = useState(false);
 
     const [sbstate, setsbState] = React.useState({
         vertical: 'top',
@@ -61,14 +64,16 @@ const ProfilepicSelectionComponent = ({
         if((filetypes === ".mov") || (filetypes === ".pdf")){
             setpicpreview("/images/fileuploaded.jpeg");
         }else{
-            setpicpreview(URL.createObjectURL(picinfo));
+            if(typeof(picinfo) === 'string'){
+                setpicpreview(picinfo)
+            }else{
+                setpicpreview(URL.createObjectURL(picinfo));
+            }
         }
 
         //disable other controls once pic file selected
         let disableState = (picinfo)?true:false;
         setdisableState(disableState);
-
-        // setdisableState(((disableState) && (showcropIcons)));
     }
 
     //launch windows file explorer
@@ -84,15 +89,16 @@ const ProfilepicSelectionComponent = ({
             evt.target.value = null;
         }else{
             setTransition(()=>TransitionDown);
-            setselPicMessage({"open": true, "errMsg":"file size should be lessthan or equal to 4MB"});
+            setselPicMessage({"open": true, "errMsg":"File size should be lessthan or equal to 4MB"});
         }
     }
 
     //remove selected file 
     const handlepicremoveevent = () =>{
-        setprofilepicFile(undefined);
-        setpicpreview(null);
-        setdisableState(!disableState);
+        // setprofilepicFile(undefined);
+        // setpicpreview(null);
+        // setdisableState(!disableState);
+        setremovedlgstate(true);
     }
 
     //launches crop dialog 
@@ -123,10 +129,19 @@ const ProfilepicSelectionComponent = ({
 
     //removes profile pic 
     const handleRemovepicClick = () => {
-        setprofilepicFile(undefined);
-        setpicpreview(null);
-        setdisableState(!disableState);
-        handleProfilePicChange(null);
+        setremovedlgstate(true);
+    }
+
+    const handleProfilePicRemove = (picState) => {
+        if(true === picState){
+            setprofilepicFile(undefined);
+            setpicpreview(null);
+            setdisableState(!disableState);
+            handleProfilePicChange(null);
+        }
+      
+        //close removed dialog state
+        setremovedlgstate(!removedlgstate);
     }
 
     const handlefollowSnackbarClose = () =>{
@@ -180,7 +195,7 @@ const ProfilepicSelectionComponent = ({
                             {
                             ((null !== profilepicFile) && (undefined !== profilepicFile)) &&
                                 <IconButton >
-                                    <PersonRemoveIcon className='select_pic_icon' onClick={handlepicremoveevent}/>
+                                    <DeleteForeverIcon className='select_pic_icon' onClick={handlepicremoveevent}/>
                                 </IconButton>
                             }
 
@@ -251,6 +266,13 @@ const ProfilepicSelectionComponent = ({
                     open={selPicMessage.open}>
                 </Backdrop>
             </>
+        }
+        {
+            (removedlgstate) &&
+            <ConfirmationDialog isopenDialog={removedlgstate} 
+                confirmMsg="Are you sure, you want to delete?"
+                handleConfirmationState = {handleProfilePicRemove}
+                menuOptions={["Cancel", "OK"]}/>
         }
     </div>
   )

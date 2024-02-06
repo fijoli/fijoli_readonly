@@ -15,7 +15,7 @@
 .login-container-box {
     width: 100%;
     text-align: center;
-    margin: 20px 0;
+    /* margin: 5px 0; */
 }
 
 .credential-Item{
@@ -32,7 +32,7 @@
     border: 1px;
     width: 94px;
     height: 24px;
-    margin-top: 50px;
+    margin-top: 10px;
     cursor: pointer;
 }
 

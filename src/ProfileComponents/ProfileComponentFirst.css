@@ -147,12 +147,12 @@
 
 .payment_heading_pcf{
     background: gray;
-    color: white;
+    color: black;
     text-align: center;
     border-radius: 10px;
     height: 25px;
     width: 124px;
-    border: 1px solid;
+    /* border: 1px solid ; */
     
 }
 
@@ -170,4 +170,8 @@
 
 .currently_training_pcf {
     border: none;
+}
+
+.errmessage_aboutyourself{
+    color: red;
 }

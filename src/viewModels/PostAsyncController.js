@@ -18,7 +18,9 @@ class PostAsyncController {
     }
 
     getpostItem = (postinfo, lstoffiles) => {
-        const uploadfilesInfo = this.getmergefileInfo(lstoffiles, undefined);
+        postinfo["post_desc"] = lstoffiles["post_description"];
+        postinfo["currency"]  = lstoffiles["post_currency"];
+        const uploadfilesInfo = this.getmergefileInfo(lstoffiles.post_file, undefined);
         return this.createformData(postinfo, uploadfilesInfo,"postInfo");
     }
 
@@ -75,13 +77,14 @@ class PostAsyncController {
         };
     }
 
-    getProfilePicInfo(post_category) {
+    getProfilePicInfo(name, opendlg, picinfo, validfileext, post_category) {
         return{
-            name        : -1,
-            opendialog : false, 
-            profilepicInfo : null, 
+            name        : name,
+            opendialog : opendlg, 
+            profilepicInfo : picinfo, 
             showcropIcons  : false, 
             removePicState : false,
+            filetypes      : validfileext,
             headerMessage  : this.postCategoryheaderMsgs[post_category]
         };
     }
@@ -95,6 +98,10 @@ class PostAsyncController {
             "currency"          : 0,
             "whatsapp_number"   : ""
         }
+    }
+
+    getPostType(post_category){
+        return this.postCategorytypes[post_category];
     }
 
 }

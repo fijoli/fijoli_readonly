@@ -18,12 +18,14 @@
     background: white;
     color: black;
     text-align: left;
+    margin-top: 9px;
 }
 
 .play_icons_post_component {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 3px;
 }
 
 .post_message_post_component{
@@ -45,12 +47,30 @@
     width: 55px;
     margin-left: -55px;
     border-radius: 10px;
-    margin-top: 1px;
+    margin-top: 11px;
     height: 27px;
 }
 
 .postcomponent_play_icons {
     display: flex;
     justify-content: center;
+    margin-top: 3px;
 }
 
+.errmessage_aboutyourself_postcomponent{
+    color: red;
+    justify-content: center;
+    display: flex;
+}
+
+.table_pricing_post_component_label {
+    width: 15%;
+    /* border-radius: 10px; */
+    text-align: center;
+    height: 25px;
+    background: white;
+    color: black;
+    text-align: left;
+    border: none;
+    margin-top: 9px;
+}

@@ -2,7 +2,7 @@
 
 const EnumPostCommentType = Object.freeze({
     none                    : "none",
-    newPost                 : "new_post_comment",
+    newPost                 : "_comment",
     editMainPost            : "edit_main_post_comment",
     deleteMainPost          : "delete_main_post_comment",
     replyMainPost           : "reply_main_post_comment",

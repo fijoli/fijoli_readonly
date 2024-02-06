@@ -61,6 +61,10 @@
     border: 0px;
 }
 
+.MuiFormHelperText-root {
+    color: red !important;
+}
+
 .indicators {
     display: flex;
     justify-content: center;
@@ -84,3 +88,6 @@
     background-color: black;
     }
     
+    .errmessage_aboutyourself_signupnext{
+        color: red;
+    }

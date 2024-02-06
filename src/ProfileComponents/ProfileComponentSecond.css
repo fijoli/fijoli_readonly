@@ -78,3 +78,7 @@
 .center-align-pcs {
     margin: 0 auto;
 }
+
+.errmessage_aboutyourself{
+    color: red;
+}

@@ -29,16 +29,19 @@ const ProfileComponentSixth = (props) =>{
         { id: 1, text: 'certificate' },
         { id: 2, text: 'certificate' },
     ];
-
+    
+    const[validState, setvalidState]        = useState({"desc_status":false, "cert_status":false, location_status: false, "lang_status": false});
     ///<summary>
     // set description 
     ///</summary>
     const handletxtChanged = (evt) =>{
         setdescription(evt.target.value);
+        setvalidState({...validState, desc_status:false});
     }
 
     const handlelocationChanged = (evt) =>{
         setlocation(evt.target.value);
+        setvalidState({...validState, location_status:false});
     }
     const handleChange = (lstoflanguages) => {
         // const {
@@ -49,6 +52,7 @@ const ProfileComponentSixth = (props) =>{
         //   typeof value === 'string' ? value.split(',') : value,
         // );
         setselectedLang(lstoflanguages);
+        setvalidState({...validState, lang_status:false});
     };    
 
     const handleCurrencyChange = (event) => {
@@ -56,14 +60,15 @@ const ProfileComponentSixth = (props) =>{
     }
 
     const handleCompleteClick = (evt) =>{
-        
-        const user_info = {
-            "user_description"  : description,
-            "languages_known"   : selectedLang.join(","),
-            "location_address"  : location
-        }
+        if(!IsValid()){
+            const user_info = {
+                "user_description"  : description,
+                "languages_known"   : selectedLang.join(","),
+                "location_address"  : location
+            }
 
-        props.handleCompleteClick(user_info, uploadfiles);
+            // props.handleCompleteClick(user_info, uploadfiles);
+        }
     }
 
     const handleOnSelect = (event) =>{
@@ -73,11 +78,30 @@ const ProfileComponentSixth = (props) =>{
     const handleuploadfile = (file, filetype, fileindex) =>{
         uploadfiles[filetype][fileindex] = file;
         setuploadfiles(uploadfiles);
+        setvalidState({...validState, cert_status:false});
     }
 
     const handleremovefile = (fileIndex, filetype) =>{
         delete uploadfiles[filetype][fileIndex];
         setuploadfiles(uploadfiles);
+        setvalidState({...validState, cert_status:false});
+    }
+
+    function IsValid(){
+        let isStateValid = validState;
+        if(description === ""){
+            isStateValid.desc_status = true;
+        }else if(uploadfiles.certificate.filter(item => item !== undefined).length === 0){
+            isStateValid.cert_status = true;
+        }else if(selectedLang.join(",") === ""){
+            isStateValid.lang_status = true;
+        }else if(location === ""){
+            isStateValid.location_status = true;
+        }
+
+        setvalidState({...isStateValid});
+
+        return (isStateValid.desc_status || isStateValid.cert_status || isStateValid.lang_status || isStateValid.location_status);
     }
 
     return(
@@ -86,9 +110,13 @@ const ProfileComponentSixth = (props) =>{
                     <tr>
                         <td>
                             <AboutMyselfComponent height={'90px'} 
-                               document_desc=""
+                               document_desc={description}
                                handletxtChanged={handletxtChanged}
                                placeholdertext = "About Myself Not more than (500 characters)"/>
+                                {
+                                    (validState.desc_status)&&
+                                    <div className="errmessage_aboutyourself">Please describe about yourself</div>
+                                }
                         </td>
                     </tr>
 
@@ -113,13 +141,18 @@ const ProfileComponentSixth = (props) =>{
                                                 return(
                                                     <td>
                                                         <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                            uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} />
+                                                            uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}
+                                                            accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf" />
                                                     </td>                                                
                                                 )
                                             })
                                         }
                                     </tr>
                                 </table>
+                                {
+                                    (validState.cert_status)&&
+                                    <div className="errmessage_aboutyourself">Please upload atleast 1 certification for your profile credibility</div>
+                                }
                             </Box>
 
                         </td>
@@ -146,15 +179,15 @@ const ProfileComponentSixth = (props) =>{
                                 <tr>
                                     <td className="checkbox_col_pc6"/>
                                     <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Mode of Training" 
+                                        <input type="label" value="Mode of Training" disabled
                                                 className="payment_heading_pc6"/>
                                     </td>
                                     <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Fees / Session" 
+                                        <input type="label" value="Fees / Session" disabled
                                                 className="payment_heading_pc6"/>
                                     </td>
                                     <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Fees / Month"  
+                                        <input type="label" value="Fees / Month"  disabled
                                                 className="payment_heading_pc6"/>
                                     </td>
                                 </tr>
@@ -269,6 +302,7 @@ const ProfileComponentSixth = (props) =>{
                                                                         placeholder = "location"
                                                                         variant="outlined"
                                                                         fullWidth
+                                                                        helperText={(validState.location_status)?"Please enter your location":""}
                                                                         sx={{
                                                                             
                                                                             '& fieldset': { borderRadius: 10 },
@@ -290,6 +324,10 @@ const ProfileComponentSixth = (props) =>{
                                 <tr>
                                     <td colSpan={4}>
                                         <CustomLanguageSelection handleChange={handleChange}/>
+                                        {
+                                            (validState.lang_status)&&
+                                            <div className="errmessage_aboutyourself">Language is not selected</div>
+                                        }
                                     </td>
                                 </tr>
                             </table>

@@ -22,9 +22,14 @@ const FijoliItems = (props) =>{
     const handleDisplayPost = (selectedItem) =>{
         if(selectedItem){
             // dispatch(getPostItemsAction(userinfo.user_id));
-            dispatch(getPostItemsAction({[selectedItem.id] : selectedItem}))
+            // dispatch(getPostItemsAction({[selectedItem.id] : selectedItem}))
             //navigate to page which displays post comment info
             // dispatch(navigateItem(EnumNavigate.postContainer));
+            let items = {};
+            Object.keys(postitems).map(item =>{
+                items = {...items, [postitems[item].id]: postitems[item]}
+            })
+            dispatch(getPostItemsAction(items));
         }
     }
 

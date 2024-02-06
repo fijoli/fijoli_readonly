@@ -82,3 +82,7 @@
 .display_middle_pct {
     text-align: center;
 }
+
+.errmessage_aboutyourself{
+    color: red;
+}

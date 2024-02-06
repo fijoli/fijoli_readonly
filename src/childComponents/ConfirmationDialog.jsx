@@ -18,6 +18,16 @@ const ConfirmationDialog = ({isopenDialog, confirmMsg, handleConfirmationState, 
         handleConfirmationState(state);
     }
 
+    function NewlineText(text) {
+        if(text.includes("\n")){
+            return text.split('\n').map(str => <p>{str}</p>);
+        }else{
+            return <p>{text}</p>;
+        }
+        
+    }
+      
+
   return (
     <div>
         <Dialog open={isopenDialog}>
@@ -26,8 +36,9 @@ const ConfirmationDialog = ({isopenDialog, confirmMsg, handleConfirmationState, 
                 <table style={{minWidth: "420px", maxWidth: "auto"}} >
                     <tr style={{width: "auto"}}>
                         <td >
-                            <input value={confirmMsg} readOnly = {true}
-                                 type="label" style={{border:"none", textAlign:"center",  marginLeft:"3px", width: "100%"}}/>
+                            <div>{confirmMsg}</div>
+                            {/* <input value={confirmMsg} readOnly = {true}
+                                 type="label" style={{border:"none", textAlign:"center",  marginLeft:"3px", width: "100%"}}/> */}
                         </td>
                     </tr>
                 </table>

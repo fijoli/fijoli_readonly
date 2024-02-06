@@ -131,7 +131,7 @@ export const storeComponent = (state = initialState, action) => {
             userInfo.dob                    = action.data.dob;
             userInfo.user_category          = action.data.user_category;
 
-            state = {...state, configData: tmpConfigData};
+            state = {...state, configData: tmpConfigData, credentials: action.data};
             return state;
 
 
@@ -216,6 +216,10 @@ export const storeComponent = (state = initialState, action) => {
             }
             return state;
 
+        case "clear_credentials":
+            delete state["credentials"];
+            return state;
+            
         case "reset_status":
             //delete state entries after performing operations
             delete state["postinfoStatus"];
@@ -389,12 +393,10 @@ export const storeComponent = (state = initialState, action) => {
         //delete post comment
         case EnumPostCommentType.postcommentdeleteSuccess:
             {
-                let lstofPosts      = state.lstofPosts;
-                let postcommentslst = {...lstofPosts[action.post_id]["comments"]};
-                postcommentslst[action.data.id].subcomments = {};
-                delete postcommentslst[action.data.id];
-                // lstofPosts[action.post_id]["comments"] = {...postcommentslst};
-                lstofPosts[action.post_id]["comments"] = postcommentslst;
+                let lstofPosts      = {...state.lstofPosts};
+                if(action.data.length > 0){
+                    delete lstofPosts[action.post_id]["comments"][action.data[0].id];
+                }
                 state = {...state, lstofPosts: lstofPosts};
             }
             return state;
@@ -403,8 +405,12 @@ export const storeComponent = (state = initialState, action) => {
             {
                 let lstofPosts      = state.lstofPosts;
                 let postcommentslst = {...lstofPosts[action.post_id]["comments"]};
-                delete postcommentslst[action.data.main_comment_id].subcomments[action.data.id];
-                postcommentslst[action.data.main_comment_id].count_reply_comments = Object.keys(postcommentslst[action.data.main_comment_id].subcomments).length ;
+                action.data.map((item)=>{
+                    console.log(item.id);
+                    delete postcommentslst[action.data[0].main_comment_id].subcomments[item.id];
+                })
+                // delete postcommentslst[action.data.main_comment_id].subcomments[action.data.id];
+                postcommentslst[action.data[0].main_comment_id].count_reply_comments = Object.keys(postcommentslst[action.data[0].main_comment_id].subcomments).length ;
                 lstofPosts[action.post_id]["comments"] = postcommentslst;
                 state = {...state, lstofPosts: lstofPosts};
 

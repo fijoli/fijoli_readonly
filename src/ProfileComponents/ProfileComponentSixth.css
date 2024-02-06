@@ -97,8 +97,9 @@
     border-radius: 10px;
     text-align: center;
     height: 25px;
-    background: white;
-    color: black;
+    background: red;
+    color: white;
+    font-weight: bold;
 }
 
 .table_pricing_second_col_pc6{
@@ -128,16 +129,17 @@
 
 .payment_heading_pc6 {
     background: gray;
-    color: white;
+    color: black;
     text-align: center;
     border-radius: 10px;
     height: 25px;
     width: 124px;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 
 .payment_heading_pc6_cell {
     text-align: center;
+
 }
 
 .currenct_select_pc6 {
@@ -149,4 +151,12 @@
 
 .currently_training_pc6 {
     border: none;
+}
+
+.MuiFormHelperText-root {
+    color: red !important;
+  }
+
+.errmessage_aboutyourself{
+    color: red;
 }

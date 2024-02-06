@@ -17,6 +17,7 @@ const ProfileComponentThird = (props) =>{
     });
 
     const [description, setdescription]     = useState("");
+    const [validState, setvalidState]        = useState({"desc_status":false, "cert_status":false, "products_status": false});
 
     const certificatedata = [
         { id: 0, text: 'certificate' },
@@ -33,6 +34,15 @@ const ProfileComponentThird = (props) =>{
     const handleuploadfile = (file, filetype, fileindex) =>{
         uploadfiles[filetype][fileindex] = file;
         setuploadfiles(uploadfiles);
+        switch(filetype){
+            case "certificate":
+                setvalidState({...validState, cert_status:false});
+                break;
+            case "product_seller":
+                setvalidState({...validState, products_status:false});
+                break;
+        }
+
     }
 
     const handleremovefile = (fileIndex, filetype) =>{
@@ -45,15 +55,31 @@ const ProfileComponentThird = (props) =>{
     ///</summary>
     const handletxtChanged = (evt) =>{
         setdescription(evt.target.value);
+        setvalidState({...validState, desc_status:false});
     }
 
     const handleCompleteClick = (evt) =>{
-        
-        const user_info = {
-            "user_description"  : description
+        if(!IsValid()){
+            const user_info = {
+                "user_description"  : description
+            }
+            // props.handleCompleteClick(user_info, uploadfiles);
         }
+    }
 
-        props.handleCompleteClick(user_info, uploadfiles);
+    function IsValid(){
+        let isStateValid = validState;
+        if(description === ""){
+            isStateValid.desc_status = true;
+        }else if(uploadfiles.certificate.filter(item => item !== undefined).length === 0){
+            isStateValid.cert_status = true;
+        }else if(uploadfiles.product_seller.filter(item => item!== undefined).length === 0){
+            isStateValid.products_status = true;
+        }
+        setvalidState({...isStateValid});
+
+        return (isStateValid.desc_status || isStateValid.cert_status || isStateValid.products_status);
+
     }
 
     return(
@@ -80,9 +106,13 @@ const ProfileComponentThird = (props) =>{
                                     rows={4}/>
                         </Box> */}
                         <AboutMyselfComponent height={'90px'} 
-                            document_desc=""
+                            document_desc={description}
                             handletxtChanged={handletxtChanged} 
                             placeholdertext="About Myself Not more than (500 characters)"/>
+                            {
+                                (validState.desc_status)&&
+                                <div className="errmessage_aboutyourself">Please describe about yourself</div>
+                            }
                     </td>
                 </tr>
                 <tr className="table_row_height_pct">
@@ -106,13 +136,19 @@ const ProfileComponentThird = (props) =>{
                                             return(
                                                 <td>
                                                     <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} />
+                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} 
+                                                        accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf"/>
                                                 </td>                                                
                                             )
                                         })
                                     }
                                 </tr>
                             </table>
+                            {
+                                (validState.cert_status)&&
+                                <div className="errmessage_aboutyourself">Please upload atleast 1 certification for your profile credibilityPlease describe about yourself</div>
+                            }
+
                         </Box>
 
                     </td>
@@ -132,12 +168,18 @@ const ProfileComponentThird = (props) =>{
                                             return(                                                
                                                 <td>
                                                     <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}/>
+                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}
+                                                        accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf"/>
                                                 </td>                                                
                                             )})
                                     }
                                 </tr>
                             </table>
+                            {
+                                (validState.products_status)&&
+                                <div className="errmessage_aboutyourself">Please upload atleast 1 product pic for your credibility</div>
+                            }
+
                         </Box>
                     </td>
                 </tr>

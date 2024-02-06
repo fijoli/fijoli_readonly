@@ -24,9 +24,9 @@ const PostCategoryMenuComponent = ({menuOptions, handleClick}) =>{
     const navigateItemtype  = useSelector((state) => state.storeComponent.navigateItemType);
 
     const handlemenuIconClick = (event) => {
-        if(navigateItemtype !== EnumNavigate.postState){
+        // if(navigateItemtype !== EnumNavigate.postState){
             setAnchorEl(event.currentTarget);
-        }
+        // }
     };
 
     const handleClose = (e, seletedmenuItem) => {

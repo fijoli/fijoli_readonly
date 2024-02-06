@@ -85,7 +85,8 @@ const FileUploadComponent = (props) =>{
             opendialog && 
             <SelectedImageDescription opendialog={opendialog}
                 documentinfo = {documentinfo}
-                dlgTitle={props.dlgTitle} emitdocumentInfo={emitdocumentInfo} />
+                dlgTitle={props.dlgTitle} emitdocumentInfo={emitdocumentInfo} 
+                accesstype = {props.accesstype}/>
         }
     </div>
   )

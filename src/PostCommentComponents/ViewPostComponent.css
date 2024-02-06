@@ -33,9 +33,9 @@
 }
 
 .postcomment_subname {
-    font-size: 15px;
+    font-size: 12px;
     border: none;
-    margin-left: 3px;
+    /* margin-left: 3px; */
 }
 
 .postcomment_postimage {

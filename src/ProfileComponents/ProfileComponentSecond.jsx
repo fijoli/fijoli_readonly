@@ -13,6 +13,7 @@ const ProfileComponentSecond = (props) =>{
     const [name,        setname]            = useState("");
     const [location,    setlocation]        = useState("");
     const [description, setdescription]     = useState("");
+    const [validState, setvalidState]        = useState({"desc_status":false, "cert_status":false, "fitness_status": false, "location_status": false});
 
     const [uploadfiles, setuploadfiles]     = useState({
         "certificate"    : [undefined, undefined, undefined], 
@@ -38,21 +39,41 @@ const ProfileComponentSecond = (props) =>{
     ///</summary.
     const handleCompleteClick = (evt) =>{
 
-        const userInfo = {
-            "studio_name"       : name,
-            "user_description"  : description,
-            "location_address"  : location
+        if(!IsValid()){
+            const userInfo = {
+                "studio_name"       : name,
+                "user_description"  : description,
+                "location_address"  : location
+            }
+    
+            props.handleCompleteClick(userInfo, uploadfiles);
         }
-
-        props.handleCompleteClick(userInfo, uploadfiles);
     }
 
+    function IsValid(){
+        let isStateValid = validState;
+        if(description === ""){
+            isStateValid.desc_status = true;
+        }else if(uploadfiles.certificate.filter(item => item !== undefined).length === 0){
+            isStateValid.cert_status = true;
+        }else if(uploadfiles.fitness_studio.filter(item => item!== undefined).length === 0){
+            isStateValid.fitness_status = true;
+        }else if(location === ""){
+            isStateValid.location_status = true;
+        }
+
+        setvalidState({...isStateValid});
+
+        return (isStateValid.desc_status || isStateValid.cert_status || isStateValid.fitness_status || isStateValid.location_status);
+    }
    
     ///<summary>
     // set description 
     ///</summary>
     const handletxtChanged = (evt) =>{
+
         setdescription(evt.target.value);
+        setvalidState({...validState, desc_status:false});
     }
 
     ///<summary>
@@ -65,6 +86,14 @@ const ProfileComponentSecond = (props) =>{
     const handleuploadfile = (file, filetype, fileindex) =>{
         uploadfiles[filetype][fileindex] = file;
         setuploadfiles(uploadfiles);
+        switch(filetype){
+            case "certificate":
+                setvalidState({...validState, cert_status:false});
+                break;
+            case "fitness_studio":
+                setvalidState({...validState, fitness_status:false});
+                break;
+        }
     }
 
     const handleremovefile = (fileIndex, filetype) =>{
@@ -74,17 +103,22 @@ const ProfileComponentSecond = (props) =>{
 
     const handlelocationchanged = (evt) =>{
         setlocation(evt.target.value);
+        setvalidState({...validState, location_status:false});
     }
 
-    return(
+    return( 
         <div className="signupformFinal-container-pcs">
             <table className="table_container-pcs">
                 <tr>
                     <td>
                         <AboutMyselfComponent height={'90px'} 
-                            document_desc=""
+                            document_desc={description} 
                             handletxtChanged={handletxtChanged} 
                             placeholdertext = "About Myself Not more than (500 characters)"/>
+                        {
+                            (validState.desc_status)&&
+                            <div className="errmessage_aboutyourself">Please describe about yourself</div>
+                        }
                     </td>
                 </tr>
 
@@ -127,13 +161,18 @@ const ProfileComponentSecond = (props) =>{
                                             return(
                                                 <td>
                                                     <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}/>
+                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}
+                                                        accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf"/>
                                                 </td>                                                
                                             )
                                         })
                                     }
                                 </tr>
                             </table>
+                            {
+                                (validState.cert_status)&&
+                                <div className="errmessage_aboutyourself">Please upload atleast 1 certification for your profile credibilityPlease describe about yourself</div>
+                            }
                         </Box>
                     </td>
                 </tr>
@@ -153,13 +192,18 @@ const ProfileComponentSecond = (props) =>{
                                             return(
                                                 <td>
                                                     <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} />
+                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} 
+                                                        accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf"/>
                                                 </td>                                                
                                             )
                                         })
                                     }
                                 </tr>
                             </table>
+                            {
+                                (validState.fitness_status)&&
+                                <div className="errmessage_aboutyourself">Please upload atleast 1 fitness studio pic for your center credibility</div>
+                            }
                         </Box>
 
                     </td>
@@ -173,6 +217,11 @@ const ProfileComponentSecond = (props) =>{
                             }}>
                             My Gym / Fitness Studio Address
                         </Box>
+                        {
+                            (validState.location_status)&&
+                            <div className="errmessage_aboutyourself">Please describe fitness studio location</div>
+                        }
+
                     </td>
                 </tr>
 

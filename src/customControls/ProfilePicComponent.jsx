@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ConfirmationDialog from '../childComponents/ConfirmationDialog';
 import { useEffect } from "react";
 import ProfilepicSelectionComponent from "../profilepiccontrols/ProfilepicSelectionComponent";
@@ -16,11 +17,11 @@ const ProfilePicComponent = (props) => {
   const [removedlgstate, setremovedlgstate ]  = useState(false);
 
   useEffect(()=>{
-    if(props.profilepic){
+    if(props.profilepic && profilepicInfo === null){
       setprofilepicInfo(props.profilepic)
       setpreviewImg(props.profilepic);
     }
-  },[props]);
+  },[props.profilepic]);
 
   //useEffect which updates pic to parent component
   useEffect(()=>{
@@ -87,7 +88,10 @@ const ProfilePicComponent = (props) => {
             :
           <>
               <img src={previewImg} className='profile_img skeleton'/>
-              <PersonRemoveIcon className='profile_pic_remove' onClick={handleRemoveProfilePic}/>
+              {
+                (props.isdelete)&&
+                <DeleteForeverIcon className='profile_pic_remove' onClick={handleRemoveProfilePic}/>
+              }
           </>  
       }
       {

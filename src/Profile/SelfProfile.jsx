@@ -49,7 +49,8 @@ const SelfProfile =() =>{
         "confirminfo"       : {"isOpen": false, "Message": ""},
         "userinfo"          : {"logged_in_user_id" : "", "blocked_user_id": ""},
         "isblocked"         : false,
-        "menuOptions"       : ["Cancel", "OK"]
+        "menuOptions"       : ["Cancel", "OK"],
+        "messageType"       : ""
     });
 
     const otherUserInfo           =  useSelector((state)=> state.storeComponent.otherProfileData);
@@ -100,6 +101,7 @@ const SelfProfile =() =>{
     //event handler which initializes confirmation info based on block/unblock user
     const handleBlockUserState = () =>{
         blockUserinfo.confirminfo.isOpen    = true;
+        blockUserinfo.messageType           = "block";
         blockUserinfo.confirminfo.Message   = (otherUserInfo.isblocked)?StringConstants.UNBLOCK_USER_MSG:StringConstants.BLOCK_USER_MSG;
         setblockUserinfo({...blockUserinfo});
     }
@@ -108,20 +110,29 @@ const SelfProfile =() =>{
     const handleBlockUserConfirmation = (state) =>{
 
         if(state){
-            blockUserinfo.isblocked     = otherUserInfo.isblocked;
-            blockUserinfo.userinfo.logged_in_user_id = loggedInUserinfo.user_id;
-            blockUserinfo.userinfo.blocked_user_id   = otherUserInfo.user_id;
+            switch(blockUserinfo.confirminfo.messageType){
+                case "block":
+                    blockUserinfo.isblocked     = otherUserInfo.isblocked;
+                    blockUserinfo.userinfo.logged_in_user_id = loggedInUserinfo.user_id;
+                    blockUserinfo.userinfo.blocked_user_id   = otherUserInfo.user_id;
+        
+                    //invokes api to store block/unblock of users if it is not logged in user
+                    if(otherUserInfo.isblocked){
+                        dispatch(unblockuserAction(blockUserinfo.userinfo))
+                    }else{
+                        dispatch(blockuserAction(blockUserinfo.userinfo));
+                    }
+                            
+                    break;
+                case "whoami":
+                    navigate("/signupformedit");
+                    break;
+            }
         }
 
         blockUserinfo.confirminfo.isOpen   = !blockUserinfo.confirminfo.isOpen;
+        blockUserinfo.confirminfo.messageType = "";
         setblockUserinfo({...blockUserinfo});
-
-        //invokes api to store block/unblock of users if it is not logged in user
-        if(otherUserInfo.isblocked){
-            dispatch(unblockuserAction(blockUserinfo.userinfo))
-        }else{
-            dispatch(blockuserAction(blockUserinfo.userinfo));
-        }
     }
 
     //event handler gets invoke when follow button is pressed
@@ -154,6 +165,14 @@ const SelfProfile =() =>{
         setfollowSBarState(FollowConfirmationMsgr.getDefaultConfirmationMsg());
     }
 
+    const handleEdit = () =>{
+        blockUserinfo.confirminfo.isOpen    = true;
+        blockUserinfo.confirminfo.messageType = "whoami";
+        blockUserinfo.confirminfo.Message   = "You are trying to change your profile identity.      You will lose all your reviews, profile details related to “who am I”. The other option is to create a new profile with a different whatsapp number. Do you still wish to edit this profile?";
+        setblockUserinfo({...blockUserinfo});
+
+    }
+
     const action = (
         <React.Fragment>
           <IconButton
@@ -174,7 +193,7 @@ const SelfProfile =() =>{
             </div>
             <div className="selfprofile">
                 <ProfilePicComponent profilepic={profilepic}
-                         handleProfilePicChange={handleProfilePicChange}/> 
+                         handleProfilePicChange={handleProfilePicChange} isdelete={false}/> 
             </div>
             { (undefined !== otherUserInfo) &&
             <div>
@@ -204,7 +223,9 @@ const SelfProfile =() =>{
                         InputProps={{ sx: { height: 15,  "& input": {   textAlign: "center"  } } }}/>
                     {
                         (isloggedInUser) &&
-                        <ModeEditIcon style={{width:"20px", marginLeft: "-30px"}}/>
+                        <IconButton onClick={handleEdit} width="auto">
+                            <ModeEditIcon style={{width:"20px", marginLeft: "-30px"}} />
+                        </IconButton>
                     }
                 </div>
                 <div className='selfprofile_div_followers'>

@@ -21,7 +21,7 @@ function TransitionDown(props) {
     return <Slide {...props} direction="up" />;
 }
 
-const SelectedImageDescription = ({opendialog, documentinfo, dlgTitle, emitdocumentInfo}) =>{
+const SelectedImageDescription = ({opendialog, documentinfo, dlgTitle, emitdocumentInfo, accesstype}) =>{
 
     const [certificationInfo,   setCertificationInfo] = useState({
             "image"         : null,
@@ -78,14 +78,14 @@ const SelectedImageDescription = ({opendialog, documentinfo, dlgTitle, emitdocum
     }
 
     const handlefileChange = (evt) => {
-        if(evt.target.files[0].size <= 4000000){
+        // if(evt.target.files[0].size <= 4000000){
             setSelectedFile(evt.target.files[0]);
             evt.target.value = null;
             setdisableState(!disableState);
-        }else{
-            setTransition(()=>TransitionDown);
-            setselPicMessage({"open": true, "errMsg":"file size should be lessthan or equal to 4MB"});
-        }
+        // }else{
+        //     setTransition(()=>TransitionDown);
+        //     setselPicMessage({"open": true, "errMsg":"file size should be lessthan or equal to 4MB"});
+        // }
     }
 
     const handleRemoveCertificate = () => {
@@ -191,7 +191,7 @@ const SelectedImageDescription = ({opendialog, documentinfo, dlgTitle, emitdocum
                 menuOptions = {["Cancel","OK"]}
             />
         }
-        <input type="file" style={{display: "none"}} accept=".pdf"
+        <input type="file" style={{display: "none"}} accept={accesstype}
                     onChange={(evt)=> handlefileChange(evt)} id="fileid"/>
         {
             <>

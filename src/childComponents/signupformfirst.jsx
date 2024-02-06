@@ -8,6 +8,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
 import DisplayMessage from "../DisplayMessageComponent/DisplayMessage";
+import { red } from "@mui/material/colors";
 
 const SignUpFormFirst = () =>{
 
@@ -120,7 +121,7 @@ const SignUpFormFirst = () =>{
             <div className="image-main-firstform"/>
                 <div className="signupformfirst-container-box"> 
                     {/* name text box */}
-                    <Box sx={{ boxShadow: 2, height: '27px', p: 1, m: 1, borderRadius: '25px' }}>
+                    <Box sx={{ boxShadow: 2, height: '27px', p: 1, m: 1, borderRadius: '25px',marginBottom: '20px' }}>
                         <TextField placeholder="Name"
                             value={regInfo.user_name} 
                             fullWidth
@@ -145,7 +146,7 @@ const SignUpFormFirst = () =>{
                     </Box>                      
 
                     {/* emailid text box */}
-                    <Box sx={{ boxShadow: 2, height: '27px', p: 1, m: 1, borderRadius: '25px'}}>
+                    <Box sx={{ boxShadow: 2, height: '27px', p: 1, m: 1, borderRadius: '25px', marginBottom: '20px'}}>
                         <TextField placeholder="EmailID" 
                             value={regInfo.user_email}
                             fullWidth
@@ -215,7 +216,7 @@ const SignUpFormFirst = () =>{
                     </table>
                     {
                         (regInfo.gender_status) &&
-                        <div>gender should be selected</div>
+                        <div style={{color: "red", fontSize: "12px"}}>gender should be selected</div>
                     }
                 </>
                 <>
@@ -230,7 +231,7 @@ const SignUpFormFirst = () =>{
                     </table>
                     {
                         (regInfo.is_active_status) &&
-                            <div>confirm terms and conditions</div>
+                            <div style={{color: "red", fontSize: "12px"}}>confirm terms and conditions</div>
                     }
                 </>
 

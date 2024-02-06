@@ -3,7 +3,8 @@
 import { IconButton, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
-import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+// import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import postCommentAction from '../actions/postCommentAction';
 import { useEffect } from 'react';
@@ -73,7 +74,7 @@ const PostCommentComponent = ({postcomment, posttype}) =>{
                         InputProps={{ sx: { height: 20, alignContent: "center"}}}/>
                         
               <IconButton onClick={handlepostingpostcomment} className="postreview_comp_postButton">
-                  <PhotoSizeSelectActualIcon style={iconStyle}></PhotoSizeSelectActualIcon>
+                  <SendIcon style={iconStyle}></SendIcon>
               </IconButton>
           </div>
       </Box>

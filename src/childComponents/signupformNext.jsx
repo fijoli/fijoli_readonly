@@ -22,12 +22,10 @@ const SignUpFormNext = () =>{
 
     const [createEyeValue, setCreateEyeValue] = useState(false);
     const [confirmEyeValue, setConfirmEyeValue] = useState(false);
+    const signupCredentials = useSelector((state)=> state.storeComponent.credentials)
 
     const [lstoftrainers, setlstoftrainers] = useState([]) ;
-    const [registrantInfo, setregistrantInfo] = useState({"createpwd":"",   "confirmpwd":"",
-        "location":"", "dob":"", "user_category":"","user_name":"","whatsapp_user_name":"",
-        "createpwd_status":false, "confirmpwd_status": false, "location_status":false,
-        "dob_status": false, "user_category_status": false});
+    const [registrantInfo, setregistrantInfo] = useState(signupCredentials);
 
     const regConfigInfo = useSelector((state)=>state.storeComponent.configData);
 
@@ -52,7 +50,7 @@ const SignUpFormNext = () =>{
         }
 
         //set user name and wusername to the existing level
-        setregistrantInfo({...registrantInfo,"user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name});
+        setregistrantInfo({...registrantInfo, "user_category":(registrantInfo)?registrantInfo.user_category:"", "user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name});
         setlstoftrainers(regConfigInfo.user_category);
 
     },[regConfigInfo]);
@@ -107,12 +105,12 @@ const SignUpFormNext = () =>{
             registerinfo.location_status || registerinfo.dob_status || registerinfo.user_category_status);
     }
 
-
     const handleSelect = (evt) =>{
         setregistrantInfo({...registrantInfo, "user_category": evt.target.value, "user_category_status": false });
     }
 
     return(
+        (registrantInfo)&&
         <div className="signupformNext-container">
             <div className="image-main-Next"/>
             <div className="image-crop-next">
@@ -135,6 +133,7 @@ const SignUpFormNext = () =>{
                 <div className="text-align-items">
                 <TextField type={createEyeValue? "text":"password"} 
                     fullWidth
+                    value={registrantInfo.createpwd}
                     placeholder="Create a Password" 
                     helperText = {(registrantInfo.createpwd_status)?"please input password":""}
                     variant="outlined" onChange={(evt)=> handleChangeName(evt, "createpwd")}
@@ -163,6 +162,7 @@ const SignUpFormNext = () =>{
                     <TextField type={confirmEyeValue? "text":"password"} 
                     fullWidth
                     placeholder="Confirm Password"
+                    value={registrantInfo.confirmpwd}
                     helperText = {(registrantInfo.confirmpwd_status)?"password mismatch":""} 
                     variant="outlined" onChange={(evt)=> handleChangeName(evt, "confirmpwd")}
                     sx={{
@@ -188,6 +188,7 @@ const SignUpFormNext = () =>{
                 <div className="text-align-items">
                 <TextField type="text" 
                     fullWidth
+                    value={registrantInfo.location}
                     helperText = {(registrantInfo.location_status)?"Please select the location":""}
                     placeholder="location" 
                     variant="outlined" onChange={(evt)=> handleChangeName(evt, "location")}
@@ -208,6 +209,8 @@ const SignUpFormNext = () =>{
                 <div className="text-align-items">
                 <TextField type="date" 
                     fullWidth
+                    value={registrantInfo.dob}
+                    // value={new Date(registrantInfo.dob_status)}
                     placeholder="Date Of Birth" 
                     helperText = {(registrantInfo.dob_status)?"You need to be minimum 18 years to register on fijoli":""}
                     variant="outlined" onChange={(evt)=> handleChangeName(evt, "dob")}
@@ -237,7 +240,9 @@ const SignUpFormNext = () =>{
                     </Select>
                     {
                         (registrantInfo.user_category_status)&&
-                        <div>Please select User category</div>
+                        <>
+                            <div className="errmessage_aboutyourself_signupnext">Please select User category</div>
+                        </>
                     }
                 </div>
 

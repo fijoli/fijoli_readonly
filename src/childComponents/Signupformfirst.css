@@ -10,14 +10,14 @@
     margin-top: 3px;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 410px;
+    height: 325px;
     /* display: none; */
 }
 
 .signupformfirst-container-box {
     width: 100%;
     text-align: center;
-    /* margin: 20px 0; */
+    /* margin: 10px 0; */
 }
 
 .button_oval_style_signupfirst{
@@ -53,3 +53,7 @@
     height: 40px;
     margin-left: -3px;
 }
+
+.MuiFormHelperText-root {
+    color: red !important;
+  }

@@ -87,6 +87,7 @@ const ProfileComponentFirst = (props) =>{
     }
 
     function IsValid(){
+        
         let isStateValid = validState;
         if(description === ""){
             isStateValid.desc_status = true;
@@ -113,7 +114,7 @@ const ProfileComponentFirst = (props) =>{
                             placeholdertext = "About Myself Not more than (500 characters)"/>
                         {
                             (validState.desc_status)&&
-                            <div>Please describe about yourself</div>
+                            <div className="errmessage_aboutyourself">Please describe about yourself</div>
                         }
                     </td>
                 </tr> 
@@ -134,7 +135,9 @@ const ProfileComponentFirst = (props) =>{
                                                 <td>
                                                     <FileUploadComponent key={item.id} filetype={item.text} 
                                                         fileindex ={index} dlgTitle = "Upload Certificate and Description"
-                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}/>
+                                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id}
+                                                        accesstype = ".jpg, .png, .jpeg, .gif, .bmp, .pdf"
+                                                        />
                                                 </td>                                                
                                             )
                                         })
@@ -143,7 +146,7 @@ const ProfileComponentFirst = (props) =>{
                             </table>
                             {
                                 (validState.cert_status)&&
-                                <div>please upload atleast 1 certification for your profile credibility</div>
+                                <div className="errmessage_aboutyourself">Please upload atleast 1 certification for your profile credibility</div>
                             }
                         </Box>
                     </td>
@@ -171,13 +174,13 @@ const ProfileComponentFirst = (props) =>{
                             <tr>
                                 <td className="checkbox_col_pcf"/>
                                 <td className="payment_heading_pcf_cell">
-                                    <input className="payment_heading_pcf" type="label" value="Mode of Training"/>
+                                    <input className="payment_heading_pcf" disabled type="label" value="Mode of Training"/>
                                 </td>
                                 <td className="payment_heading_pcf_cell">
-                                    <input className="payment_heading_pcf" type="label" value="Fees / Session" />
+                                    <input className="payment_heading_pcf" disabled type="label" value="Fees / Session" />
                                 </td>
                                 <td className="payment_heading_pcf_cell">
-                                    <input className="payment_heading_pcf" type="label" value="Fees / Month" />
+                                    <input className="payment_heading_pcf" disabled type="label" value="Fees / Month" />
                                 </td>
                             </tr>
                             <tr >
