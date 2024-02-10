@@ -1,0 +1,1 @@
+.app-skull{--app-skull-header-bg:rgba(0, 0, 0, 0.015);--col-brand-col:20%;--brand-link-font-size:2rem;--brand-link-color:var(--theme-bg)}.app-skull-header{background-color:var(--app-skull-header-bg)}.app-skull-header .brand-link{font-size:var(--brand-link-font-size);text-align:center;color:var(--brand-link-color)}.app-skull-header .col-grid .col-brand{width:var(--col-brand-col)}

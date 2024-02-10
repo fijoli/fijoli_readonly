@@ -74,13 +74,12 @@ const FileUploadComponent = (props) =>{
 
   return (
     <div>
-        <Button variant="outlined" 
-            startIcon={
-                (isuploaded)? <UploadFileOutlinedIcon /> :  <FileDownloadOffOutlinedIcon sx={{color: "red"}} />
-            } 
-            onClick={(evt)=>handleuploadbtnClick(evt)}/>
-        <input id={id} type="file"
-            style={{display: "none"}} onChange={handlefilechange}/>
+        <button className="anchor-outline rounded ao-grey-skin block" onClick={(evt)=>handleuploadbtnClick(evt)}>
+            <span className="flex text-center grow ypad-">
+                <span><span className="pad padxd">{(isuploaded)? <UploadFileOutlinedIcon /> :  <FileDownloadOffOutlinedIcon sx={{color: "red"}} />}</span></span>
+            </span>
+        </button>
+        <input id={id} type="file" style={{display: "none"}} onChange={handlefilechange}/>
         {
             opendialog && 
             <SelectedImageDescription opendialog={opendialog}

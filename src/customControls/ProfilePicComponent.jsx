@@ -54,9 +54,9 @@ const ProfilePicComponent = (props) => {
 
   //removes the selected pic file
   const handleProfilePicRemove = (picState) => {
-
+    console.log(picState);
     //deletes the 
-    if(true === picState){
+    if(picState){
       setSelectedPicInfo(null);
     }
 
@@ -76,20 +76,39 @@ const ProfilePicComponent = (props) => {
 
   return (
     <div className='profile_pic'>
-      {
-        (null === profilepicInfo)?
-          <>
-              <label className='pic_container' >
-                    <PersonIcon sx={{fontSize: "50px"}} />
-              </label>
-              <CameraAltIcon className='camera_icon' onClick={handleCameraClick}/>
-          </>
-            :
-          <>
-              <img src={previewImg} className='profile_img skeleton'/>
-              <PersonRemoveIcon className='profile_pic_remove' onClick={handleRemoveProfilePic}/>
-          </>  
-      }
+        <>
+          <div className="relative">
+            <img src="./base/1x1.png" className="w" />
+            <label className='abs trbl flex grow padoff align-items-stretch justify-center circle oh' >
+                <div className="relative">
+                  {
+                    (profilepicInfo) && (
+                      <>
+                          <span className="abs trbl bg-cover bg-center marg-pull-2x hinherit" style={{backgroundImage:["url(",previewImg,")"].join("")}}></span>
+                      </>
+                    )||(
+                      <div className="flex align-items-center justify-center h">
+                        <div>
+                          <PersonIcon sx={{fontSize: "5rem"}} />
+                        </div>
+                      </div>
+                    )
+                  }
+                </div>
+            </label>
+            <div className="flex align-items-end justify-end hinherit abs trbl">
+              <div>
+                {
+                  (profilepicInfo) && (
+                    <PersonRemoveIcon className='profile-icon-sized remove-icon' onClick={handleRemoveProfilePic} />
+                  )||(
+                    <CameraAltIcon className='profile-icon-sized camera-icon' onClick={handleCameraClick} />
+                  )
+                }
+              </div>
+            </div>
+          </div>
+        </>
       {
           (opendlgstate) &&
           <ProfilepicSelectionComponent opendialog={opendlgstate} 

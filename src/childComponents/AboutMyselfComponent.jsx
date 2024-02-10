@@ -15,20 +15,17 @@ const AboutMyselfComponent =({height, document_desc, handletxtChanged, placehold
 
   return (
     <div>
-        <Box fullWidth  sx={{ boxShadow: 4,
-                height: {height}, p: 1, m: 1, borderRadius: '15px'
-            }} >
-            <TextField type="text" fullWidth variant="outlined"
-                name = "document_desc"
-                value = {document_desc}
-                multiline
-                placeholder={placeholdertext}
-                sx={{
-                    "& .MuiOutlinedInput-notchedOutline": { border: "none" }
-                    }}
-                onChange = {handletxtdescChanged} rows={4}
-                InputProps={{ sx: { height: 100 }}}/>
-        </Box>
+        <TextField type="text" fullWidth variant="outlined" className='form-control nohover'
+            name = "document_desc"
+            value = {document_desc}
+            multiline
+            placeholder={placeholdertext}
+            sx={{
+                // "& .MuiOutlinedInput-notchedOutline": { border_radius: 30 }
+                '& fieldset': { borderRadius: 5 },
+                }}
+            onChange = {handletxtdescChanged} rows={4}
+            InputProps={{ sx: { height: 100 }}}/>
     </div>
   )
 }

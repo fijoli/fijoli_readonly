@@ -11,63 +11,66 @@ import ProfileReviewComponent from './ProfileReviewComponent';
 import "./ProfileTabComponent.css";
 
 //component which displays about user (BIO, REVIEWS, MY POSTS)
-const ProfileTabComponent = ({userinfo}) =>{
+const ProfileTabComponent = ({ userinfo }) => {
 
-    //set to default tab index
-    const dispatch                = useDispatch();
-    const [tabindex, settabindex] = useState(3);
+  //set to default tab index
+  const dispatch = useDispatch();
+  const [tabindex, settabindex] = useState(2);
 
-    //set selected tab index 
-    const  handleselectTabIndex = (selectedTabIndex) =>{
-      // if(tabindex !== selectedTabIndex){
-        dispatch(resetStatus());
-        settabindex(selectedTabIndex);
-      // }
+  //set selected tab index 
+  const handleselectTabIndex = (selectedTabIndex) => {
+    // if(tabindex !== selectedTabIndex){
+    dispatch(resetStatus());
+    settabindex(selectedTabIndex);
+    // }
+  }
+
+  useEffect(() => {
+    if (userinfo) {
+      settabindex(2);
     }
-
-    useEffect(()=>{
-      if(userinfo){
-        settabindex(3);
-      }
-    },[userinfo]);
+  }, [userinfo]);
+  const tabitems = [
+    { label: "Bio" },
+    { label: "Reviews" },
+    { label: "My Posts" },
+  ];
 
   return (
-    <div>
-      <table style={{width: "100%"}}>
-        <tr>
-          <td style={{textAlign: "left",width: "33%" }}>
-            {
-              <Button variant="outlined" onClick={(e) => handleselectTabIndex(1)}
-                className={(tabindex === 1)?"buttonSelect":"buttonNone"} >Bio</Button>
-            }
-          </td>
-          <td style={{textAlign: "center",width: "33%" }}>
-            {
-              <Button variant="outlined" onClick={(e) => handleselectTabIndex(2)}
-               className={(tabindex === 2)?"buttonSelect":"buttonNone"} >Reviews</Button>               
-            }
-          </td>
-          <td style={{textAlign: "right",width: "34%" }}>
-            {
-              <Button variant="outlined"  onClick={(e) => handleselectTabIndex(3)}
-                  className={(tabindex === 3)?"buttonSelect":"buttonNone"}
-                  >My Posts</Button>
-            }
-          </td>
-        </tr>
-      </table>
-      <div style={{height: "5px", background: "lightgray"}}/>
+    <div className='pad padyf'>
+      <div className="flex justify-center align-items-center ypad-off">
+        {
+          tabitems.map((item, i) => {
+            return (
+              <div className="text-center">
+                <button onClick={(e) => handleselectTabIndex(i)} className={["anchor-outline", (tabindex==i)?"ao-fill-theme":"ao-grey-black"].join(" ")}>
+                  <span className="flex text-center grow pad-">
+                    <span><span className="pad padxd">{item.label}</span></span>
+                  </span>
+                </button>
+              </div>
+            )
+          })
+        }
+      </div>
+      <div className="divider nospace marg margbc"></div>
       {
-        (1 === tabindex) &&
-        <ProfileBioComponent userinfo={userinfo}/>
-      }    
-      {
-        (2 === tabindex) &&
-        <ProfileReviewComponent userinfo={userinfo} handleselectTabIndex={handleselectTabIndex}/>
-      }
-      {
-        (3 === tabindex) &&
-        <ProfilepostCatetoryComponent />
+        (()=>{
+          var comps = [
+            ()=>{
+              return <ProfileBioComponent userinfo={userinfo} />
+            },
+            ()=>{
+              return <ProfileReviewComponent userinfo={userinfo} handleselectTabIndex={handleselectTabIndex} />
+            },
+            ()=>{
+              return <ProfilepostCatetoryComponent />
+            }
+          ][tabindex]||false;
+          if(comps){
+            return comps()
+          }
+        })()
       }
     </div>
   )

@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +22,7 @@ const PostContainer = () =>{
   return (
     <div>
       {
-        ((undefined !== lstofPosts) && (0 < Object.keys(lstofPosts).length)) &&
+        (lstofPosts && (Object.keys(lstofPosts).length)) &&
         Object.keys(lstofPosts).map((postkey, idx)=>{
           return <ViewPostComponent key={idx} postkey = {postkey}/>
         })

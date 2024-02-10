@@ -10,51 +10,82 @@ import { useEffect } from 'react';
 import certificateAction from '../actions/certificationAction';
 
 //components which displays about BIO info of an user
-const ProfileBioComponent = ({userinfo}) =>{
+const ProfileBioComponent = ({ userinfo }) => {
 
-    const dispatch             = useDispatch();
+    const dispatch = useDispatch();
 
     //holds the lst of certificates which are uploaded of an user
-    const lstofCertificates    = useSelector((state)=> state.storeComponent.lstCertificates);
+    const lstofCertificates = useSelector((state) => state.storeComponent.lstCertificates);
 
     //useeffect which fetches list of certifications of given user
-    useEffect(()=>{
-        dispatch(certificateAction({"whatsapp_number": userinfo.whatsapp_number}));
-    },[])
+    useEffect(() => {
+        dispatch(certificateAction({ "whatsapp_number": userinfo.whatsapp_number }));
+    }, [])
 
     return (
-    <div style={{marginTop: "10px"}}>
-        <div>
-            <span style={{fontSize: "20px", marginLeft: "15px"}}>About My Self</span>
-            <ModeEditIcon style={{marginTop: "6px", marginLeft: "10px"}} />
-        </div>
-        <div>
-            <p style={{marginLeft: "18px", marginRight: "10px"}}>{userinfo.user_description}</p>
-        </div>
+        <div className='flex wrap'>
+            <div className='flex--12'>
+                <h6 className="lead h6 nomargi flex justify-between align-items-center">
+                    <span className='opacity75 font-semibold'>About My Self</span>
+                    <span>
+                        <button onClick={() => { }} className={["anchor-outline rounded pad padxc ao-grey-skin"].join(" ")}>
+                            <span className="flex align-items-center justify-between">
+                                <span>
+                                    <i className="fa5 fa5-pencil"></i>
+                                </span>
+                            </span>
+                        </button>
+                    </span>
+                </h6>
+                <div className="divider nospace dashed"></div>
+                <div className="flex">
+                    <div>{userinfo.user_description}</div>
+                </div>
+            </div>
 
-        <div>
-            <span style={{fontSize: "20px", marginLeft: "15px"}}>Languages I Speak</span>
-            <ModeEditIcon style={{marginTop: "6px", marginLeft: "10px"}} />
-        </div>
+            <div className='flex--12'>
+                <h6 className="lead h6 nomargi flex justify-between align-items-center">
+                    <span className='opacity75 font-semibold'>Languages I Speak</span>
+                    <span>
+                        <button onClick={() => { }} className={["anchor-outline rounded pad padxc ao-grey-skin"].join(" ")}>
+                            <span className="flex align-items-center justify-between">
+                                <span>
+                                    <i className="fa5 fa5-pencil"></i>
+                                </span>
+                            </span>
+                        </button>
+                    </span>
+                </h6>
+                <div className="divider nospace dashed"></div>
+                <div className="flex">
+                    <div>{userinfo.languages_known}</div>
+                </div>
+            </div>
 
-        <div>
-            <p style={{marginLeft: "18px", marginRight: "10px"}}>{userinfo.languages_known}</p>
+            <div className='flex--12'>
+                <h6 className="lead h6 nomargi flex justify-between align-items-center">
+                    <span className='opacity75 font-semibold'>My Certifications</span>
+                    <span>
+                        <button onClick={() => { }} className={["anchor-outline rounded pad padxc ao-grey-skin"].join(" ")}>
+                            <span className="flex align-items-center justify-between">
+                                <span>
+                                    <i className="fa5 fa5-pencil"></i>
+                                </span>
+                            </span>
+                        </button>
+                    </span>
+                </h6>
+                <div className="divider nospace dashed"></div>
+                <div className="flex">
+                    {
+                        (lstofCertificates||[]).map((item, index) => {
+                            return <ProfileCertificationComponent key={index} item={item} />
+                        })
+                    }
+                </div>
+            </div>
         </div>
-        <div>
-            <span style={{fontSize: "20px", marginLeft: "15px"}}>My Certifications</span>
-            <ModeEditIcon style={{marginTop: "6px", marginLeft: "10px"}} />
-        </div>
-        <div>
-            {
-                ((undefined !== lstofCertificates) && (0 < lstofCertificates.length)) &&
-                lstofCertificates.map((item, index)=>{
-                    // console.log(item);
-                   return <ProfileCertificationComponent key={index} item={item}/>
-                })
-            }
-        </div>
-    </div>
-  )
+    )
 }
 
 export default ProfileBioComponent

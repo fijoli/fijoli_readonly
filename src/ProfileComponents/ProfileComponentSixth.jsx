@@ -81,228 +81,189 @@ const ProfileComponentSixth = (props) =>{
     }
 
     return(
-            <div className="signupformFinal-container-pc6">
-                <table className="table_container-pc6">
-                    <tr>
-                        <td>
-                            <AboutMyselfComponent height={'90px'} 
-                               document_desc=""
-                               handletxtChanged={handletxtChanged}
-                               placeholdertext = "About Myself Not more than (500 characters)"/>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <Box
-                                sx={{
-                                    boxShadow: 4,
-                                    width: '350px',
-                                    height: '57px',
-                                    p: 1,
-                                    m: 1,
-                                    borderRadius: '15px',
-                                    textAlign: 'center',
-                                    margin: '0 auto'
-                                }}>
-                                My Certification
-                                <table className="table_container-certification_pc6">
-                                    <tr>
-                                        {
-                                            certificatedata.map((item,index)=>{
-                                                return(
-                                                    <td>
-                                                        <FileUploadComponent key={item.id} filetype={item.text} fileindex ={index}
-                                                            uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} />
-                                                    </td>                                                
-                                                )
-                                            })
-                                        }
-                                    </tr>
-                                </table>
-                            </Box>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <table>
-                                    <tr>
-                                        <td>
-                                            <input className="currently_training_pc6" type="label" value="Currently Not Training"/>
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" onChange={handleOnSelect}/>
-                                        </td>
-                                    </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <table className={visibility?"table_container-pricing-pc6":"table_container_pricing_pc6_hidden"} >
-                                <tr>
-                                    <td className="checkbox_col_pc6"/>
-                                    <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Mode of Training" 
-                                                className="payment_heading_pc6"/>
-                                    </td>
-                                    <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Fees / Session" 
-                                                className="payment_heading_pc6"/>
-                                    </td>
-                                    <td className="payment_heading_pc6_cell">
-                                        <input type="label" value="Fees / Month"  
-                                                className="payment_heading_pc6"/>
-                                    </td>
-                                </tr>
-
-                                <tr className="checkbox_col_pc6">
-                                    <td >
-                                        <input type="checkbox" className="display_left_checkbox_pc6" />
-                                    </td>
-                                    <td className="payment_heading_pc6_cell">
-                                    <input type="label" disabled value="At client's place" 
-                                        className="table_pricing_first_col_pc6"/>
-                                    </td>
-
-                                    <td className="payment_heading_pc6_cell">
-                                        <input name="myt1" type="text"
-                                            placeholder="Numbers only"
-                                            className="table_pricing_second_col_pc6"/>
-
-                                        <select value={selectedIndex} onChange={handleCurrencyChange}
-                                            className="currenct_select_pc6">
-                                                {lstofsupportedCurrency.map((item, indx)=>{
-                                                    return <option value={indx}>{item}</option>
-                                                })}
-                                        </select>
-                                    </td>
-
-                                    <td className="payment_heading_pc6_cell">
-                                        <input name="myt2" type="text"
-                                            placeholder="Numbers only"
-                                            className="table_pricing_third_col_pc6"/>
-
-                                        <select value={selectedIndex} onChange={handleCurrencyChange}
-                                            className="currenct_select_pc6">
-                                                {lstofsupportedCurrency.map((item, indx)=>{
-                                                    return <option value={indx}>{item}</option>
-                                                })}
-                                        </select>
-                                    </td>
-                                </tr>
-
-                                <tr className="checkbox_col_pc6">
-                                    <td>
-                                        <input type="checkbox" className="display_left_checkbox_pc6" />
-                                    </td>
-                                    <td className="payment_heading_pc6_cell">
-                                    <input type="label" disabled value="At my clinic" 
-                                        className="table_pricing_first_col_pc6"/>
-
-                                    </td>
-
-                                    <td className="payment_heading_pc6_cell">
-                                        <input name="myt1" type="text"
-                                            placeholder="Numbers only"
-                                            className="table_pricing_second_col_pc6"/>
-
-                                        <select value={selectedIndex} onChange={handleCurrencyChange}
-                                            className="currenct_select_pc6">
-                                                {lstofsupportedCurrency.map((item, indx)=>{
-                                                    return <option value={indx}>{item}</option>
-                                                })}
-                                        </select>
-                                    </td>
-
-                                    <td className="payment_heading_pc6_cell">
-                                        <input name="myt2" type="text"
-                                            placeholder="Numbers only"
-                                            className="table_pricing_third_col_pc6"/>
-
-                                        <select value={selectedIndex} onChange={handleCurrencyChange}
-                                            className="currenct_select_pc6">
-                                                {lstofsupportedCurrency.map((item, indx)=>{
-                                                    return <option value={indx}>{item}</option>
-                                                })}
-                                        </select>
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-
-                                    </td>
-                                    <td colSpan={3}>
-                                        <table>
-                                            <tr>
-                                                <td>
-                                                    <Box
-                                                        sx={{
-                                                            boxShadow: 2,
-                                                            height: '12px',
-                                                            p: 1,
-                                                            m: 1,
-                                                            borderRadius: '15px',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                    }}>
-                                                            My clinic Address
-                                                    </Box>
-                                                </td>
-                                                <td>
-                                                    <Box
-                                                        sx={{
-                                                            height: '30px',
-                                                            p: 1,
-                                                            m: 1,
-                                                            borderRadius: '15px',
-                                                            textAlign: 'center',
-                                                            margin: "0 auto",
-                                                        }}>
-
-                                                            <TextField type="text" 
-                                                                        placeholder = "location"
-                                                                        variant="outlined"
-                                                                        fullWidth
-                                                                        sx={{
-                                                                            
-                                                                            '& fieldset': { borderRadius: 10 },
-                                                                            }}
-                                                                        onChange = {handlelocationChanged}
-                                                                        InputProps={{ sx: { height: 30 },
-                                                                        startAdornment:<InputAdornment position="start">
-                                                                        <IconButton>
-                                                                            <LocationOnIcon/>
-                                                                        </IconButton>
-                                                                    </InputAdornment>}}/>
-                                                    </Box>
-
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan={4}>
-                                        <CustomLanguageSelection handleChange={handleChange}/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-
-                <>
-                    <button onClick={handleCompleteClick} 
-                            className="button_oval_style_submit-p6">Complete Profile</button>
-                </>
-
+        <div className="flex wrap flex-container">
+            <div className="flex--12">
+                <AboutMyselfComponent height={'90px'}
+                    document_desc={description}
+                    handletxtChanged={handletxtChanged}
+                    placeholdertext="About Myself Not more than (500 characters)" />
             </div>
+            <div className="flex--12">
+                <h5 className="lead h6 text-center color color-theme nomargi pad padbc">My Certification</h5>
+                <div className="flex flex-container justify-center align-items-center">
+                    {
+                        certificatedata.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <FileUploadComponent key={item.id} filetype={item.text}
+                                        fileindex={index} dlgTitle="Upload Certificate and Description"
+                                        uploadfile={handleuploadfile} removefile={handleremovefile} keyItem={item.id} />
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div className="pad padt1 bg bg grey-skin"></div>
+                <label className="block pad padc">
+                    <div className="flex align-items-center justify-between">
+                        <div>
+                            Currently Not Training
+                        </div>
+                        <div className="icon-sized-xs bg grey-skin radius text-center">
+                            <input type="checkbox" onChange={handleOnSelect} />
+                        </div>
+                    </div>
+                </label>
+                <div className="pad padt1 bg bg grey-skin"></div>
+
+                <div className={visibility ? "" : "nodisplay"} >
+                    <div className="marg margtc bg grey-skin rounded">
+                        <label className="flex align-items-center wrap">
+                            <div className="icon-sized-xs">
+                                <input type="checkbox" className="" />
+                            </div>
+                            <div className="">
+                                <span className="pad padxb">Fees / Month</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div className="flex grow align-items-center wrap">
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Session</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt1" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select className="form-control" value={selectedIndex} onChange={handleCurrencyChange}>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Month</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt2" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select value={selectedIndex} onChange={handleCurrencyChange}
+                                        className='form-control'>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="marg margtc bg grey-skin rounded">
+                        <label className="flex align-items-center wrap">
+                            <div className="icon-sized-xs">
+                                <input type="checkbox" className="" />
+                            </div>
+                            <div className="">
+                                <span className="pad padxb">Training at client place</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div className="flex grow align-items-center wrap">
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Session</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt1" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select className="form-control" value={selectedIndex} onChange={handleCurrencyChange}>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Month</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt2" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select value={selectedIndex} onChange={handleCurrencyChange}
+                                        className='form-control'>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="marg margtc bg grey-skin rounded">
+                        <label className="flex align-items-center wrap">
+                            <div className="icon-sized-xs">
+                                <input type="checkbox" className="" />
+                            </div>
+                            <div className="">
+                                <span className="pad padxb">At My Clinic</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div className="flex grow align-items-center wrap">
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Session</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt1" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select className="form-control" value={selectedIndex} onChange={handleCurrencyChange}>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex--6 xs--12">
+                            <label className="form-label"> Fees / Month</label>
+                            <div className="flex flex-container padcell align-items-center grow wrap">
+                                <div className="flex--6 xs--12">
+                                    <input name="myt2" type="text" placeholder="Numbers only" className="form-control" />
+                                </div>
+                                <div className="flex--6 xs--12">
+                                    <select value={selectedIndex} onChange={handleCurrencyChange}
+                                        className='form-control'>
+                                        {(lstofsupportedCurrency || []).map((item, indx) => {
+                                            return <option key={indx} value={indx}>{item}</option>
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex wrap">
+                        <div className="flex--12">
+                            <CustomLanguageSelection handleChange={handleChange} />
+                        </div>
+                        <div className="flex--12">
+                            <div className="text-center pad padtb">
+                                <button onClick={handleCompleteClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                    <span className="flex text-center grow">
+                                        <span><span className="pad padxd">Complete Profile</span></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
     )
 

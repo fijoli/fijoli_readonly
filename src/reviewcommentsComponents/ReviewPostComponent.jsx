@@ -123,7 +123,7 @@ const ReviewPostComponent = ({reviewcomment}) =>{
                     <TextField 
                         value = {desc}
                         style={{textAlign: 'left'}}
-                        placeholder="              share your receipe in not more than 500 characters" 
+                        placeholder="share your receipe in not more than 500 characters" 
                         fullWidth
                         multiline
                         sx={{

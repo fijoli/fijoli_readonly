@@ -1,0 +1,63 @@
+
+.profile_pic {
+    width: 78px;
+    height: 78px;
+    /* border: 1px solid red; */
+}
+
+.skeleton {
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading{
+    0%{
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}
+
+
+.pic_container{
+    position: absolute;
+    border-radius: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 78px;
+    height: 78px;  
+    background: gray;
+}
+
+.profile_pic_remove{
+    font-size: 30px;
+    margin-top: 40px;
+    margin-left: 50px;
+    z-index: 1;
+    position: relative;
+    color: white;
+}
+.camera_icon {
+   font-size: 30px;
+   margin-top: 40px;
+   margin-left: 58px;
+   z-index: 1;
+   position: relative;
+}
+
+.file_ctrl {
+    display: none;
+}
+
+.profile_img {
+    position: absolute;
+    border-radius: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 78px;
+    height: 78px;  
+}

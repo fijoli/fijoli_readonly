@@ -3,63 +3,66 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import getregisteredInfo from "../actions/getProfileData";
 import storeregistrantInfo from "../actions/updateSignupFormData";
-import {Box, IconButton, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { Link, Box, IconButton, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import "./SignupformNext.css";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 import LockIcon from '@mui/icons-material/Lock';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { SlideLayoutTemplate } from "./SlideLayoutComponent/template";
 
-
-const SignUpFormNext = () =>{
+const SignUpFormNext = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [params] = useSearchParams();
-    const lstofforms    =   ["form1", "form2"];
+    const lstofforms = ["form1", "form2"];
 
     const [createEyeValue, setCreateEyeValue] = useState(false);
     const [confirmEyeValue, setConfirmEyeValue] = useState(false);
 
-    const [lstoftrainers, setlstoftrainers] = useState([]) ;
-    const [registrantInfo, setregistrantInfo] = useState({"createpwd":"",   "confirmpwd":"",
-        "location":"", "dob":"", "user_category":"","user_name":"","whatsapp_user_name":"",
-        "createpwd_status":false, "confirmpwd_status": false, "location_status":false,
-        "dob_status": false, "user_category_status": false});
+    const [lstoftrainers, setlstoftrainers] = useState([]);
+    const [registrantInfo, setregistrantInfo] = useState({
+        "createpwd": "", "confirmpwd": "",
+        "location": "", "dob": "", "user_category": "", "user_name": "", "whatsapp_user_name": "",
+        "createpwd_status": false, "confirmpwd_status": false, "location_status": false,
+        "dob_status": false, "user_category_status": false
+    });
 
-    const regConfigInfo = useSelector((state)=>state.storeComponent.configData);
+    const regConfigInfo = useSelector((state) => state.storeComponent.configData);
 
-    useEffect(()=>{
-        if(lstoftrainers.length === 0){
-            console.log("dispatch useEffect");
+    useEffect(() => {
+        if (lstoftrainers.length === 0) {
+            console.log("dispatch useEffect", params.get("whatsapp_number"));
             dispatch(getregisteredInfo(params.get("whatsapp_number")));
         }
-    },[lstoftrainers]);
+    }, [lstoftrainers]);
 
-    useEffect(()=>{
+    useEffect(() => {
 
         //return if object is not initialized
-        if(0 === Object.keys(regConfigInfo).length){
+        if (0 === Object.keys(regConfigInfo).length) {
             return;
         }
 
         //redirect error page if the user is not valid
-        if(regConfigInfo.status === 400){
+        if (regConfigInfo.status === 400) {
             navigate("/error");
             return;
         }
 
         //set user name and wusername to the existing level
-        setregistrantInfo({...registrantInfo,"user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name});
+        setregistrantInfo({ ...registrantInfo, "user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name });
         setlstoftrainers(regConfigInfo.user_category);
 
-    },[regConfigInfo]);
+    }, [regConfigInfo]);
 
-    const handleChangeName = (evt, type) =>{
+    const handleChangeName = (evt, type) => {
         let state = [type] + "_status";
-        setregistrantInfo({...registrantInfo, [type]: evt.target.value, [state]: false});
+        setregistrantInfo({ ...registrantInfo, [type]: evt.target.value, [state]: false });
     }
 
     const handlePasswordVisibility = () => {
@@ -70,188 +73,209 @@ const SignUpFormNext = () =>{
         setConfirmEyeValue(!confirmEyeValue);
     }
 
-    const handleNextEvent = (evt) =>{
+    const handleNextEvent = (evt) => {
 
         // if(registrantInfo.createpwd != registrantInfo.confirmpwd){
         //     // navigate("/error");
         //     setregistrantInfo({...registrantInfo, "createpwd_status" : false});
         //     return;
         // }
-        if(!IsValid()){
+        if (!IsValid()) {
             dispatch(storeregistrantInfo("store_registrantInfo", registrantInfo));
-            dispatch({type:"reset_status"});
+            dispatch({ type: "reset_status" });
             navigate("/signupform3");
         }
     }
 
-    function IsValid(){
+    function IsValid() {
         let registerinfo = registrantInfo;
-        let selectedDate   = new Date(registerinfo.dob);
-        let actualDate    = new Date();
+        let selectedDate = new Date(registerinfo.dob);
+        let actualDate = new Date();
         actualDate.setFullYear(actualDate.getFullYear() - 18);
-        if(registerinfo.createpwd === ""){
-            registerinfo['createpwd_status'] =  true;
-        }else if((registerinfo.confirmpwd === "") || (registerinfo.createpwd !== registerinfo.confirmpwd)){
-            registerinfo['confirmpwd_status'] =  true;
-        }else if(registerinfo.location === ""){
-            registerinfo['location_status'] =  true;
-        }else if(registerinfo.dob === ""){
-            registerinfo['dob_status'] =  true;
-        }else if(registerinfo.user_category === ""){
-            registerinfo['user_category_status'] =  true;
-        }else if(registrantInfo.dob !== "" && selectedDate.getFullYear() > actualDate.getFullYear()){
-            registerinfo['dob_status'] =  true;
+        if (registerinfo.createpwd === "") {
+            registerinfo['createpwd_status'] = true;
+        } else if ((registerinfo.confirmpwd === "") || (registerinfo.createpwd !== registerinfo.confirmpwd)) {
+            registerinfo['confirmpwd_status'] = true;
+        } else if (registerinfo.location === "") {
+            registerinfo['location_status'] = true;
+        } else if (registerinfo.dob === "") {
+            registerinfo['dob_status'] = true;
+        } else if (registerinfo.user_category === "") {
+            registerinfo['user_category_status'] = true;
+        } else if (registrantInfo.dob !== "" && selectedDate.getFullYear() > actualDate.getFullYear()) {
+            registerinfo['dob_status'] = true;
         }
-        setregistrantInfo({...registerinfo});
+        setregistrantInfo({ ...registerinfo });
         return (registerinfo.createpwd_status || registerinfo.confirmpwd_status ||
             registerinfo.location_status || registerinfo.dob_status || registerinfo.user_category_status);
     }
 
 
-    const handleSelect = (evt) =>{
-        setregistrantInfo({...registrantInfo, "user_category": evt.target.value, "user_category_status": false });
+    const handleSelect = (evt) => {
+        setregistrantInfo({ ...registrantInfo, "user_category": evt.target.value, "user_category_status": false });
     }
 
-    return(
-        <div className="signupformNext-container">
-            <div className="image-main-Next"/>
-            <div className="image-crop-next">
-                <h3 className="text-align">Welcome ({registrantInfo.user_name})</h3>
-                <p className="text-align-para">Just couple more steps to get you onboarded.</p>
-                <p className="text-align-para">Let’s complete your profile</p>
+    return (
+        <SlideLayoutTemplate {...{}}>
+            {
+                {
+                    component: () => {
+                        return (
+                            <>
+                                <div className="flex justify-center relative wrap">
+                                    <div className="desk-col">
+                                        <div className="text-center">
+                                            <h2 className='lead h5 color color-theme'>Welcome, {registrantInfo.user_name}</h2>
+                                            <p className=''>
+                                                Just couple more steps to get you onboarded.
+                                            </p>
+                                            <p className='opacity75'>
+                                                Let’s complete your profile
+                                            </p>
+                                            <div className="flex wrap">
+                                                <div className="flex--12">
+                                                    <TextField placeholder="Whatsapp Number"
+                                                        value={registrantInfo.whatsapp_number}
+                                                        fullWidth
+                                                        variant="outlined"
+                                                        label=" "
+                                                        onChange={(evt) => handleChangeName(evt, "whatsappnumber")}
+                                                        sx={{ '& fieldset': { borderRadius: 33 } }}
+                                                        required
+                                                        helperText={(registrantInfo.whatsapp_number_status) ? "Whatsapp number is incorrect." : ""}
+                                                        InputProps=
+                                                        {{
+                                                            sx: { height: 50 },
+                                                            startAdornment:
+                                                                <InputAdornment position="start">
+                                                                    <IconButton> <WhatsAppIcon /></IconButton>
+                                                                </InputAdornment>
+                                                        }} />
+                                                </div>
+                                                <div className="flex--12">
+                                                    <TextField type={createEyeValue ? "text" : "password"}
+                                                        fullWidth
+                                                        placeholder="Create a Password"
+                                                        helperText={(registrantInfo.createpwd_status) ? "please input password" : ""}
+                                                        variant="outlined" onChange={(evt) => handleChangeName(evt, "createpwd")}
+                                                        sx={{
+                                                            '& fieldset': { borderRadius: 33 }
+                                                        }}
+                                                        InputProps={{
+                                                            sx: { height: 50 },
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <IconButton>
+                                                                    <LockIcon />
+                                                                </IconButton>
+                                                            </InputAdornment>,
+                                                            endAdornment: <InputAdornment position="end">
+                                                                <IconButton onClick={handlePasswordVisibility}>
+                                                                    {
+                                                                        (createEyeValue) ? <VisibilityIcon /> : <VisibilityOffIcon />
+                                                                    }
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        }} />
+                                                </div>
+                                                <div className="flex--12">
+                                                    <TextField type={confirmEyeValue ? "text" : "password"}
+                                                        fullWidth
+                                                        placeholder="Confirm Password"
+                                                        helperText={(registrantInfo.confirmpwd_status) ? "password mismatch" : ""}
+                                                        variant="outlined" onChange={(evt) => handleChangeName(evt, "confirmpwd")}
+                                                        sx={{
+                                                            '& fieldset': { borderRadius: 33 }
+                                                        }}
+                                                        InputProps={{
+                                                            sx: { height: 50 },
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <IconButton>
+                                                                    <LockIcon />
+                                                                </IconButton>
+                                                            </InputAdornment>,
+                                                            endAdornment: <InputAdornment position="end">
+                                                                <IconButton onClick={handleConfirmPasswordVisibility}>
+                                                                    {
+                                                                        (confirmEyeValue) ? <VisibilityIcon /> : <VisibilityOffIcon />
+                                                                    }
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        }} />
+                                                </div>
+                                                <div className="flex--12">
+                                                    <TextField type="text"
+                                                        fullWidth
+                                                        helperText={(registrantInfo.location_status) ? "Please select the location" : ""}
+                                                        placeholder="location"
+                                                        variant="outlined" onChange={(evt) => handleChangeName(evt, "location")}
+                                                        sx={{
+                                                            '& fieldset': { borderRadius: 33 }
+                                                        }}
+                                                        InputProps={{
+                                                            sx: { height: 50 },
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <IconButton>
+                                                                    <LocationOnIcon />
+                                                                </IconButton>
+                                                            </InputAdornment>,
+                                                        }} />
+                                                </div>
+                                                <div className="flex--12">
+                                                    <TextField type="date"
+                                                        fullWidth
+                                                        placeholder="Date Of Birth"
+                                                        helperText={(registrantInfo.dob_status) ? "You need to be minimum 18 years to register on fijoli" : ""}
+                                                        variant="outlined" onChange={(evt) => handleChangeName(evt, "dob")}
+                                                        sx={{
+                                                            '& fieldset': { borderRadius: 33 }
+                                                        }}
+                                                        InputProps={{
+                                                            sx: { height: 50 },
+                                                            startAdornment: <InputAdornment position="start">
+                                                                <IconButton>
+                                                                    <CalendarMonthIcon />
+                                                                </IconButton>
+                                                            </InputAdornment>,
+                                                        }} />
+                                                </div>
+                                                <div className="flex--12">
+                                                    <Select displayEmpty value={registrantInfo.user_category}
+                                                        onChange={handleSelect}
+                                                        style={{ height: "50px", borderRadius: "33px", width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                                        <MenuItem value="" disabled>Who am I</MenuItem>
+                                                        {
+                                                            lstoftrainers.map((item, idx) => {
+                                                                return <MenuItem key={idx} value={idx + 1}>{item}</MenuItem>
+                                                            })
+                                                        }
+                                                    </Select>
+                                                    {
+                                                        (registrantInfo.user_category_status) &&
+                                                        <div>Please select User category</div>
+                                                    }
+                                                </div>
+                                                <div className="flex--12">
+                                                    <div className="text-center pad padtb">
+                                                        <button onClick={handleNextEvent} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                                            <span className="flex text-center grow">
+                                                                <span><span className="pad padxd">Next</span></span>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                <div className="text-align-items">
-                <TextField placeholder="your username in whatsapp number" 
-                    fullWidth
-                    sx={{
-                        '& fieldset': { borderRadius: 33 },
-                        // "& .MuiOutlinedInput-notchedOutline": { border: "none" }
-                    }}
-                    InputProps={{ sx: { height: 30 } }}
-                    value={registrantInfo.whatsapp_user_name}
-                    variant="outlined" onChange={(evt)=> handleChangeName(evt, "whatsappnumber")}/>
-                </div>
-
-                <div className="text-align-items">
-                <TextField type={createEyeValue? "text":"password"} 
-                    fullWidth
-                    placeholder="Create a Password" 
-                    helperText = {(registrantInfo.createpwd_status)?"please input password":""}
-                    variant="outlined" onChange={(evt)=> handleChangeName(evt, "createpwd")}
-                    sx={{
-                        '& fieldset': { borderRadius: 33 }
-                        }}
-                    InputProps={{
-                        sx: { height: 35 },
-                        startAdornment:<InputAdornment position="start">
-                            <IconButton>
-                                <LockIcon/>
-                            </IconButton>
-                        </InputAdornment>,
-                        endAdornment: <InputAdornment position="end">
-                            <IconButton onClick={handlePasswordVisibility}>
-                                {
-                                    (createEyeValue)?<VisibilityIcon/>:<VisibilityOffIcon/>
-                                }
-                            </IconButton>
-                        </InputAdornment>
-                    }}/>
-                </div>
-
-                <div className="text-align-items">
-                    
-                    <TextField type={confirmEyeValue? "text":"password"} 
-                    fullWidth
-                    placeholder="Confirm Password"
-                    helperText = {(registrantInfo.confirmpwd_status)?"password mismatch":""} 
-                    variant="outlined" onChange={(evt)=> handleChangeName(evt, "confirmpwd")}
-                    sx={{
-                        '& fieldset': { borderRadius: 33 }
-                        }}
-                    InputProps={{
-                        sx: { height: 35 },
-                        startAdornment:<InputAdornment position="start">
-                            <IconButton>
-                                <LockIcon/>
-                            </IconButton>
-                        </InputAdornment>,
-                        endAdornment: <InputAdornment position="end">
-                            <IconButton onClick={handleConfirmPasswordVisibility}>
-                                {
-                                    (confirmEyeValue)?<VisibilityIcon/>:<VisibilityOffIcon/>
-                                }
-                            </IconButton>
-                        </InputAdornment>
-                    }}/>
-                </div>
-
-                <div className="text-align-items">
-                <TextField type="text" 
-                    fullWidth
-                    helperText = {(registrantInfo.location_status)?"Please select the location":""}
-                    placeholder="location" 
-                    variant="outlined" onChange={(evt)=> handleChangeName(evt, "location")}
-                    sx={{
-                        '& fieldset': { borderRadius: 33 }
-                        }}
-                    InputProps={{
-                        sx: { height: 35 },
-                        startAdornment:<InputAdornment position="start">
-                            <IconButton>
-                                <LocationOnIcon/>
-                            </IconButton>
-                        </InputAdornment>,
-                    }}/>
-
-                </div>
-
-                <div className="text-align-items">
-                <TextField type="date" 
-                    fullWidth
-                    placeholder="Date Of Birth" 
-                    helperText = {(registrantInfo.dob_status)?"You need to be minimum 18 years to register on fijoli":""}
-                    variant="outlined" onChange={(evt)=> handleChangeName(evt, "dob")}
-                    sx={{
-                        '& fieldset': { borderRadius: 33 }
-                        }}
-                    InputProps={{
-                        sx: { height: 35 },
-                        startAdornment:<InputAdornment position="start">
-                            <IconButton>
-                                <CalendarMonthIcon/>
-                            </IconButton>
-                        </InputAdornment>,
-                    }}/>
-                </div>
-
-                <div className="text-align-items">
-                    <Select displayEmpty value={registrantInfo.user_category} 
-                        onChange={handleSelect} 
-                        style={{height: "30px", borderRadius: "15px", width: "100%", alignItems: "center", justifyContent: "center"}}>
-                        <MenuItem value="" disabled>Who am I</MenuItem>
-                        {
-                            lstoftrainers.map((item, idx)=>{
-                                return <MenuItem value={idx+1}>{item}</MenuItem>
-                            })
-                        }
-                    </Select>
-                    {
-                        (registrantInfo.user_category_status)&&
-                        <div>Please select User category</div>
+                                    </div>
+                                </div>
+                                <div className="pad padyc"></div>
+                            </>
+                        )
                     }
-                </div>
+                }
+            }
+        </SlideLayoutTemplate>
 
-                <div className="text-align-items">
-                    <button  onClick={handleNextEvent} className="button_oval_style_submit-signform2">Next</button>
-                </div>
-
-                <div className="text-align-items">
-                {lstofforms.map((_,idx)=>{
-                            return <button key={idx} onClick={null} className={0 === idx? "indicator" : "indicator indicator-inactive"}/>
-                })}                            
-                </div>
-            </div>
-        </div> 
     );
 }
 
