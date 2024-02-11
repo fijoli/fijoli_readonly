@@ -261,7 +261,7 @@ const PostComponent = () => {
 
                     <TextField
                         style={{ textAlign: 'left' }}
-                        placeholder="              share your receipe in not more than 500 characters"
+                        placeholder="Share your receipe in not more than 500 characters"
                         fullWidth
                         multiline
                         helperText={(validState.desc_status) ? "please write something about your " + `${postinfo.post_category}` + " offering" : ""}

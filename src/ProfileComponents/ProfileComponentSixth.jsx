@@ -253,7 +253,7 @@ const ProfileComponentSixth = (props) =>{
                         </div>
                         <div className="flex--12">
                             <div className="text-center pad padtb">
-                                <button onClick={handleCompleteClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                <button onClick={handleCompleteClick} className="anchor-outline rounded ao-fill-theme font-bold">
                                     <span className="flex text-center grow">
                                         <span><span className="pad padxd">Complete Profile</span></span>
                                     </span>

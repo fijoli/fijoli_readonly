@@ -28,7 +28,7 @@ export const LandingPage = () => {
                                 <div className="pad padtd">
                                     <div className='flex padoff align-items-center justify-center'>
                                         <div>
-                                            <button onClick={handleloginbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                            <button onClick={handleloginbtnClick} className="anchor-outline rounded ao-fill-theme font-bold">
                                                 <span className="flex text-center grow">
                                                     <span><span className="pad padxd">Login</span></span>
                                                 </span>
@@ -38,7 +38,7 @@ export const LandingPage = () => {
                                             <div className="line-lp"></div>
                                         </div>
                                         <div>
-                                            <button onClick={handlesignUpbtnClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                            <button onClick={handlesignUpbtnClick} className="anchor-outline rounded ao-fill-theme font-bold">
                                                 <span className="flex text-center grow">
                                                     <span><span className="pad padxd">Sign Up</span></span>
                                                 </span>

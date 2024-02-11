@@ -15,28 +15,28 @@ import deletereviewcomment from '../actions/deletereviewcomment';
 
 //component to display submitter review comment
 let g = {};
-const SubmitterReview = ({reviewComment, menuoption}) =>{
+const SubmitterReview = ({ reviewComment, menuoption }) => {
 
     //set default objects
-    const dispatch      = useDispatch();
-    const [userid, setuserid]   = useState(0);
+    const dispatch = useDispatch();
+    const [userid, setuserid] = useState(0);
 
     //hook which is used to set userid
-    useEffect(()=>{
-        if(reviewComment){
+    useEffect(() => {
+        if (reviewComment) {
             setuserid(reviewComment.user_id);
         }
-    },[reviewComment,setuserid]);
+    }, [reviewComment, setuserid]);
 
     //event which performs edit/delete operations 
     //of the review comment
-    const handleClick = (eventtype)=>{
+    const handleClick = (eventtype) => {
         g.user_id = userid
         //initialize the rating visible type
-        reviewComment["rating_visible"] = (eventtype === "reply")?false:true;
-        if("delete" === eventtype){
+        reviewComment["rating_visible"] = (eventtype === "reply") ? false : true;
+        if ("delete" === eventtype) {
             dispatch(deletereviewcomment(reviewComment));
-        }else {
+        } else {
             //pass review comment to parent control to post
             //ProfileReviewComponent which posts the review comment 
             reviewComment["mode"] = "edit";
@@ -44,90 +44,67 @@ const SubmitterReview = ({reviewComment, menuoption}) =>{
         }
     }
 
-  return (
-    <div className="comment_container">
-    <div className="comment_header">
-        <img src={img2} className="comment_image_pic" alt="" />
-        <div className="comment_username">
-            <span>{reviewComment.user_id}</span>
-            <RatingComponent rating={reviewComment.user_rating} isenable={true} />
-        </div>
-        <div className="comment_icons">
-            {reviewComment.ismenuvisible &&
-                menuoption.map((item, index) => {
-                    return (
-                        <React.Fragment>
-                            {(()=>{
-                                if (item === "edit") {
-                                    return (
-                                        <IconButton onClick={() => handleClick("edit")}>
-                                            <EditIcon />
-                                        </IconButton>
-                                    );
-                                } else if (item === "delete") {
-                                    return (
-                                        <IconButton onClick={() => handleClick("delete")}>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    );
-                                } else if (item === "reply") {
-                                    return (
-                                        <IconButton onClick={() => handleClick("reply")}>
-                                            <ReplyIcon />
-                                        </IconButton>
-                                    );
-                                }
-                            })()
-                            }
-                        </React.Fragment>
-                    )
-                })}
-        </div>
-    </div>
-    <div className="comment_body">
-        <span>{reviewComment.review_desc}</span>
-    </div>
-</div>
-    // <div className='submitter_reviewcomment_container'> 
-    //     <table className='submitter_reviewcomment_table_container'>
-    //         <tr className='submitter_reviewcomment_header_height'>
-    //             <td >
-    //                 <img src={img2} className='submitter_reviewcomment_image_pic'/>
-    //             </td>
-    //             <td colSpan={(reviewComment.ismenuvisible)?4:3} className="submitter_reviewcomment_username_col">
-    //                 <div >
-    //                     <span>{reviewComment.user_id}</span>
-    //                     <br/>
-    //                     <RatingComponent rating={reviewComment.user_rating}  isenable={true}/>
-    //                 </div>
-    //             </td>
-    //             <td className='submitter_reviewcomment_icon_col'>
-    //                 {
-    //                     (reviewComment.ismenuvisible) &&
-    //                         menuoption.map((item, index)=>{
-    //                             if(item === "edit"){
-    //                                 return <IconButton onClick={()=>handleClick("edit")}><EditIcon/></IconButton>
-    //                             }else if(item === "delete"){
-    //                                 return <IconButton onClick={()=>handleClick("delete")}><DeleteIcon/></IconButton>
-    //                             }else if(item === "reply"){
-    //                                 return <IconButton onClick={()=>handleClick("reply")}><ReplyIcon/></IconButton>
-    //                             }
-    //                         }
-    //                     )
-    //                 }
-    //             </td>
-    //         </tr>
-    //         <tr>
-    //             <td></td>
-    //             <td colSpan={5}>
-    //             <span >
-    //                 {reviewComment.review_desc}
-    //             </span>
-    //         </td>
-    //         </tr>
-    //     </table>
-    // </div>
-)
+    return (
+        <>
+            <div className="flex grow">
+                <div className="icon-sized-xsm">
+                    <span className="relative oh block circle nolh">
+                        <img src="./base/1x1.png" alt="Picture" className='w' />
+                        <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", img2, ")"].join("") }}></span>
+                    </span>
+                </div>
+                <div className="">
+                    <span>{reviewComment.user_id}</span>
+                    <RatingComponent rating={reviewComment.user_rating} isenable={true} />
+                </div>
+                <div className="">
+                    <div className="flex ypad-off justify-end pad-">
+                        {(reviewComment.ismenuvisible) &&
+                            (menuoption).map((item, index) => {
+                                return (
+                                    <React.Fragment>
+                                        {(() => {
+                                            if (item === "edit") {
+                                                return (
+                                                    <div className="">
+                                                        <IconButton onClick={() => handleClick("edit")}>
+                                                            <EditIcon />
+                                                        </IconButton>
+                                                    </div>
+                                                );
+                                            } else if (item === "delete") {
+                                                return (
+                                                    <div className="">
+                                                        <IconButton onClick={() => handleClick("delete")}>
+                                                            <DeleteIcon />
+                                                        </IconButton>
+                                                    </div>
+                                                );
+                                            } else if (item === "reply") {
+                                                return (
+                                                    <div className="">
+                                                        <IconButton onClick={() => handleClick("reply")}>
+                                                            <ReplyIcon />
+                                                        </IconButton>
+                                                    </div>
+                                                );
+                                            }
+                                        })()
+                                        }
+                                    </React.Fragment>
+                                )
+                            })}
+                    </div>
+                </div>
+            </div>
+            <div className="flex grow">
+                <div className="icon-sized-xsm visible-from-xsm"></div>
+                <div className="lead h8">
+                    <span>{reviewComment.review_desc}</span>
+                </div>
+            </div>
+        </>
+    )
 }
 
 export default SubmitterReview

@@ -17,8 +17,6 @@ const ReplyPostCommentContainer=({post_id, id, logged_in_user_id})=> {
       }
     });
 
-    console.log("post_id " + post_id + " id " + id + " user_id " + logged_in_user_id );
-
     useEffect(()=>{
 
         if((undefined === lstofpostreplycomments) || 
@@ -32,13 +30,16 @@ const ReplyPostCommentContainer=({post_id, id, logged_in_user_id})=> {
     },[]);
 
   return (
-    <div style={{height: "auto", marginLeft: "25px"}}>
+    <div className='flex grow flex-container'>
+      <div className="icon-sized-xs visible-from-xsm"></div>
+      <div className='bg grey-a'>
         {
             (lstofpostreplycomments)&&
             Object.keys(lstofpostreplycomments).map((replycommentid, index)=>{
                return <ViewReplyPostCommentComponent key={index} post_id={post_id} comment_id={id} replycomment_id={replycommentid}/>
             })
         }
+      </div>
     </div>
   )
 }

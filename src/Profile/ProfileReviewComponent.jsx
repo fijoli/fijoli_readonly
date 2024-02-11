@@ -28,6 +28,12 @@ const ProfileReviewComponent = ({ userinfo, handleselectTabIndex }) => {
   const reviewtype = useSelector((state) => state.storeComponent.reviewtype);
   const reviewpoststate = useSelector((state) => state.storeComponent.reviewpoststate);
 
+  const callback = (oo)=>{
+    if(oo.ref == "close_edit_review"){
+      setisDisplayCommentCtrl(false);
+    }
+  }
+
   //redirect to review page once review post is updated successfully
   useEffect(() => {
 
@@ -84,13 +90,17 @@ const ProfileReviewComponent = ({ userinfo, handleselectTabIndex }) => {
   }, [reviewtype]);
 
   return (
-    <div className='profile_review_component'>
-      <span className='profile_review_component_rating_heading'>Average Rating</span>
-      <RatingComponent rating="3.5" isenable={true} />
+    <div className=''>
+      <div className="flex justify-between">
+        <div>
+          <span className='profile_review_component_rating_heading'>Average Rating</span>
+          <RatingComponent rating="3.5" isenable={true} />
+        </div>
+      </div>
       <div>
         {
           (isDisplayCommentCtrl) &&
-          <ReviewPostComponent reviewcomment={reviewComment} />
+          <ReviewPostComponent reviewcomment={reviewComment} callback={callback} />
         }
         {
           (!isDisplayCommentCtrl) &&

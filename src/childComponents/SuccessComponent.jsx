@@ -29,7 +29,7 @@ export const SuccessComponent = () => {
                         Click on the confirmation link shared in Whatsapp to complete the sign up
                       </p>
                       <p class="pad padtf">
-                        <Link to={navigatelink} className="inlineblock anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                        <Link to={navigatelink} className="inlineblock anchor-outline rounded ao-fill-theme font-bold">
                           <span className="flex text-center grow">
                               <span><span className="pad padxd">Let's Start</span></span>
                           </span>

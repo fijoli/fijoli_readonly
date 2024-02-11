@@ -216,7 +216,7 @@ const SignUpFormFirst = () => {
                                 </div>
 
                                 <div className="text-center pad padtb">
-                                    <button onClick={handleClickEvent} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                    <button onClick={handleClickEvent} className="anchor-outline rounded ao-fill-theme font-bold">
                                         <span className="flex text-center grow">
                                             <span><span className="pad padxd">Next</span></span>
                                         </span>

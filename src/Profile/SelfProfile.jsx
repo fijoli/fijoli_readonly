@@ -231,7 +231,6 @@ const SelfProfile = () => {
                             </div>
                         }
                     </div>
-                    <div className="divider"></div>
                     <div className="flex align-items-center justify-center marg margyd wrap">
                         {
                             [

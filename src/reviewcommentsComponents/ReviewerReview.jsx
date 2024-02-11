@@ -45,49 +45,51 @@ const ReviewerReview = ({reviewComment, menuoption}) =>{
   }
 
   return (
-    <div className='reviewer_reviewcomment_container'> 
-          <table className='reviewer_reviewcomment_table_container'>
-            <tr className='reviewer_reviewcomment_header_height'>
-                <td className='reviewer_reviewcomment_dummy_col'>
-                 </td>
-                <td >
-                    <img src={img2} className='reviewer_reviewcomment_image_pic' alt=''/>
+    <>
+      <div className='reviewer_reviewcomment_container'> 
+            <table className='reviewer_reviewcomment_table_container'>
+              <tr className='reviewer_reviewcomment_header_height'>
+                  <td className='reviewer_reviewcomment_dummy_col'>
+                  </td>
+                  <td >
+                      <img src={img2} className='reviewer_reviewcomment_image_pic' alt=''/>
+                  </td>
+                  <td colSpan={3} >
+                      <div className='reviewer_reviewcomment_username_div'>
+                          <span >
+                              {reviewComment.reviewer_user_id} 
+                          </span>
+                      </div>
+                  </td>
+                  <td className='reviewer_reviewcomment_icon_col'>
+                    {
+                        (reviewComment.ismenuvisible) &&
+                          menuoption.map((item, index)=>{
+                              return (()=>{
+                                if(item === "edit"){
+                                    return <IconButton key={index} onClick={()=>handleClick("edit")}><EditIcon/></IconButton>
+                                }else if(item === "delete"){
+                                    return <IconButton key={index} onClick={()=>handleClick("delete")}><DeleteIcon/></IconButton>
+                                }
+                              })()
+                          })
+                      }
+                  </td>
+              </tr>
+              <tr >
+                <td ></td>
+                <td className='reviewer_reviewcomment_dummy_col'></td>
+                <td colSpan={4} >
+                  <div className="reviewer_reviewcommnt_description_span">
+                    <span>
+                      {reviewComment.reply_desc}
+                    </span>
+                  </div>
                 </td>
-                <td colSpan={3} >
-                    <div className='reviewer_reviewcomment_username_div'>
-                        <span >
-                            {reviewComment.reviewer_user_id} 
-                        </span>
-                    </div>
-                </td>
-                <td className='reviewer_reviewcomment_icon_col'>
-                  {
-                      (reviewComment.ismenuvisible) &&
-                        menuoption.map((item, index)=>{
-                            return (()=>{
-                              if(item === "edit"){
-                                  return <IconButton key={index} onClick={()=>handleClick("edit")}><EditIcon/></IconButton>
-                              }else if(item === "delete"){
-                                  return <IconButton key={index} onClick={()=>handleClick("delete")}><DeleteIcon/></IconButton>
-                              }
-                            })()
-                        })
-                    }
-                </td>
-            </tr>
-            <tr >
-              <td ></td>
-              <td className='reviewer_reviewcomment_dummy_col'></td>
-              <td colSpan={4} >
-                <div className="reviewer_reviewcommnt_description_span">
-                  <span>
-                    {reviewComment.reply_desc}
-                  </span>
-                </div>
-              </td>
-            </tr>
-          </table>
-    </div>
+              </tr>
+            </table>
+      </div>
+    </>
   )
 }
 

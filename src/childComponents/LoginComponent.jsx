@@ -156,7 +156,7 @@ const LoginComponent = () => {
                                                 }} />
                                         </div>
                                         <div className="text-center pad padtf">
-                                            <button onClick={handleLoginClickEvent} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                            <button onClick={handleLoginClickEvent} className="anchor-outline rounded ao-fill-theme font-bold">
                                                 <span className="flex text-center grow">
                                                     <span><span className="pad padxd">Login</span></span>
                                                 </span>

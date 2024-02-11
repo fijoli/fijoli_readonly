@@ -1,9 +1,9 @@
 :root {
   --body-bg: #ffffff;
   --body-font-size: 14px;
-  --body-child-font-size: 1.2rem;
-  --anchor-font-size: 1.2rem;
-  --input-font-size: 1.2rem;
+  --body-child-font-size: 1.12rem;
+  --anchor-font-size: 1.12rem;
+  --input-font-size: 1.12rem;
   --body-line-height: 2rem;
   --footer-font-family: 'regular';
   --footer-font-size: 12px;
@@ -22,6 +22,7 @@
   --lightgrey: #8a8a8a;
   --black-skin: #2a2a2a;
   --grey-skin: #f2f2f2;
+  --grey-a: rgba(0, 0, 0, 0.01);
 }
 * {
   box-sizing: border-box;
@@ -34,7 +35,12 @@ body {
   background-color: var(--body-bg);
   overflow-x: hidden;
 }
-body * {
+body .font-child,
+body p,
+body ul,
+body li,
+body ol,
+body label {
   font-size: var(--body-child-font-size);
 }
 .lead {
@@ -71,6 +77,14 @@ body * {
 a,
 button {
   font-size: var(--anchor-font-size);
+}
+a.font-size-small,
+button.font-size-small {
+  --anchor-font-size: 1rem;
+}
+.font-size-small a,
+.font-size-small button {
+  --anchor-font-size: 1rem;
 }
 .app-fc-input {
   font-size: var(--input-font-size) !important;
@@ -2599,6 +2613,9 @@ button {
 .nomargi {
   margin: 0 !important;
 }
+.nopadi {
+  padding: 0 !important;
+}
 .inlineblock {
   display: inline-block;
 }
@@ -2840,6 +2857,9 @@ button {
 }
 .grey-skin {
   --background-color: var(--grey-skin);
+}
+.grey-a {
+  --background-color: var(--grey-a);
 }
 .label-theme {
   --label-bg: var(--theme-bg);
@@ -3219,6 +3239,18 @@ button.anchor-outline {
   --ao-border-color: var(--theme-bg);
   --ao-background-color: var(--theme-bg);
 }
+.anchor-outline.ao-lightgrey-black {
+  --ao-background-color: var(--lightgrey);
+  --ao-color: var(--white);
+  --ao-border-color: var(--lightgrey);
+}
+.anchor-outline.ao-lightgrey-black:hover,
+.anchor-outline.ao-lightgrey-black:focus,
+.anchor-outline.ao-lightgrey-black.active {
+  --ao-color: var(--white);
+  --ao-border-color: var(--black-skin);
+  --ao-background-color: var(--black-skin);
+}
 .anchor-outline.ao-grey-black-theme {
   --ao-background-color: var(--grey-skin);
   --ao-color: var(--black);
@@ -3273,6 +3305,7 @@ button.anchor-outline {
   --ao-color: var(--black-skin);
 }
 .anchor-outline.ao-link-themeblack:focus {
+  --ao-background-color: transparent;
   --ao-color: var(--lightgrey);
 }
 a.anchor-outline,

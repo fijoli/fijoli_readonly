@@ -76,10 +76,14 @@ const ProfileBioComponent = ({ userinfo }) => {
                     </span>
                 </h6>
                 <div className="divider nospace dashed"></div>
-                <div className="flex">
+                <div className="flex wrap">
                     {
                         (lstofCertificates||[]).map((item, index) => {
-                            return <ProfileCertificationComponent key={index} item={item} />
+                            return (
+                                <div className="flex--6 xs--12">
+                                    <ProfileCertificationComponent key={index} item={item} />
+                                </div>
+                            )
                         })
                     }
                 </div>

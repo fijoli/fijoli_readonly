@@ -32,6 +32,7 @@ import lheart from './../../src/asset/lheart.svg';
 import rheart from './../../src/asset/rheart.svg';
 import comment from './../../src/asset/awesome-comment.svg';
 import EnumPostMenuOptions from './PostControllers/PostMenuOptions';
+import { CircleImageTemplate } from '../helper/component_block';
 
 const iconStyle = {
     fontSize: '25px', // Adjust the size as needed
@@ -189,10 +190,7 @@ const ViewPostComponent = ({ postkey }) => {
                                 <div className='flex align-items-center grow'>
                                     <div className='icon-sized-xsm'>
                                         <a href={null} className='anchor-outline ao-grey-black-theme circle oh nolh block' onClick={handleOtherProfile}>
-                                            <span className="relative block">
-                                                <img src="./base/1x1.png" alt="Post" className="w" />
-                                                <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", userpicinfo, ")"].join("") }}></span>
-                                            </span>
+                                            <CircleImageTemplate image={userpicinfo} />
                                         </a>
                                     </div>
                                     <div>
@@ -284,10 +282,11 @@ const ViewPostComponent = ({ postkey }) => {
                                     </div>
                                 </div>
                                 <div className="flex grow align-items-center">
-                                    <div>
+                                    <div className='font-child'>
                                         {postitem.post_desc}
                                     </div>
                                 </div>
+                                <div className="divider"></div>
                                 {
                                     (confirmDlgInfo.showConfirmationDlg) &&
                                     <ConfirmationDialog isopenDialog={confirmDlgInfo.showConfirmationDlg}

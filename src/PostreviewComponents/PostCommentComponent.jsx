@@ -13,18 +13,18 @@ import EnumPostCommentType from '../singletonControllers/PostReviewTypes';
 import getpostCommentAction from '../actions/getpostCommentAction';
 import "./PostCommentComponent.css";
 
-const PostCommentComponent = ({postcomment, posttype}) =>{
+const PostCommentComponent = ({ postcomment, posttype, title }) => {
 
-  const iconStyle  = {fontSize: '45px' };
-  const dispatch   =  useDispatch();
-  const navigate   =  useNavigate();
+  const iconStyle = { fontSize: '45px' };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [postcmtdesc, setpostcmtdesc] = useState("");
   // const loggedInUser      = useSelector((state)=> state.storeComponent.configData.profileData);
-  const postcommentState  = useSelector((state)=> state.storeComponent.postcommentState);
+  const postcommentState = useSelector((state) => state.storeComponent.postcommentState);
 
-  useEffect(()=>{
-    switch(posttype){
+  useEffect(() => {
+    switch (posttype) {
       case EnumPostCommentType.newPost:
       case EnumPostCommentType.editMainPost:
       case EnumPostCommentType.editReplyPost:
@@ -35,22 +35,22 @@ const PostCommentComponent = ({postcomment, posttype}) =>{
         setpostcmtdesc("");
         break;
     }
-  },[]);
+  }, []);
 
-  useEffect(()=>{
-    if((postcommentState) && (200 === postcommentState.status)){
+  useEffect(() => {
+    if ((postcommentState) && (200 === postcommentState.status)) {
       dispatch(getpostCommentAction(postcomment.post_id, postcomment.comment_user_id));
-    }else if((postcommentState) && (400 === postcommentState.status)){
+    } else if ((postcommentState) && (400 === postcommentState.status)) {
       dispatch(resetStatus());
       navigate("/error");
     }
-  },[postcommentState]);
+  }, [postcommentState]);
 
   const handletxtdescChanged = (evt) => {
     setpostcmtdesc(evt.target.value);
     postcomment["comment_desc"] = evt.target.value;
   }
-  
+
   const handlepostingpostcomment = () => {
     // postcomment["comment_user_id"] = loggedInUser.user_id;
     dispatch(postCommentAction(postcomment, posttype));
@@ -58,25 +58,40 @@ const PostCommentComponent = ({postcomment, posttype}) =>{
   }
 
   return (
-    <div >
-      <Box component="section" sx={{ p: 1, m: 1, boxShadow: 4,
-        border: '1px dashed grey', borderRadius: '15px', background: "lightgrey", height: 30 }}>
-          <div style={{display: 'flex', flexDirection: "row"}}>
-              <TextField type="text" fullWidth variant="outlined"
-                        name = "document_desc" multiline rows={2}
-                        value = {postcmtdesc}
-                        placeholder="Add comment" 
-                        sx={{
-                            "& .MuiOutlinedInput-notchedOutline": { border: "none" }
-                            }}
-                        onChange = {handletxtdescChanged} 
-                        InputProps={{ sx: { height: 20, alignContent: "center"}}}/>
-                        
-              <IconButton onClick={handlepostingpostcomment} className="postreview_comp_postButton">
-                  <PhotoSizeSelectActualIcon style={iconStyle}></PhotoSizeSelectActualIcon>
-              </IconButton>
+    <div className='flex grow wrap ypad-' >
+      <div>
+        <label className="form-label">{title || "Post a Comment"}</label>
+        <TextField type="text" fullWidth variant="outlined"
+          name="document_desc" multiline rows={2}
+          value={postcmtdesc}
+          placeholder="Add comment"
+          sx={{
+            // "& .MuiOutlinedInput-notchedOutline": { border: "none" }
+            '& fieldset': { borderRadius: 5 },
+          }}
+          onChange={handletxtdescChanged}
+          InputProps={{ sx: { height: 120, alignContent: "center" } }} />
+      </div>
+      <div className="flex--12">
+        <div className="flex justify-end ypad-">
+          <div className="">
+            <button className="anchor-outline rounded ao-grey-black-theme" onClick={()=>{}} >
+              <span className="flex justify-center align-items-center">
+                <span>
+                  Cancel
+                </span>
+              </span>
+            </button>
           </div>
-      </Box>
+          <div>
+            <button onClick={handlepostingpostcomment} className="anchor-outline rounded ao-fill-theme font-bold">
+              <span className="flex justify-between pad padxc grow">
+                <span>Post</span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

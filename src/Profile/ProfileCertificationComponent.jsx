@@ -17,21 +17,20 @@ const ProfileCertificationComponent =({item}) =>{
     },[item])
 
   return (
-    <div>
-        <table style={{width: "100%"}}>
-            <tr>
-                <td style={{width: "12%", height:"auto"}}>
-                    <label className='select_certification_pdf_container' >
-                        <PictureAsPdfIcon sx={{fontSize: "100px"}} />
-                    </label>
-                </td>
-                <td style={{width: "70%", height:"auto"}}>
-                    <p style={{margin: "6px"}}>
-                        {doc_desc}
-                    </p>
-                </td>
-            </tr>
-        </table>
+    <div className="flex align-items-center">
+        <div className='icon-sized-xsm'>
+            <label className='bg grey-skin circle block nolh relative' >
+                <img src="./base/1x1.png" alt="DocIcon" className='w' />
+                <span className="abs trbl flex align-items-center justify-center">
+                    <span>
+                        <PictureAsPdfIcon />
+                    </span>
+                </span>
+            </label>
+        </div>
+        <div>
+            <p> {doc_desc} </p>
+        </div>
     </div>
   )
 }

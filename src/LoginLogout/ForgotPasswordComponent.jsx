@@ -141,7 +141,7 @@ const ForgotPasswordComponent = () => {
                                     </div>
 
                                     <div className="text-center pad padtb">
-                                        <button onClick={handleSubmitClick} className="anchor-outline rounded ao-theme ao-fill-theme font-bold">
+                                        <button onClick={handleSubmitClick} className="anchor-outline rounded ao-fill-theme font-bold">
                                             <span className="flex text-center grow">
                                                 <span><span className="pad padxd">Submit</span></span>
                                             </span>

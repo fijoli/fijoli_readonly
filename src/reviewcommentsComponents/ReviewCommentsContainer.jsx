@@ -28,21 +28,23 @@ const ReviewCommentsContainer = ({ postitem, menuoptions }) => {
   }, [postitem]);
 
   return (
-    <div className='rvwcmt_container_main_div'>
-      {
-        (0 < reviewcomments.length) &&
-        reviewcomments.map((reviewComment, index) => {
-          return (() => {
-
-            if (0 === index) {
-              return <SubmitterReview key={reviewComment.user_id.toString() + index.toString()} reviewComment={reviewComment} menuoption={menuoptions["submitter"]} />
-            } else if (1 === index) {
-              return <ReviewerReview key={reviewComment.reviewer_user_id.toString() + index.toString()} reviewComment={reviewComment} menuoption={menuoptions["reviewer"]} />
-            }
-          })()
-        })
-      }
-    </div>
+    <>
+      <div className="divider nospace"></div>
+      <div className='pad padyc'>
+        {
+          (0 < reviewcomments.length) &&
+          reviewcomments.map((reviewComment, index) => {
+            return (() => {
+              if (0 === index) {
+                return <SubmitterReview key={reviewComment.user_id.toString() + index.toString()} reviewComment={reviewComment} menuoption={menuoptions["submitter"]} />
+              } else if (1 === index) {
+                return <ReviewerReview key={reviewComment.reviewer_user_id.toString() + index.toString()} reviewComment={reviewComment} menuoption={menuoptions["reviewer"]} />
+              }
+            })()
+          })
+        }
+      </div>
+    </>
   )
 }
 
