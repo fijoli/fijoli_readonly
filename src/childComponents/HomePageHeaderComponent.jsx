@@ -4,12 +4,8 @@ import React, { useEffect, useState } from 'react';
 import "../css/HomePageHeaderComponent.css";
 
 import SearchIcon from '@mui/icons-material/Search';
-import HomeIcon from '@mui/icons-material/Home';
-import PublicIcon from '@mui/icons-material/Public';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button, TextField, IconButton, InputAdornment } from '@mui/material';
+import { TextField, IconButton, InputAdornment } from '@mui/material';
 
 //need to delete once the actual image is downloaded
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,11 +18,8 @@ import searchpostAction from '../SearchPosts/Actions/searchpostAction';
 import PostCategoryMenuComponent from './PostCategoryMenuComponent/PostCategoryMenuComponent';
 
 
-const iconStyle = { fontSize: '30px', color: "black" };
-const rediconStyle = { fontSize: '30px', color: "red" };
-
 //home page header component
-const HomePageHeaderComponent = ({ userinfo }) => {
+const HomePageHeaderComponent = ({ userinfo, menutoggle, onMenuToggle }) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [keyitems, setkeyitems] = useState([]);
@@ -116,13 +109,14 @@ const HomePageHeaderComponent = ({ userinfo }) => {
     <div className='app-skull'>
       <div className="app-skull-header">
         <div className="col-grid flex align-items-center grow ypad-off">
+          <div className='col-lr-space'></div>
           <div className='col-brand'>
             <h1 className="brand-link ellipsis">Fijoli</h1>
           </div>
           <div>
             <TextField
               value={searchkey}
-              placeholder="search content"
+              placeholder="Search content"
               sx={{
                 '& fieldset': { borderRadius: 33 }
               }}
@@ -138,8 +132,8 @@ const HomePageHeaderComponent = ({ userinfo }) => {
               }}
               variant="outlined" />
           </div>
-          <div>
-            <div className="relative nolh marg marga">
+          <div className='col-pic'>
+            <div className="span-icon relative nolh">
               <img src="./base/1x1.png" alt="img2" onLoad={handleuserpicloaded} className="w" />
               <a href={null} onClick={(evt) => handleProfile(EnumNavigate.profileState)} className='anchor-outline ao-grey-black-theme circle relative oh abs trbl'>
                 <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", userpic, ")"].join("") }}>
@@ -147,14 +141,20 @@ const HomePageHeaderComponent = ({ userinfo }) => {
               </a>
             </div>
           </div>
-          <div className='text-center'>
-            <button onClick={(evt) => handleHdrPagevisibleState(EnumNavigate.menuState)} className={["anchor-outline radius ao-grey-theme font-bold"].join(" ")}>
-              <span className="flex text-center grow align-iems-center">
-                <span><span className="nolh">{<MenuIcon />}</span></span>
-              </span>
-            </button>
+          <div className='col-menu relative'>
+            <div className="span-icon relative nolh">
+              <img src="./base/1x1.png" alt="img2" onLoad={handleuserpicloaded} className="w" />
+              <button onClick={(evt) => onMenuToggle(!menutoggle)} className={["w abs trbl anchor-outline radius ao-grey-theme"].join(" ")}>
+                <span className="flex text-center grow align-iems-center padoff">
+                  <span className="nolh">{<MenuIcon />}</span>
+                </span>
+              </button>
+            </div>
           </div>
+          <div className='col-lr-space'></div>
         </div>
+
+
         <div className="app-main-menu">
           <div className='inner flex align-items-center justify-center grow text-center padoff'>
             <div>
@@ -189,7 +189,7 @@ const HomePageHeaderComponent = ({ userinfo }) => {
               <PostCategoryMenuComponent menuOptions={keyitems} handleClick={handlepostMenuItemClick}>
                 {
                   {
-                    menuicon: function ({handlemenuIconClick}) {
+                    menuicon: function ({ handlemenuIconClick }) {
                       return (
                         <button onClick={handlemenuIconClick} className={["anchor-outline ao-grey-black-theme font-bold w"].join(" ")}>
                           <span className="flex text-center grow align-iems-center pad padyb">

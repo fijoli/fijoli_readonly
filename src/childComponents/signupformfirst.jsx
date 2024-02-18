@@ -123,7 +123,7 @@ const SignUpFormFirst = () => {
                     component: () => {
                         return (
                             <>
-                                <div className="desk-col flex justify-center relative wrap">
+                                <div className="flex justify-center relative wrap">
                                     <div className="flex--10 xs--12">
                                         <TextField placeholder="Name"
                                             value={regInfo.user_name}

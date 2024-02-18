@@ -123,7 +123,7 @@ const SignUpFormNext = () => {
                         return (
                             <>
                                 <div className="flex justify-center relative wrap">
-                                    <div className="desk-col">
+                                    <div className="">
                                         <div className="text-center">
                                             <h2 className='lead h5 color color-theme'>Welcome, {registrantInfo.user_name}</h2>
                                             <p className=''>

@@ -87,7 +87,7 @@ const ForgotPasswordComponent = () => {
                     component: () => {
                         return (
                             <>
-                                <div className="desk-col">
+                                <div className="">
                                     <div className="flex justify-center relative wrap">
                                         <div className="flex--10 xs--12">
                                             <TextField placeholder="EmailID"

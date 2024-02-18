@@ -133,13 +133,13 @@ const SignUpFormFinal = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex--12 slide-card">
+                <div className="desk-col slide-card">
                     <div className="flex justify-center pad-">
                         <div className="profile-icon-box bg lightgrey circle">
                             <ProfilePicComponent handleProfilePicChange={handleProfilePicChange} />
                         </div>
                     </div>
-                    <div className="desk-col">
+                    <div className="">
                         <div className="flex justify-center relative wrap">
                             <div className="flex--10 sm--12">
                                 <div className="pad padbc">

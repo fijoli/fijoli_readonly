@@ -80,11 +80,11 @@ export function SlideLayoutTemplate(prop) {
                         </div>
                     </div>
                 </div>
-                <div className="flex--12 slide-card">
-                    <div className="flex justify-center">
-                        <div className="flex--5 md--6 sm--12 ">
-                            {
-                                ({undefined:false,1:true,0:false}[slide_context]) && (
+                <div className="desk-col slide-card">
+                    {
+                        ({undefined:false,1:true,0:false}[slide_context]) && (
+                            <div className="flex justify-center">
+                                <div className="flex--5 md--6 sm--12 ">
                                     <div className="flex justify-center text-center">
                                         <div className="flex--12 sm--8 xsm--12">
                                             <div className="slide-change slide-active-onoff slide-context">
@@ -117,12 +117,14 @@ export function SlideLayoutTemplate(prop) {
                                             <br/>
                                         </div>
                                     </div>
-                                )
-                            }
-                            {
-                                prop.children.component(prop)
-                            }
-                        </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    <div className="pad padyd">
+                        {
+                            prop.children.component(prop)
+                        }
                     </div>
                 </div>
             </div>

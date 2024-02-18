@@ -109,7 +109,7 @@ const LoginComponent = () => {
                     component: () => {
                         return (
                             <>
-                                <div className="desk-col flex justify-center relative transition">
+                                <div className="flex justify-center relative transition">
                                     <div className="flex--10 xs--12  transition">
                                         {/* whatsapp number text field */}
                                         <TextField

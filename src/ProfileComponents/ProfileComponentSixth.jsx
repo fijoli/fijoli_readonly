@@ -1,7 +1,7 @@
 
 
 import "./ProfileComponentSixth.css";
-import {Box, checkboxClasses, IconButton, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { Box, checkboxClasses, IconButton, InputAdornment, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import uploadicon from "./../asset/uploadIcon.jpg";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -11,18 +11,18 @@ import FileUploadComponent from "../childComponents/FileUploadComponent";
 import CustomLanguageSelection from "../customControls/CustomLanguageSelection";
 import AboutMyselfComponent from "../childComponents/AboutMyselfComponent";
 
-const ProfileComponentSixth = (props) =>{
+const ProfileComponentSixth = (props) => {
 
-    const [visibility, setvisibility]       = useState(true);
+    const [visibility, setvisibility] = useState(true);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [selectedLang, setselectedLang]   = useState([]);
-    const [uploadfiles, setuploadfiles]     = useState({
+    const [selectedLang, setselectedLang] = useState([]);
+    const [uploadfiles, setuploadfiles] = useState({
         "certificate": [undefined, undefined, undefined]
     });
-    const [location,    setlocation]        = useState("");
-    const [description, setdescription]     = useState("");
+    const [location, setlocation] = useState("");
+    const [description, setdescription] = useState("");
 
-    const lstofsupportedCurrency            = useSelector((state)=> state.storeComponent.configData.currency);
+    const lstofsupportedCurrency = useSelector((state) => state.storeComponent.configData.currency);
 
     const certificatedata = [
         { id: 0, text: 'certificate' },
@@ -33,11 +33,11 @@ const ProfileComponentSixth = (props) =>{
     ///<summary>
     // set description 
     ///</summary>
-    const handletxtChanged = (evt) =>{
+    const handletxtChanged = (evt) => {
         setdescription(evt.target.value);
     }
 
-    const handlelocationChanged = (evt) =>{
+    const handlelocationChanged = (evt) => {
         setlocation(evt.target.value);
     }
     const handleChange = (lstoflanguages) => {
@@ -49,38 +49,38 @@ const ProfileComponentSixth = (props) =>{
         //   typeof value === 'string' ? value.split(',') : value,
         // );
         setselectedLang(lstoflanguages);
-    };    
+    };
 
     const handleCurrencyChange = (event) => {
         setSelectedIndex(event.target.selectedIndex)
     }
 
-    const handleCompleteClick = (evt) =>{
-        
+    const handleCompleteClick = (evt) => {
+
         const user_info = {
-            "user_description"  : description,
-            "languages_known"   : selectedLang.join(","),
-            "location_address"  : location
+            "user_description": description,
+            "languages_known": selectedLang.join(","),
+            "location_address": location
         }
 
         props.handleCompleteClick(user_info, uploadfiles);
     }
 
-    const handleOnSelect = (event) =>{
+    const handleOnSelect = (event) => {
         setvisibility(!event.target.checked);
     }
 
-    const handleuploadfile = (file, filetype, fileindex) =>{
+    const handleuploadfile = (file, filetype, fileindex) => {
         uploadfiles[filetype][fileindex] = file;
         setuploadfiles(uploadfiles);
     }
 
-    const handleremovefile = (fileIndex, filetype) =>{
+    const handleremovefile = (fileIndex, filetype) => {
         delete uploadfiles[filetype][fileIndex];
         setuploadfiles(uploadfiles);
     }
 
-    return(
+    return (
 
         <div className="flex wrap flex-container">
             <div className="flex--12">
@@ -247,24 +247,26 @@ const ProfileComponentSixth = (props) =>{
                             </div>
                         </div>
                     </div>
-                    <div className="flex wrap">
-                        <div className="flex--12">
-                            <CustomLanguageSelection handleChange={handleChange} />
-                        </div>
-                        <div className="flex--12">
-                            <div className="text-center pad padtb">
-                                <button onClick={handleCompleteClick} className="anchor-outline rounded ao-fill-theme font-bold">
-                                    <span className="flex text-center grow">
-                                        <span><span className="pad padxd">Complete Profile</span></span>
-                                    </span>
-                                </button>
-                            </div>
+                </div>
+
+                <div className="flex wrap">
+                    <div className="flex--12">
+                        <CustomLanguageSelection handleChange={handleChange} />
+                    </div>
+                    <div className="flex--12">
+                        <div className="text-center pad padtb">
+                            <button onClick={handleCompleteClick} className="anchor-outline rounded ao-fill-theme font-bold">
+                                <span className="flex text-center grow">
+                                    <span><span className="pad padxd">Complete Profile</span></span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
-    
+
     )
 
 }

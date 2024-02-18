@@ -77,7 +77,7 @@ const ProfileComponentSecond = (props) => {
     }
 
     return (
-        <div className="desk-col">
+        <div className="">
             <div className="flex wrap justify-center flex-container">
                 <div className="flex--12">
                     <AboutMyselfComponent height={'90px'}

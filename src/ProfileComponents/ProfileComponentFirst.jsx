@@ -132,7 +132,7 @@ const ProfileComponentFirst = (props) => {
                 {
                     (validState.cert_status) &&
                     <div>
-                        <p className="lead h7 color color-theme">please upload atleast 1 certification for your profile credibility</p>
+                        <p className="lead h7 color color-theme">Please upload atleast 1 certification for your profile credibility</p>
                     </div>
                 }
                 <label className="block pad padc">
@@ -148,7 +148,7 @@ const ProfileComponentFirst = (props) => {
                 <div className="pad padt1 bg bg grey-skin"></div>
                 <div className={visibility ? "" : "nodisplay"} >
                     <div className="marg margtc bg grey-skin rounded">
-                        <label className="flex align-items-center wrap"> 
+                        <label className="flex align-items-center wrap">
                             <div className="icon-sized-xs">
                                 <input type="checkbox" className="" />
                             </div>
@@ -191,7 +191,7 @@ const ProfileComponentFirst = (props) => {
                         </div>
                     </div>
                     <div className="marg margtc bg grey-skin rounded">
-                        <label className="flex align-items-center wrap"> 
+                        <label className="flex align-items-center wrap">
                             <div className="icon-sized-xs">
                                 <input type="checkbox" className="" />
                             </div>
@@ -234,7 +234,7 @@ const ProfileComponentFirst = (props) => {
                         </div>
                     </div>
                     <div className="marg margtc bg grey-skin rounded">
-                        <label className="flex align-items-center wrap"> 
+                        <label className="flex align-items-center wrap">
                             <div className="icon-sized-xs">
                                 <input type="checkbox" className="" />
                             </div>
@@ -276,22 +276,23 @@ const ProfileComponentFirst = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex wrap">
-                        <div className="flex--12">
-                            <CustomLanguageSelection handleChange={handleChange} />
-                            {
-                                (validState.lang_status) &&
-                                <>Language is not selected</>
-                            }
-                        </div>
-                        <div className="flex--12">
-                            <div className="text-center pad padtb">
-                                <button onClick={handleCompleteClick} className="anchor-outline rounded ao-fill-theme font-bold">
-                                    <span className="flex text-center grow">
-                                        <span><span className="pad padxd">Complete Profile</span></span>
-                                    </span>
-                                </button>
-                            </div>
+                </div>
+
+                <div className="flex wrap">
+                    <div className="flex--12">
+                        <CustomLanguageSelection handleChange={handleChange} />
+                        {
+                            (validState.lang_status) &&
+                            <>Language is not selected</>
+                        }
+                    </div>
+                    <div className="flex--12">
+                        <div className="text-center pad padtb">
+                            <button onClick={handleCompleteClick} className="anchor-outline rounded ao-fill-theme font-bold">
+                                <span className="flex text-center grow">
+                                    <span><span className="pad padxd">Complete Profile</span></span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>

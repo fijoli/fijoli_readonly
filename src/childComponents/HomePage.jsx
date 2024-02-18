@@ -51,6 +51,11 @@ const HomePage = () => {
     }
   }
 
+  const [menutoggle, setMenuToggle] = useState(false);
+  const onMenuToggle = (flag=false)=>{
+    setMenuToggle(flag);
+  }
+
   const userinfo = useMemo(() => createUserinfo(loggedInUserInfo), [loggedInUserInfo]);
 
   const handlecloseDisplayMsg = () => {
@@ -59,13 +64,9 @@ const HomePage = () => {
   }
 
   return (
-    <div className='desk-col'>
-      <HomePageHeaderComponent userinfo={userinfo} />
-      <>
-        {(navigateItemtype === EnumNavigate.menuState) &&
-          <MenuComponent />
-        }
-      </>
+    <div className='desk-col relative'>
+      <HomePageHeaderComponent userinfo={userinfo} menutoggle={menutoggle} onMenuToggle={onMenuToggle} />
+      <MenuComponent onMenuToggle={onMenuToggle} menutoggle={menutoggle} />
       <>
         {
           (navigateItemtype === EnumNavigate.postState) &&

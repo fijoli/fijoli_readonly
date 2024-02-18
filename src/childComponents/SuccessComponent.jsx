@@ -19,7 +19,7 @@ export const SuccessComponent = () => {
             return (
               <>
                 <div className="flex justify-center relative wrap">
-                  <div className="desk-col">
+                  <div className="">
                     <div className="text-center">
                       <h2 className='lead h5 color color-theme'>Hi, Welcome to Fijoli</h2>
                       <p className=''>

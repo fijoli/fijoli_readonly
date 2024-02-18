@@ -113,8 +113,8 @@ const CreatePasswordComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex--12 slide-card">
-                    <div className="desk-col pad padyf">
+                <div className="desk-col slide-card">
+                    <div className="pad padyf">
                         <div className="flex wrap justify-center">
                             <div className="flex--10 xs--12">
                                 <TextField type={createEyeValue ? "text" : "password"}
