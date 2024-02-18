@@ -23,28 +23,24 @@ const SignUpFormNext = () => {
 
     const [createEyeValue, setCreateEyeValue] = useState(false);
     const [confirmEyeValue, setConfirmEyeValue] = useState(false);
+    const signupCredentials = useSelector((state)=> state.storeComponent.credentials)
 
-    const [lstoftrainers, setlstoftrainers] = useState([]);
-    const [registrantInfo, setregistrantInfo] = useState({
-        "createpwd": "", "confirmpwd": "",
-        "location": "", "dob": "", "user_category": "", "user_name": "", "whatsapp_user_name": "",
-        "createpwd_status": false, "confirmpwd_status": false, "location_status": false,
-        "dob_status": false, "user_category_status": false
-    });
+    const [lstoftrainers, setlstoftrainers] = useState([]) ;
+    const [registrantInfo, setregistrantInfo] = useState(signupCredentials);
 
-    const regConfigInfo = useSelector((state) => state.storeComponent.configData);
+    const regConfigInfo = useSelector((state)=>state.storeComponent.configData);
 
-    useEffect(() => {
-        if (lstoftrainers.length === 0) {
-            console.log("dispatch useEffect", params.get("whatsapp_number"));
+    useEffect(()=>{
+        if(lstoftrainers.length === 0){
+            console.log("dispatch useEffect");
             dispatch(getregisteredInfo(params.get("whatsapp_number")));
         }
-    }, [lstoftrainers]);
+    },[lstoftrainers]);
 
-    useEffect(() => {
+    useEffect(()=>{
 
         //return if object is not initialized
-        if (0 === Object.keys(regConfigInfo).length) {
+        if(0 === Object.keys(regConfigInfo).length){
             return;
         }
 
@@ -55,14 +51,14 @@ const SignUpFormNext = () => {
         }
 
         //set user name and wusername to the existing level
-        setregistrantInfo({ ...registrantInfo, "user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name });
+        setregistrantInfo({...registrantInfo, "user_category":(registrantInfo)?registrantInfo.user_category:"", "user_name": regConfigInfo.profileData.user_name, "whatsapp_user_name": regConfigInfo.profileData.whatsapp_user_name});
         setlstoftrainers(regConfigInfo.user_category);
 
-    }, [regConfigInfo]);
+    },[regConfigInfo]);
 
-    const handleChangeName = (evt, type) => {
+    const handleChangeName = (evt, type) =>{
         let state = [type] + "_status";
-        setregistrantInfo({ ...registrantInfo, [type]: evt.target.value, [state]: false });
+        setregistrantInfo({...registrantInfo, [type]: evt.target.value, [state]: false});
     }
 
     const handlePasswordVisibility = () => {
@@ -73,53 +69,55 @@ const SignUpFormNext = () => {
         setConfirmEyeValue(!confirmEyeValue);
     }
 
-    const handleNextEvent = (evt) => {
+    const handleNextEvent = (evt) =>{
 
         // if(registrantInfo.createpwd != registrantInfo.confirmpwd){
         //     // navigate("/error");
         //     setregistrantInfo({...registrantInfo, "createpwd_status" : false});
         //     return;
         // }
-        if (!IsValid()) {
+        if(!IsValid()){
             dispatch(storeregistrantInfo("store_registrantInfo", registrantInfo));
-            dispatch({ type: "reset_status" });
+            dispatch({type:"reset_status"});
             navigate("/signupform3");
         }
     }
 
-    function IsValid() {
+    function IsValid(){
         let registerinfo = registrantInfo;
-        let selectedDate = new Date(registerinfo.dob);
-        let actualDate = new Date();
+        let selectedDate   = new Date(registerinfo.dob);
+        let actualDate    = new Date();
         actualDate.setFullYear(actualDate.getFullYear() - 18);
-        if (registerinfo.createpwd === "") {
-            registerinfo['createpwd_status'] = true;
-        } else if ((registerinfo.confirmpwd === "") || (registerinfo.createpwd !== registerinfo.confirmpwd)) {
-            registerinfo['confirmpwd_status'] = true;
-        } else if (registerinfo.location === "") {
-            registerinfo['location_status'] = true;
-        } else if (registerinfo.dob === "") {
-            registerinfo['dob_status'] = true;
-        } else if (registerinfo.user_category === "") {
-            registerinfo['user_category_status'] = true;
-        } else if (registrantInfo.dob !== "" && selectedDate.getFullYear() > actualDate.getFullYear()) {
-            registerinfo['dob_status'] = true;
+        if(registerinfo.createpwd === ""){
+            registerinfo['createpwd_status'] =  true;
+        }else if((registerinfo.confirmpwd === "") || (registerinfo.createpwd !== registerinfo.confirmpwd)){
+            registerinfo['confirmpwd_status'] =  true;
+        }else if(registerinfo.location === ""){
+            registerinfo['location_status'] =  true;
+        }else if(registerinfo.dob === ""){
+            registerinfo['dob_status'] =  true;
+        }else if(registerinfo.user_category === ""){
+            registerinfo['user_category_status'] =  true;
+        }else if(registrantInfo.dob !== "" && selectedDate.getFullYear() > actualDate.getFullYear()){
+            registerinfo['dob_status'] =  true;
         }
-        setregistrantInfo({ ...registerinfo });
+        setregistrantInfo({...registerinfo});
         return (registerinfo.createpwd_status || registerinfo.confirmpwd_status ||
             registerinfo.location_status || registerinfo.dob_status || registerinfo.user_category_status);
     }
 
-
-    const handleSelect = (evt) => {
-        setregistrantInfo({ ...registrantInfo, "user_category": evt.target.value, "user_category_status": false });
+    const handleSelect = (evt) =>{
+        setregistrantInfo({...registrantInfo, "user_category": evt.target.value, "user_category_status": false });
     }
 
     return (
-        <SlideLayoutTemplate {...{}}>
+        <SlideLayoutTemplate {...{registrantInfo}}>
             {
                 {
-                    component: () => {
+                    component: (props) => {
+                        let {registrantInfo} = props;
+                        registrantInfo = registrantInfo || {}
+                        console.log(registrantInfo)
                         return (
                             <>
                                 <div className="flex justify-center relative wrap">
@@ -135,7 +133,7 @@ const SignUpFormNext = () => {
                                             <div className="flex wrap">
                                                 <div className="flex--12">
                                                     <TextField placeholder="Whatsapp Number"
-                                                        value={registrantInfo.whatsapp_number}
+                                                        value={registrantInfo.whatsapp_user_name}
                                                         fullWidth
                                                         variant="outlined"
                                                         label=" "
