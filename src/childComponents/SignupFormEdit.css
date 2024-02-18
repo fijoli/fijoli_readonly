@@ -1,0 +1,28 @@
+
+  .text-align-items_edit{
+    margin-top: 50px;
+    justify-content: center;
+    display: flex;
+    /* border: 1px solid red; */
+    margin-left: -12px;
+  }
+
+  .text-align-items_dob{
+    margin-top: 10px;
+    justify-content: center;
+    display: flex;
+    /* border: 1px solid red; */
+    margin-left: -12px;
+  }
+
+  /* .image_edit_final_div img {
+    width: 100%;
+    max-height: 100%;
+  } */
+
+.errmessage_validState{
+    color: red;
+    justify-content: center;
+    display: flex;
+    margin-top: 45px;
+ }
