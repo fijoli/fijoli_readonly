@@ -13,23 +13,32 @@ import navigateItem from '../actions/navigateItemAction';
 import PostContainer from '../PostCommentComponents/PostContainer';
 import BlockUserContainer from '../blockusercomponents/BlockUserContainer';
 import FollowersContainer from '../Follow/FollowerComponents/FollowersContainer';
-import FollowingContainer from '../Follow/FollowingComponents/FollowingContainer';
 import SearchpostContainer from '../SearchPosts/SearchPostComponents/SearchpostContainer';
+import FollowingContainer from '../Follow/FollowingComponents/FollowingContainer';
 import clearErrorMessageAction from '../actions/clearErrorMessageAction';
 import DisplayMessage from '../DisplayMessageComponent/DisplayMessage';
-
+import actiongetloginUser from "../actions/actiongetloginUser";
+import { useSearchParams } from 'react-router-dom';
+import EnumPostCategory from './enums/EnumPostCategory';
+import PostAsyncController from '../viewModels/PostAsyncController';
+import getPostItemsAction from '../actions/getPostItemsAction';
 
 const HomePage = () =>{
 
   const dispatch                          = useDispatch();
   const [displaymsg, setdisplaymsg]       = useState({});
-  
+  const loginData  =   {
+    "whatsapp_number":"", 
+    "encrypted_password":"",
+  };
 
+  const [params]          = useSearchParams();
   const lstofItems        = useSelector(state => state.storeComponent.configData.postItems);
-  const navigateItemtype  = useSelector((state) => state.storeComponent.navigateItemType);
+  let navigateItemtype  = useSelector((state) => state.storeComponent.navigateItemType);
   const loggedInUserInfo  = useSelector((state) => state.storeComponent.configData.profileData);
-  
+  const lstofPosts        = useSelector((state)=> state.storeComponent.lstofPosts);
   const errormsgstate     = useSelector(state => state.storeComponent.errormsg);
+  // const [navigateItemtype, setnavigateitemType] = useState("");
 
   useEffect(()=>{
     if(errormsgstate){
@@ -38,9 +47,12 @@ const HomePage = () =>{
   },[errormsgstate]);
 
   useEffect(()=>{
-    // dispatch({type: "getFijoliItems"});
-    dispatch(navigateItem(EnumNavigate.homepageState));
+    dispatch(navigateItem(params.get("navigateTo")))
   },[]);
+
+  useEffect(()=>{
+    getInfo();
+  },[navigateItemtype]);
 
   const createUserinfo = (loggedInUser) =>{
     if(loggedInUser){
@@ -53,6 +65,60 @@ const HomePage = () =>{
   
   const userinfo = useMemo(() => createUserinfo(loggedInUserInfo), [loggedInUserInfo]);
 
+  function getInfo(){
+
+    if(localStorage.getItem("whatsapp_number") === ''){
+      localStorage.setItem("whatsapp_number", loggedInUserInfo.whatsapp_number);
+      localStorage.setItem("token", loggedInUserInfo.encrypted_password)
+      localStorage.setItem("navigateTo", params.get("navigateTo"));
+    }
+
+    switch(params.get("navigateTo")){
+        case EnumNavigate.homepageState:
+        case EnumNavigate.profileState:
+          if(undefined === lstofItems){
+            loginData.whatsapp_number = localStorage.getItem("whatsapp_number");
+            loginData.encrypted_password = localStorage.getItem("token");
+            loginData.navigateItemType   = params.get("navigateTo");
+            // localStorage.setItem("whatsapp_number", "");
+            dispatch(actiongetloginUser(loginData));
+          }
+          dispatch(navigateItem(params.get("navigateTo")));
+          break;
+
+        case EnumPostCategory.FitRecipesPost:
+        case EnumPostCategory.FitStoryboardsPost:
+        case EnumPostCategory.FitnessProductsPost:
+        case EnumPostCategory.FitnessServicesPost:
+        case EnumPostCategory.TransformationStoriesPost:
+          // 
+          if(undefined === lstofItems){
+            loginData.whatsapp_number = localStorage.getItem("whatsapp_number");
+            loginData.encrypted_password = localStorage.getItem("token");
+            loginData.navigateItemType   = params.get("navigateTo");
+            // localStorage.setItem("whatsapp_number", "");
+            dispatch(actiongetloginUser(loginData));
+          }else{
+
+          if(undefined === lstofPosts){
+            let postAsyncCtrl = new PostAsyncController();
+            let postitems = lstofItems[postAsyncCtrl.getPostType(params.get("navigateTo"))];
+            let items = {};
+            Object.keys(postitems).map(item =>{
+                items = {...items, [postitems[item].id]: postitems[item]}
+            })
+            dispatch(getPostItemsAction(items));
+          }
+          dispatch(navigateItem(EnumNavigate.postContainer));
+          }
+          break;
+
+        default :
+          dispatch(navigateItem(params.get("navigateTo")))
+          break;
+    }
+
+  }
   const handlecloseDisplayMsg = () =>{
     setdisplaymsg({"open": false, "msg": ""});
     dispatch(clearErrorMessageAction());
@@ -62,13 +128,14 @@ const HomePage = () =>{
       <div className='homepage-container'>
         <HomePageHeaderComponent userinfo = {userinfo}/>
         <>
-        { (navigateItemtype === EnumNavigate.menuState) &&
+        { 
+          (params.get("navigateTo") === EnumNavigate.menuState) &&
           <MenuComponent />
         }
         </>
         <>
         {
-          (navigateItemtype === EnumNavigate.postState) &&
+          (params.get("navigateTo") === EnumNavigate.postState) &&
           <PostComponent />
         }
         </>

@@ -1,8 +1,8 @@
 
-const getregisteredInfo = (whatsapp_number) => {
+const getregisteredInfo = (whatsapp_number, isloggedIn = false) => {
     return {
       type: "get_registeredInfo",
-      data: {"whatsapp_number": whatsapp_number}
+      data: {"whatsapp_number": whatsapp_number, "isloggedIn": isloggedIn}
     };
   };
   

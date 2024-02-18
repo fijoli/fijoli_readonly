@@ -16,6 +16,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import {IconButton, InputAdornment, Stack, TextField} from "@mui/material";
 import DisplayMessage from "../DisplayMessageComponent/DisplayMessage";
 import clearErrorMessageAction from "../actions/clearErrorMessageAction";
+import EnumNavigate from "../singletonControllers/NavigateController";
 
 //component which is used to login 
 const LoginComponent = () => {
@@ -53,7 +54,9 @@ const LoginComponent = () => {
         //reset and navigate once response 
         if((loginState) && (200 === loginState.status)){
             dispatch({type:"reset_status"})
-            navigate("/homepage");
+            localStorage.setItem("whatsapp_number", "");
+            const url = "/homepage?navigateTo=" + EnumNavigate.homepageState;
+            navigate(url);
         }
     },[loginState]);
 

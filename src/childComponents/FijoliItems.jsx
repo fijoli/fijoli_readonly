@@ -4,6 +4,9 @@ import { useDispatch } from 'react-redux';
 import getPostItemsAction from '../actions/getPostItemsAction';
 import "./FijoliItems.css";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import navigateItem from '../actions/navigateItemAction';
+import EnumNavigate from '../singletonControllers/NavigateController';
+import { useNavigate } from 'react-router-dom';
 
 ///<summary>
 // home page category post items component
@@ -11,6 +14,8 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 const FijoliItems = (props) =>{
 
     const dispatch            = useDispatch();
+    const navigate            = useNavigate();
+
     const [postitems, setpostitems] = useState([]);
     const [indexRange, setindexRange]   = useState({min:0, max:5});
     
@@ -30,6 +35,8 @@ const FijoliItems = (props) =>{
                 items = {...items, [postitems[item].id]: postitems[item]}
             })
             dispatch(getPostItemsAction(items));
+            let url = "/homepage?navigateTo=" + selectedItem.post_category;
+            navigate(url);
         }
     }
 

@@ -5,7 +5,7 @@ const getPostItemsAction = (item) => {
     return{
       type: "get_post_success",
       "data" : item,
-      "navigateItemTo" : EnumNavigate.postContainer
+      // "navigateItemTo" : EnumNavigate.postContainer
     }
   }
 

@@ -73,6 +73,15 @@ export class ApiService {
         return response;
     }
 
+    getloginUser(loginData){
+        const requestOptions = {
+            headers: { "Content-Type": "application/json" },
+        };
+        var baseurl = this.url + "getlogin";
+        let response = axios.post(baseurl, JSON.stringify(loginData), requestOptions);
+        return response;
+    }
+
     confirmRegistration(confirmregInfo){
         const requestOptions = {
             headers: { 'Content-Type': 'multipart/form-data' },

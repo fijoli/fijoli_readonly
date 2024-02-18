@@ -7,5 +7,4 @@ const EnumFollow = Object.freeze({
 
 // export default EnumFollow;
 
-
 //enum type already exists in enumnavigate - not necessary to use this

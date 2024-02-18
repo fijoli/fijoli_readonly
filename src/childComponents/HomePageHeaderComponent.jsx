@@ -22,6 +22,7 @@ import setpostcategoryType from '../actions/setpostcategoryType';
 import PostAsyncController from '../viewModels/PostAsyncController';
 import searchpostAction from '../SearchPosts/Actions/searchpostAction';
 import PostCategoryMenuComponent from './PostCategoryMenuComponent/PostCategoryMenuComponent';
+import { useNavigate } from 'react-router-dom';
 
 
 const ITEM_HEIGHT = 48;
@@ -36,6 +37,7 @@ const HomePageHeaderComponent = ({userinfo}) => {
     const [searchkey, setsearchkey]                     = useState("");
     const [isContextMenuVisible, setContextMenuVisible] = useState(false);
     const [userpic, setuserpic]                         = useState("");
+    const navigate                                      = useNavigate("");
 
     const dispatch        = useDispatch();
     const lstofPosts      = useSelector(state => state.storeComponent.configData.Post);
@@ -89,6 +91,9 @@ const HomePageHeaderComponent = ({userinfo}) => {
   };
 
   const handleHdrPagevisibleState = (navigateTo) =>{
+    const url = "/homepage?navigateTo=" + navigateTo;
+    navigate(url);
+
     dispatch(navigateItem(navigateTo));
   }
 
@@ -96,6 +101,9 @@ const HomePageHeaderComponent = ({userinfo}) => {
   const handleProfile = (navigateTo) => {
 
     dispatch(getselectedprofile(true, 0));
+    const url = "/homepage?navigateTo=" + EnumNavigate.profileState;
+    navigate(url);
+    // let url = navigateTo + "?navigateTo=" + EnumNavigate.profileState
     dispatch(navigateItem(navigateTo));
 
   }     
@@ -109,8 +117,6 @@ const HomePageHeaderComponent = ({userinfo}) => {
   const handlesearchkeyChange = (evt) =>{
     setsearchkey(evt.target.value);
   }
-  
-  // const [userpicloaded, setuserpicloaded] = useState(true);
 
   const handleuserpicloaded = (evt) => {
     // setuserpicloaded(false);

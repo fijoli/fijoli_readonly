@@ -123,6 +123,10 @@ const getData= (queryType, data) =>{
             response = serv.loginUser(data).then((result)=> result);
             break;
 
+        case "getlogin":
+            response = serv.getloginUser(data).then((result)=> result);
+            break;
+
         case "get-fijoli-items":
             response = fijoliItems;
             break;
@@ -265,6 +269,28 @@ function* invokeLogin(action){
 
 function* actionLoginData(){
     yield takeLatest("invoke_loginData", invokeLogin)
+}
+
+function* getLogin(action){
+    const resp      = yield call(getData, "getlogin", action.loginData);
+    const result    = JSON.parse(JSON.stringify(resp.data));
+
+    if(200 !== resp.data.status){
+        yield put({
+            type: "error_occurred",
+            data: "user doesnt exists"
+        })   
+    }else{
+        yield put({
+            type: "get_login_success",
+            result
+        })   
+    }
+
+}
+
+function* actiongetLoginData(){
+    yield takeLatest("get_loginData", getLogin)
 }
 
 function* getfijoliItems(action){
@@ -978,7 +1004,8 @@ export default function* rootSaga() {
         actiongetsearchpost(),
         actiongetsearchpostitem(),
         actionreplypostcommentlikedislikestate(),
-        actiongetselectedpostcategory()
+        actiongetselectedpostcategory(),
+        actiongetLoginData()
     ]);
 }
   

@@ -5,6 +5,7 @@ import initialState from "../models/initialState";
 import SysConfigData from "../models/sysConfigItems";
 import EnumNavigate from "../singletonControllers/NavigateController";
 import EnumPostCommentType from "../singletonControllers/PostReviewTypes";
+import PostAsyncController from "../viewModels/PostAsyncController";
 import StoreItemController from "./StoreItemController";
 
 export const storeComponent = (state = initialState, action) => {
@@ -12,6 +13,7 @@ export const storeComponent = (state = initialState, action) => {
     switch(action.type){
 
         case "navigateTo":
+            localStorage.setItem("navigateItemType", action.navigateItemTo);
             state = {...state, navigateItemType: action.navigateItemTo};
             return state;
 
@@ -42,6 +44,36 @@ export const storeComponent = (state = initialState, action) => {
             }
             
             return state; 
+        case "get_login_success":
+            if(action.result.status != 200){
+                state = {...state, loginState: {"status": 400}}
+            }else{
+
+                let postasyncctrl = new PostAsyncController();
+                let navigateitemto = action.result.navigateItemType;
+                const configData = new SysConfigData(action.result);
+                let lstofpostitems = {};
+                if(postasyncctrl.getpostCategorytype(action.result.navigateItemType) !== ""){
+                    navigateitemto = postasyncctrl.getpostCategorytype(action.result.navigateItemType);  
+                    lstofpostitems = configData.getlstofPostItems()[navigateitemto];
+                }
+
+                state = {...state, configData: {
+                    "user_category" : [...configData.getlstofuserCategory()],
+                    "languages"     : [...configData.getlstofLanguages()],
+                    "currency"      : [...configData.getlstofCurrency()],
+                    "Post"          : [...configData.getlstofPosts()],
+                    "lstofusers"    : configData.getlstofUsers(),
+                    "postItems"         : configData.getlstofPostItems(),
+                    "profileData"   : configData.getRegisteredUserInfo()}, 
+                    loginState: {"status": 200},
+                    navigateItemType : navigateitemto,
+                    otherProfileData : configData.getRegisteredUserInfo(),
+                    lstofPosts       : lstofpostitems
+                }
+            }
+            return state;
+
         case "get_registeredInfo_success":  
         case "confirmRegistration_success":
         case "invoke_login_success":

@@ -101,7 +101,7 @@ const SelfProfile =() =>{
     //event handler which initializes confirmation info based on block/unblock user
     const handleBlockUserState = () =>{
         blockUserinfo.confirminfo.isOpen    = true;
-        blockUserinfo.messageType           = "block";
+        blockUserinfo.confirminfo.messageType           = "block";
         blockUserinfo.confirminfo.Message   = (otherUserInfo.isblocked)?StringConstants.UNBLOCK_USER_MSG:StringConstants.BLOCK_USER_MSG;
         setblockUserinfo({...blockUserinfo});
     }

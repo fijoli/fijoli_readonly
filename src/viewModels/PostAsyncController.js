@@ -17,6 +17,14 @@ class PostAsyncController {
         "Fit StoryBoards Post" : "Select storyboard pic"
     }
 
+    postCategorytype = {
+        "Fit Recipes Post" : "Fit Recipes",
+        "Fitness Products Post" : "Fitness Products",
+        "Fitness Services Post" : "Fitness Services",
+        "Transformation Stories Post" : "Transformation Stories",
+        "Fit StoryBoards Post" : "Fit StoryBoards"
+    }
+
     getpostItem = (postinfo, lstoffiles) => {
         postinfo["post_desc"] = lstoffiles["post_description"];
         postinfo["currency"]  = lstoffiles["post_currency"];
@@ -104,6 +112,9 @@ class PostAsyncController {
         return this.postCategorytypes[post_category];
     }
 
+    getpostCategorytype(post_category){
+        return this.postCategorytype[post_category];
+    }
 }
 
 export default PostAsyncController;
