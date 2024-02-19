@@ -36,18 +36,20 @@ class App extends Component {
           {/* <Route exact path="/postitems" element={<PostCommentContainer/>} /> */}
           {/* <Route exact path="/" element={<LogoComponent/>} /> */}
           {/* <Route exact path="/" element={<TempComponent/>} /> */}
+          
           <Route exact path="/" element={<LandingPage/>} />
           <Route exact path="/users" element={<DisplayUsers/>} />
           <Route exact path="/signupform1" element={<SignUpFormFirst/>} />
           <Route exact path="/signupform2" element={<SignupformNext/>} />
           <Route exact path="/login" element={<LoginComponent/>} />
-          <Route exact path="/error" element={<ErrorComponent/>} />
           <Route exact path="/signupsuccess" element={<SuccessComponent/>} />
           <Route exact path='/signupform3' element={<SignupFormFinal/>}/>
-          <Route exact path='/homepage' element={<HomePage/>}/>
-          <Route exact path='/menucomponent' element={<MenuComponent/>}/>
+          {/* <Route exact path='/homepage' element={<HomePage/>}/> */}
+          {/* <Route exact path='/menucomponent' element={<MenuComponent/>}/> */}
           <Route exact path="/forgetpassword" element={<ForgotPasswordComponent/>} />        
           <Route exact path="/createpassword" element={<CreatePasswordComponent/>} />        
+          <Route exact path="/:pages" element={<HomePage/>} />
+          <Route exact path="*" element={<ErrorComponent/>} />
         </Routes>
       </Router>
     );

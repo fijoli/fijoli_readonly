@@ -223,7 +223,7 @@ const ViewPostComponent = ({ postkey }) => {
                                                     <span>
                                                         <IconButton key="upkey" onClick={(evt) => handlelikeState(1)}>
                                                             {
-                                                                (([postitem.is_active, postitem.reaction].join("")) === "11") && (<img src={rheart} className="view_image_pic" />) ||
+                                                                (([postitem.is_active, postitem.reaction].join("")) === "11")? (<img src={rheart} className="view_image_pic" />) :
                                                                 (<img src={lheart} className="view_image_pic" />)
                                                             }
                                                         </IconButton>
@@ -238,14 +238,14 @@ const ViewPostComponent = ({ postkey }) => {
                                                     <span>
                                                         <IconButton key="downkey" onClick={(evt) => handlelikeState(0)}>
                                                             {
-                                                                (([postitem.is_active, postitem.reaction].join("")) === "10") &&
-                                                                (<img src={rdislikeHeart} className="view_image_pic" />) ||
+                                                                (([postitem.is_active, postitem.reaction].join("")) === "10") ?
+                                                                (<img src={rdislikeHeart} className="view_image_pic" />) :
                                                                 (<img src={dislikeHeart} className="view_image_pic" />)
                                                             }
                                                         </IconButton>
                                                     </span>
                                                     <span>
-                                                        <span className='lead h9'>{postitem.likes_count}</span>
+                                                        <span className='lead h9'>{postitem.dislikes_count}</span>
                                                     </span>
                                                 </span>
                                             </div>
