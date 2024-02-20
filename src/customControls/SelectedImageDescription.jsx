@@ -1,15 +1,12 @@
 
 
-import { Avatar, Backdrop, Button, Dialog, DialogContent, DialogTitle, IconButton, Skeleton, Slide, Snackbar } from '@mui/material';
-import React from 'react'
+import { Avatar, Backdrop, Dialog, DialogContent, DialogTitle, IconButton, Skeleton, Slide, Snackbar } from '@mui/material';
+import React, { useCallback } from 'react'
 import { useState } from 'react';
 
-import PersonIcon from '@mui/icons-material/Person';
 import CancelIcon from '@mui/icons-material/Cancel';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import UploadIcon from '@mui/icons-material/Upload';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CloseIcon from '@mui/icons-material/Close';
 import "./SelectedImageDescription.css";
@@ -29,27 +26,18 @@ const SelectedImageDescription = ({ opendialog, documentinfo, dlgTitle, emitdocu
     });
 
     const [disableState, setdisableState] = useState(false);
-    const [filename, setfilename] = useState("");
+    const [setfilename] = useState("");
     const [deleteforeverState, setdelforeverState] = useState(false);
     const [selPicMessage, setselPicMessage] = useState({ "open": false });
 
     const [transition, setTransition] = useState(undefined);
 
-    const [sbstate, setsbState] = React.useState({
+    const [sbstate] = React.useState({
         vertical: 'top',
         horizontal: 'center',
     });
     const { vertical, horizontal } = sbstate;
 
-    //hook which initializes the useState of certificate
-    useEffect(() => {
-        if (null !== documentinfo) {
-            certificationInfo["document_desc"] = documentinfo.document_desc;
-            //call api to set the image to useState
-            setSelectedFile(documentinfo.image);
-            setdisableState(!disableState);
-        }
-    }, [documentinfo]);
 
     const handleCancelClick = () => {
         emitdocumentInfo(documentinfo);
@@ -63,7 +51,8 @@ const SelectedImageDescription = ({ opendialog, documentinfo, dlgTitle, emitdocu
         document.getElementById("fileid").click();
     }
 
-    const setSelectedFile = (selectedfile) => {
+    
+    const setSelectedFile = useCallback((selectedfile) => {
 
         if (null == selectedfile) {
             setfilename("");
@@ -75,8 +64,16 @@ const SelectedImageDescription = ({ opendialog, documentinfo, dlgTitle, emitdocu
         }
 
         setCertificationInfo({ ...certificationInfo });
-    }
-
+    },[certificationInfo,setfilename])
+    //hook which initializes the useState of certificate
+    useEffect(() => {
+        if (null !== documentinfo) {
+            certificationInfo["document_desc"] = documentinfo.document_desc;
+            //call api to set the image to useState
+            setSelectedFile(documentinfo.image);
+            setdisableState(!disableState);
+        }
+    }, [documentinfo,certificationInfo,disableState,setSelectedFile]);
     const handlefileChange = (evt) => {
         if (evt.target.files[0].size <= 4000000) {
             setSelectedFile(evt.target.files[0]);
@@ -88,10 +85,10 @@ const SelectedImageDescription = ({ opendialog, documentinfo, dlgTitle, emitdocu
         }
     }
 
-    const handleRemoveCertificate = () => {
-        setSelectedFile(null);
-        setdisableState(!disableState);
-    }
+    // const handleRemoveCertificate = () => {
+    //     setSelectedFile(null);
+    //     setdisableState(!disableState);
+    // }
 
     const handletxtChanged = (evt) => {
         certificationInfo[evt.target.name] = evt.target.value;
@@ -141,11 +138,11 @@ const SelectedImageDescription = ({ opendialog, documentinfo, dlgTitle, emitdocu
                     <div className='flex wrap justify-center'>
                         <div className='flex--4'>
                             {
-                                (certificationInfo.image) && (
+                                ((certificationInfo.image) ? (
                                     <Avatar src="/images/fileuploaded.jpeg" sx={{ width: 92, height: 92 }} />
-                                ) || (
+                                ) : (
                                     <Skeleton variant="circular" animation="wave" width={100} height={100} />
-                                )
+                                ))
                             }
                             <div className='flex justify-center text-center pad padtb pad-'>
                                 <div>

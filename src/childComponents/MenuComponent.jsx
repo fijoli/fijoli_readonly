@@ -51,10 +51,10 @@ const MenuComponent = (props) => {
     //else redirects to error page
     useEffect(() => {
 
-        if ((undefined != deactivateStatus) && (200 === deactivateStatus.status)) {
+        if ((undefined !== deactivateStatus) && (200 === deactivateStatus.status)) {
             dispatch({ "type": "clear" });
             navigate("/login");
-        } else if ((undefined != deactivateStatus) && (200 !== deactivateStatus.status)) {
+        } else if ((undefined !== deactivateStatus) && (200 !== deactivateStatus.status)) {
             navigate("/error");
         }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import successimage from './../asset/success.png'
 import "./SuccessComponent.css";
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux';
@@ -28,7 +27,7 @@ export const SuccessComponent = () => {
                       <p className='opacity75'>
                         Click on the confirmation link shared in Whatsapp to complete the sign up
                       </p>
-                      <p class="pad padtf">
+                      <p className="pad padtf">
                         <Link to={navigatelink} className="inlineblock anchor-outline rounded ao-fill-theme font-bold">
                           <span className="flex text-center grow">
                               <span><span className="pad padxd">Let's Start</span></span>

@@ -1,17 +1,14 @@
-
-
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react';
 import "./ProfilepicSelectionComponent.css";
 import CloseIcon from '@mui/icons-material/Close';
-import PersonIcon from '@mui/icons-material/Person';
 import UploadIcon from '@mui/icons-material/Upload';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import TransformIcon from '@mui/icons-material/Transform';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import CancelIcon from '@mui/icons-material/Cancel';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import { Avatar, Backdrop, Box, Button, Dialog, DialogContent, DialogTitle, IconButton, InputAdornment, Skeleton, Slide, Snackbar, TextField } from '@mui/material'
+import { Avatar, Backdrop, Button, Dialog, DialogContent, DialogTitle, IconButton, Skeleton, Slide, Snackbar } from '@mui/material'
 
 import ProfilepicCropComponent from './ProfilepicCropComponent';
 
@@ -33,29 +30,15 @@ const ProfilepicSelectionComponent = ({
 
     const [transition, setTransition] = useState(undefined);
 
-    const [sbstate, setsbState] = React.useState({
+    const [sbstate] = React.useState({
         vertical: 'top',
         horizontal: 'center',
       });
     const { vertical, horizontal } = sbstate;
-    
-    ///<summary>
-    // if pic is already selected initialize 
-    // when the dialog is launched
-    ///</summary>
-    useEffect(()=>{
-        if(profilepicInfo){
-            setselectedPic(profilepicInfo);
-            setOriginalpicFile(profilepicInfo);
-            if(removePicState){
-                setconfirmbtnlist([...["No", "Yes"]]);
-            }
-        }
-    },[profilepicInfo])
 
     //initialize usestate member variables once
     //pic file selected
-    const setselectedPic = (picinfo) => {
+    const setselectedPic = useCallback((picinfo) => {
         //set usestate member variables
         setprofilepicFile(picinfo);
         if((filetypes === ".mov") || (filetypes === ".pdf")){
@@ -69,7 +52,21 @@ const ProfilepicSelectionComponent = ({
         setdisableState(disableState);
 
         // setdisableState(((disableState) && (showcropIcons)));
-    }
+    },[filetypes,setpicpreview])
+    ///<summary>
+    // if pic is already selected initialize 
+    // when the dialog is launched
+    ///</summary>
+    useEffect(()=>{
+        if(profilepicInfo){
+            setselectedPic(profilepicInfo);
+            setOriginalpicFile(profilepicInfo);
+            if(removePicState){
+                setconfirmbtnlist([...["No", "Yes"]]);
+            }
+        }
+    },[profilepicInfo,removePicState,setselectedPic])
+
 
     //launch windows file explorer
     const handleuploadpicevent = () =>{
@@ -219,6 +216,7 @@ const ProfilepicSelectionComponent = ({
                                             startIcon={<HowToRegIcon style={{fontSize: "20px"}}/>} 
                                             onClick={handleRemovepicClick}>Yes</Button>
                             }
+                            return "";
                         })
                     }
                 </div>

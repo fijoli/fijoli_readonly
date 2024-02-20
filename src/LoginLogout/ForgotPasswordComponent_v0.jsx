@@ -34,10 +34,10 @@ const ForgotPasswordComponent = () => {
       );
 
     useEffect(()=>{
-        if((undefined != forgetpwdState) && (200 === forgetpwdState.status)){
+        if((undefined !== forgetpwdState) && (200 === forgetpwdState.status)){
             dispatch({"type": "reset_status"});
             navigate("/createpassword?whatsapp_number=" + forgetpwdData.whatsapp_number);
-        }else if((undefined != forgetpwdState) && (400 === forgetpwdState.status)){
+        }else if((undefined !== forgetpwdState) && (400 === forgetpwdState.status)){
             dispatch({"type": "reset_status"});
             // navigate("/error");  
             setdisplaymsg({"open": true, "msg": "Given data doesnt exists"});    

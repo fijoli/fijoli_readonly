@@ -12,6 +12,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import DisplayMessage from '../customControls/DisplayMessage';
 
 import intro_image from "./../asset/trainer.jpg";
+import { SITECONF } from '../helper/siteconf';
 
 const CreatePasswordComponent = () => {
 
@@ -36,7 +37,7 @@ const CreatePasswordComponent = () => {
 
     useEffect(() => {
 
-        if ((undefined != createpwdState) && (200 === createpwdState.status)) {
+        if ((undefined !== createpwdState) && (200 === createpwdState.status)) {
             dispatch({ "type": "reset_status" });
             setTimeout(() => {
                 setShowbackdrop(false);
@@ -44,7 +45,7 @@ const CreatePasswordComponent = () => {
             }, 3000);
             // navigate("/signupsuccess");
             setShowbackdrop(true);
-        } else if ((undefined != createpwdState) && (400 === createpwdState.status)) {
+        } else if ((undefined !== createpwdState) && (400 === createpwdState.status)) {
             dispatch({ "type": "reset_status" });
             // navigate("/error");
             setdisplaymsg({ "open": true, "msg": "failed to save password details" });
@@ -127,7 +128,7 @@ const CreatePasswordComponent = () => {
                                         '& fieldset': { borderRadius: 33 }
                                     }}
                                     InputProps={{
-                                        sx: { height: 50 },
+                                        sx: { height: SITECONF.INPUT_HEIGHT },
                                         startAdornment: <InputAdornment position="start">
                                             <IconButton>
                                                 <LockIcon />
@@ -152,7 +153,7 @@ const CreatePasswordComponent = () => {
                                         '& fieldset': { borderRadius: 33 }
                                     }}
                                     InputProps={{
-                                        sx: { height: 50 },
+                                        sx: { height: SITECONF.INPUT_HEIGHT },
                                         startAdornment: <InputAdornment position="start">
                                             <IconButton>
                                                 <LockIcon />

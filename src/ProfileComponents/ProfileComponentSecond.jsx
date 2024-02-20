@@ -5,6 +5,7 @@ import "./ProfileComponentSecond.css";
 import { useState } from "react";
 import FileUploadComponent from "../childComponents/FileUploadComponent";
 import AboutMyselfComponent from "../childComponents/AboutMyselfComponent";
+import { SITECONF } from "../helper/siteconf";
 
 
 const ProfileComponentSecond = (props) => {
@@ -94,7 +95,7 @@ const ProfileComponentSecond = (props) => {
                     <TextField type="text" fullWidth style={{ textAlign: 'center' }} placeholder="type here" variant="outlined" sx={{
                         '& fieldset': { borderRadius: 33 },
                         // "& .MuiOutlinedInput-notchedOutline": { border: "none" }
-                    }} onChange={handlenametxtChanged} InputProps={{ sx: { height: 50 } }} />
+                    }} onChange={handlenametxtChanged} InputProps={{ sx: { height: SITECONF.INPUT_HEIGHT } }} />
                 </div>
             </div>
             <div className="flex wrap justify-center flex-container">
@@ -149,7 +150,7 @@ const ProfileComponentSecond = (props) => {
                         }}
                         onChange={handlelocationchanged}
                         InputProps={{
-                            sx: { height: 50 },
+                            sx: { height: SITECONF.INPUT_HEIGHT },
                             startAdornment: <InputAdornment position="start">
                                 <IconButton>
                                     <LocationOnIcon />

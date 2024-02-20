@@ -51,7 +51,7 @@ export function SlideLayoutTemplate(prop) {
             setslide(slideVal);
         }, 5000);
         return () => clearInterval(interval);
-    }, [slide])
+    }, [slide,lstofImages])
 
     return (
         <>
@@ -61,7 +61,7 @@ export function SlideLayoutTemplate(prop) {
                         {
                             lstofImages.map((item, idx) => {
                                 return (
-                                    <div key={idx} className={["abs trbl slide-item transition ease", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
+                                    <div key={idx} className={["abs trbl slide-item transition ease", ((idx === slide) ? "slide-img-on" : "")].join(" ")}>
                                         <span className="abs trbl bg-cover bg-center" style={{ "backgroundImage": "url(" + item.src + ")" }}></span>
                                     </div>
                                 )
@@ -84,15 +84,15 @@ export function SlideLayoutTemplate(prop) {
                     {
                         ({undefined:false,1:true,0:false}[slide_context]) && (
                             <div className="flex justify-center">
-                                <div className="flex--5 md--6 sm--12 ">
+                                <div className="flex--7 md--6 sm--12 ">
                                     <div className="flex justify-center text-center">
                                         <div className="flex--12 sm--8 xsm--12">
                                             <div className="slide-change slide-active-onoff slide-context">
                                                 {
                                                     lstofImages.map((item, idx) => {
                                                         return (
-                                                            <div key={idx} className={["slide-item transition ease s2", ((idx == slide) ? "slide-img-on" : "")].join(" ")}>
-                                                                <h5 className='lead h5 nomargi pad padyb'>{item.msg.join("\n")}</h5>
+                                                            <div key={idx} className={["slide-item transition ease s2", ((idx === slide) ? "slide-img-on" : "")].join(" ")}>
+                                                                <h5 className='lead h6 nomargi pad padyb'>{item.msg.join("\n")}</h5>
                                                             </div>
                                                         )
                                                     })
@@ -105,7 +105,7 @@ export function SlideLayoutTemplate(prop) {
                                                             {lstofImages.map((_, idx) => {
                                                                 return <React.Fragment key={idx}>
                                                                     <div className="relative">
-                                                                        <a href={null} onClick={() => handleIndicator(idx)} className={["circle", (slide === idx ? "bullet-item active" : "bullet-item")].join(" ")}></a>
+                                                                        <button type="button" onClick={() => handleIndicator(idx)} className={["circle", (slide === idx ? "bullet-item active" : "bullet-item")].join(" ")}></button>
                                                                     </div>
                                                                 </React.Fragment>
                                                             })}

@@ -12,6 +12,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import DisplayMessage from '../DisplayMessageComponent/DisplayMessage';
 
 import { SlideLayoutTemplate } from '../childComponents/SlideLayoutComponent/template';
+import { SITECONF } from '../helper/siteconf';
 
 const ForgotPasswordComponent = () => {
 
@@ -34,10 +35,10 @@ const ForgotPasswordComponent = () => {
     );
 
     useEffect(() => {
-        if ((undefined != forgetpwdState) && (200 === forgetpwdState.status)) {
+        if ((undefined !== forgetpwdState) && (200 === forgetpwdState.status)) {
             dispatch({ "type": "reset_status" });
             navigate("/createpassword?whatsapp_number=" + forgetpwdData.whatsapp_number);
-        } else if ((undefined != forgetpwdState) && (400 === forgetpwdState.status)) {
+        } else if ((undefined !== forgetpwdState) && (400 === forgetpwdState.status)) {
             dispatch({ "type": "reset_status" });
             // navigate("/error");  
             setdisplaymsg({ "open": true, "msg": "Given data doesnt exists" });
@@ -96,7 +97,7 @@ const ForgotPasswordComponent = () => {
                                                 helperText={(forgetpwdData.user_email_status) ? "email id is not valid" : ""}
                                                 sx={{ '& fieldset': { borderRadius: 33 } }}
                                                 InputProps={{
-                                                    sx: { height: 50 },
+                                                    sx: { height: SITECONF.INPUT_HEIGHT },
                                                     startAdornment: <InputAdornment position="start">
                                                         <IconButton>
                                                             <EmailIcon />
@@ -112,7 +113,7 @@ const ForgotPasswordComponent = () => {
                                                 helperText={(forgetpwdData.whatsapp_number_status) ? "whatsapp number is not entered" : ""}
                                                 sx={{ '& fieldset': { borderRadius: 33 } }}
                                                 InputProps={{
-                                                    sx: { height: 50 },
+                                                    sx: { height: SITECONF.INPUT_HEIGHT },
                                                     startAdornment: <InputAdornment position="start">
                                                         <IconButton>
                                                             <WhatsAppIcon />
@@ -130,7 +131,7 @@ const ForgotPasswordComponent = () => {
                                                 variant="outlined" onChange={(evt) => handleChange(evt, "dob")}
                                                 sx={{ '& fieldset': { borderRadius: 33 } }}
                                                 InputProps={{
-                                                    sx: { height: 50 },
+                                                    sx: { height: SITECONF.INPUT_HEIGHT },
                                                     startAdornment: <InputAdornment position="start">
                                                         <IconButton>
                                                             <CalendarMonthIcon />

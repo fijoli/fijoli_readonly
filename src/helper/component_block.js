@@ -1,16 +1,3 @@
-{/* <button onClick={{}} className="anchor-outline rounded ao-fill-theme font-bold">
-    <span className="flex text-center grow">
-        <span><span className="pad padxd">Complete Profile</span></span>
-    </span>
-</button> */}
-
-
-{/* <span className="relative block">
-    <img src="./base/1x1.png" alt="Post" className="w" />
-    <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", userpicinfo, ")"].join("") }}></span>
-</span> */}
-
-
 export const LikeIconTemplate = (prop)=>{
     let {blockdata, onlike, ondislike} = prop;
     return (
@@ -36,7 +23,7 @@ export const LikeIconTemplate = (prop)=>{
                             <button onClick={ondislike} className="anchor-outline rounded ao-grey-skin">
                                 <span className="flex text-center grow align-items-center h ">
                                     <span className='icon-sized-xss'>
-                                        <img src={"/categoryImages/rDislikeheart.svg"} className="flex--12" />
+                                        <img alt="dislike" src={"/categoryImages/rDislikeheart.svg"} className="flex--12" />
                                     </span>
                                 </span>
                             </button>
@@ -96,6 +83,19 @@ export const CircleImageTemplate = (prop)=>{
                 <img src={[(dimension||"./base/1x1.png")].join("")} alt="Post" className="w" />
                 <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", image, ")"].join("") }}></span>
             </span>
+        </>
+    )
+}
+
+export const BackButton = (prop)=>{
+    let {onClick} = prop;
+    return (
+        <>
+            <button onClick={onClick} type="button" className="icon-sized-xs ishtoo anchor-outline ao-black-theme inlineblock circle nolh"  >
+                <span className="flex justify-center align-items-center h text-center">
+                    <span><i className="pad padx1 fa5 fa5-arrow-left"></i></span>
+                </span>
+            </button>
         </>
     )
 }

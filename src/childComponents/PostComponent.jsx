@@ -1,27 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import AspectRatioIcon from '@mui/icons-material/AspectRatio';
 import Button from "@mui/material/Button";
 import { Backdrop, ButtonGroup, CircularProgress, IconButton, TextField } from '@mui/material';
 import "./PostComponent.css"
 import { useDispatch, useSelector } from 'react-redux';
-import { grey } from '@mui/material/colors';
 import PostAsyncController from '../viewModels/PostAsyncController';
 import ConfirmationDialog from '../DialogComponents/ConfirmationDialog';
-import { useNavigate } from 'react-router-dom';
-import navigateItem from '../actions/navigateItemAction';
-import EnumNavigate from '../singletonControllers/NavigateController';
 import postactionItem from '../actions/postactionItem';
-import img1 from "./../asset/img1.jpg";
 import ProfilepicSelectionComponent from '../profilepiccontrols/ProfilepicSelectionComponent';
-import resetStatus from '../actions/resetStatus';
 
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
 import FileDownloadOffOutlinedIcon from '@mui/icons-material/FileDownloadOffOutlined';
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PlayDisabledIcon from '@mui/icons-material/PlayDisabled';
-import { upload } from '@testing-library/user-event/dist/upload';
 import updatepostAction from '../actions/updatepostAction';
 import clearpreviouspoststateAction from './Actions/clearpreviouspoststateAction';
 
@@ -90,7 +81,7 @@ const PostComponent = () => {
             setpicinfo({ ...picinfo });
             setdesc(postedpost["post_desc"]);
         }
-    }, [postedpost]);
+    }, [postedpost,picinfo,postinfo,uploadedfiles]);
 
     //clears unwanted data in store once the component get unmount
     useEffect(() => {
@@ -98,16 +89,16 @@ const PostComponent = () => {
             setShowbackdrop(false);
             dispatch(clearpreviouspoststateAction());
         });
-    }, []);
+    }, [dispatch]);
 
     //hook which invokes when a new post is posted into server
     //if successfully posted navigates to home page
     //else error page
     // useEffect(()=>{
-    //     if((undefined != postStatus) && (200 === postStatus.status)){
+    //     if((undefined !== postStatus) && (200 === postStatus.status)){
     //         // dispatch({"type":"reset_status"});
     //         dispatch(navigateItem(EnumNavigate.postContainer));
-    //     }else if((undefined != postStatus) && (200 !== postStatus.status)){
+    //     }else if((undefined !== postStatus) && (200 !== postStatus.status)){
     //         // dispatch({"type":"reset_status"});
     //         navigate("/error");
     //     }
@@ -128,6 +119,8 @@ const PostComponent = () => {
             case "3":
                 uploadedfiles["post_video"][0] = selectedfile;
                 picinfo.profilevideoloaded = (selectedfile) ? true : false;
+                break;
+                default :
                 break;
         }
 
@@ -226,6 +219,8 @@ const PostComponent = () => {
             case "3":
                 selPicInfo.profilepicInfo = uploadedfiles["post_video"][0];
                 break;
+                default:
+                break;
         }
         setSelPicInfo({ ...selPicInfo });
     }
@@ -264,7 +259,7 @@ const PostComponent = () => {
                         placeholder="Share your receipe in not more than 500 characters"
                         fullWidth
                         multiline
-                        helperText={(validState.desc_status) ? "please write something about your " + `${postinfo.post_category}` + " offering" : ""}
+                        helperText={(validState.desc_status) ? "please write something about your " + postinfo.post_category + " offering" : ""}
                         value={postinfo["post_desc"]}
                         sx={{
                             "& .MuiOutlinedInput-notchedOutline": { border: "none" }

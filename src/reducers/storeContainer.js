@@ -46,7 +46,7 @@ export const storeComponent = (state = initialState, action) => {
         case "confirmRegistration_success":
         case "invoke_login_success":
 
-            if(action.result.status != 200){
+            if(action.result.status !== 200){
                 state = {...state, loginState: {"status": 400}}
             }else{
                 const configData = new SysConfigData(action.result);
@@ -160,6 +160,7 @@ export const storeComponent = (state = initialState, action) => {
             const userCategories = state.configData.user_category;
             Object.keys(action.data).map((item)=>{
                 action.data[item]["user_category_type"] = userCategories[action.data[item].user_category-1];
+                return item;
             });
             state = {...state, lstofPosts: action.data, navigateItemType: action.navigateItemTo};
             return state;
@@ -171,12 +172,14 @@ export const storeComponent = (state = initialState, action) => {
                 let lstofposts = [];    
                 Object.keys(action.data.postItems).map(item =>{
                     lstofposts = [...lstofposts, action.data.postItems[item]];
+                    return item;
                 });
                 let category_name = StoreItemController.getPostCategoryType(action.data.post_category);
 
                 configData.postItems[category_name] = StoreItemController.removeDuplicates(configData.postItems[category_name], lstofposts);
                 Object.keys(action.data.postItems).map((item)=>{
                     action.data.postItems[item]["user_category_type"] = userCategories[action.data.postItems[item].user_category-1];
+                    return item;
                 });
                 state = {...state, lstofPosts: action.data.postItems, configData: {...configData}, navigateItemType: EnumNavigate.postContainer};
             }
@@ -212,7 +215,7 @@ export const storeComponent = (state = initialState, action) => {
             otherProfileData["isblocked"] = action.data.state;
             state = {...state, otherProfileData: {...otherProfileData}};
             if((!action.data.state) && (Object.keys(state).includes("lstofblockusers"))){
-                state.lstofblockusers = state.lstofblockusers.filter(item => item.user_id != action.data.blocked_user_id);
+                state.lstofblockusers = state.lstofblockusers.filter(item => item.user_id !== action.data.blocked_user_id);
             }
             return state;
 
@@ -338,6 +341,7 @@ export const storeComponent = (state = initialState, action) => {
                         //     newcomment[key] = action.data.comments[commentId][key];
                         // });
                         lstofPosts[action.post_id]["comments"] = {...lstofPosts[action.post_id]["comments"], ...{[commentId]:action.data.comments[commentId]}};
+                        return commentId
                     });
                 }
 
@@ -352,6 +356,7 @@ export const storeComponent = (state = initialState, action) => {
                 let editcomment     = {};
                 Object.keys(lstofPosts[action.post_id]["comments"][action.data.id]).map(key=>{
                     editcomment[key] = lstofPosts[action.post_id]["comments"][action.data.id][key];
+                    return key;
                 });
                 editcomment["comment_desc"] = action.data.comment_desc;
                 lstofPosts[action.post_id]["comments"][action.data.id] = {...editcomment};
@@ -376,8 +381,10 @@ export const storeComponent = (state = initialState, action) => {
                         let newcomment = {};
                         Object.keys(action.data.comments[commentId]).map(key=>{
                             newcomment[key] = action.data.comments[commentId][key];
+                            return key
                         });
                         postcomment["subcomments"] = {...postcomment["subcomments"], ...{[commentId]:action.data.comments[commentId]}};
+                        return commentId
                     });
                 }
 
@@ -419,6 +426,7 @@ export const storeComponent = (state = initialState, action) => {
                 let editcomment     = {};
                 Object.keys(lstofPosts[action.post_id].comments[action.data.main_comment_id].subcomments[action.data.id]).map(key=>{
                     editcomment[key] = lstofPosts[action.post_id].comments[action.data.main_comment_id].subcomments[action.data.id][key]
+                    return key
                 });
                 editcomment["comment_desc"] = action.data.comment_desc;
                 lstofPosts[action.post_id].comments[action.data.main_comment_id].subcomments[action.data.id] = {...editcomment};
@@ -485,7 +493,7 @@ export const storeComponent = (state = initialState, action) => {
             let lstofpostreplycomments = {...state.lstofpostreplycomments};
                 
             let comments = lstofpostreplycomments[action.postcomment.parent_id].filter((item, indx)=> 
-               (item.id != action.postcomment.id)
+               (item.id !== action.postcomment.id)
             );
             if(0 < comments.length){
                 lstofpostreplycomments[action.postcomment.parent_id] = [...comments];
@@ -543,7 +551,6 @@ export const storeComponent = (state = initialState, action) => {
             return state;
 
         case "post_follow_state_success":
-            {
                 if(200 === action.data.status){
                     let configData = state.configData;
                     configData.profileData["follower_count"] = action.data.logged_in_user_followData.follower_count;
@@ -559,7 +566,6 @@ export const storeComponent = (state = initialState, action) => {
                         state = {...state, otherProfileData: {...otherProfileData}};
                     }
                 }
-            }
             return state;
         
         case "get_follow_count_success":

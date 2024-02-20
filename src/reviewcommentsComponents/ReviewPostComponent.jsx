@@ -1,20 +1,17 @@
 
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import { Button, IconButton, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 
 import ConfirmationDialog from '../childComponents/ConfirmationDialog';
 
-import { grey } from '@mui/material/colors';
-import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
-import FileDownloadOffOutlinedIcon from '@mui/icons-material/FileDownloadOffOutlined';
 import { useDispatch } from 'react-redux';
 import postdummyreviewcomments from '../actions/postdummyreviewcommentsState';
 import postuserreviewcomment from '../actions/postuserreviewcomment';
 import ProfilepicSelectionComponent from '../profilepiccontrols/ProfilepicSelectionComponent';
 import PostReviewController from '../viewModels/PostReviewController';
 import RatingComponent from './RatingComponent';
-// import { Label } from '@material-ui/icons';
+
 
 
 const ReviewPostComponent = ({ reviewcomment, callback }) => {
@@ -31,9 +28,6 @@ const ReviewPostComponent = ({ reviewcomment, callback }) => {
         "confirmationMessage": "Are you sure to post review comment?",
         "menuOptions": ["No", "Yes"]
     });
-
-    // Adjust the size as needed
-    const iconStyle = { fontSize: '45px', color: grey };
 
     //created this hook to fix an issue -displaying description to support onchange event
     //hook sets review comment of the description

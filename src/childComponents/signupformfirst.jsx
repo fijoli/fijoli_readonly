@@ -3,12 +3,13 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import registerInfoAction from "../actions/registerInfo"
-import { Box, IconButton, InputAdornment, RadioGroup, Stack, TextField, Typography } from "@mui/material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
 import DisplayMessage from "../DisplayMessageComponent/DisplayMessage";
 import { SlideLayoutTemplate } from "./SlideLayoutComponent/template";
+import { SITECONF } from "../helper/siteconf";
 
 const SignUpFormFirst = () => {
 
@@ -18,7 +19,7 @@ const SignUpFormFirst = () => {
     const [displaymsg, setdisplaymsg] = useState({});
 
     const EMAIL_REGEX = new RegExp(
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,6}))$/
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,6}))$/
     );
 
     //create state variables to store the entered values
@@ -51,7 +52,7 @@ const SignUpFormFirst = () => {
             }
         }
 
-    }, [registrationState]);
+    }, [registrationState,navigate]);
 
     ///<summary>
     // handle change to update signup form data
@@ -101,7 +102,7 @@ const SignUpFormFirst = () => {
     // handle gender update 
     ///</summary>
     const handlegenderChange = (gendertype) => {
-        setregInfo({ ...regInfo, ["gender"]: gendertype, ["gender_status"]: false });
+        setregInfo({ ...regInfo, "gender": gendertype, "gender_status": false });
     }
 
     ///<summary>
@@ -109,7 +110,7 @@ const SignUpFormFirst = () => {
     ///</summary>
     const handleagreeChange = (evt) => {
         let is_active = (evt.target.checked) ? 1 : 0;
-        setregInfo({ ...regInfo, ["is_active"]: is_active, ["is_active_status"]: false });
+        setregInfo({ ...regInfo, "is_active": is_active, "is_active_status": false });
     }
 
     const handlecloseDisplayMsg = () => {
@@ -135,7 +136,7 @@ const SignUpFormFirst = () => {
                                             required
                                             InputProps=
                                             {{
-                                                sx: { height: 50 },
+                                                sx: { height: SITECONF.INPUT_HEIGHT },
                                                 startAdornment:
                                                     <InputAdornment position="start">
                                                         <IconButton> <PersonIcon /></IconButton>
@@ -153,7 +154,7 @@ const SignUpFormFirst = () => {
                                             helperText={(regInfo.user_email_status) ? "EmailId is incorrect." : ""}
                                             InputProps=
                                             {{
-                                                sx: { height: 50 },
+                                                sx: { height: SITECONF.INPUT_HEIGHT },
                                                 startAdornment:
                                                     <InputAdornment position="start">
                                                         <IconButton> <EmailIcon /></IconButton>
@@ -172,7 +173,7 @@ const SignUpFormFirst = () => {
                                             helperText={(regInfo.whatsapp_number_status) ? "Whatsapp number is incorrect." : ""}
                                             InputProps=
                                             {{
-                                                sx: { height: 50 },
+                                                sx: { height: SITECONF.INPUT_HEIGHT },
                                                 startAdornment:
                                                     <InputAdornment position="start">
                                                         <IconButton> <WhatsAppIcon /></IconButton>

@@ -16,6 +16,7 @@ class SysConfigData{
             if("user_category" === item.category_name){
                 return item.values;
             }
+            return false;
         });
 
         return [...user_category[0].values];
@@ -28,6 +29,7 @@ class SysConfigData{
             if("Language" === item.category_name){
                 return item.values;
             }
+            return false;
         });
         
         return [...languages[0].values];
@@ -39,6 +41,7 @@ class SysConfigData{
             if("Currency" === item.category_name){
                 return item.values;
             }
+            return false;
         });
 
         return [...currency_result[0].values];
@@ -50,6 +53,7 @@ class SysConfigData{
             if("Post" === item.category_name){
                 return item.values;
             }
+            return false;
         });
         
         return [...post_result[0].values];

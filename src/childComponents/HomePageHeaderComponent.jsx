@@ -16,6 +16,7 @@ import setpostcategoryType from '../actions/setpostcategoryType';
 import PostAsyncController from '../viewModels/PostAsyncController';
 import searchpostAction from '../SearchPosts/Actions/searchpostAction';
 import PostCategoryMenuComponent from './PostCategoryMenuComponent/PostCategoryMenuComponent';
+import { SITECONF } from '../helper/siteconf';
 
 
 //home page header component
@@ -123,7 +124,7 @@ const HomePageHeaderComponent = ({ userinfo, menutoggle, onMenuToggle }) => {
               fullWidth
               onChange={handlesearchkeyChange}
               InputProps={{
-                sx: { height: 50 },
+                sx: { height: SITECONF.INPUT_HEIGHT },
                 endAdornment: <InputAdornment position='end'>
                   <IconButton onClick={() => handleSearchClick(EnumNavigate.searchposts)}>
                     <SearchIcon />

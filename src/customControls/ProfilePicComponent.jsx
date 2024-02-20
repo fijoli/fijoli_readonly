@@ -27,7 +27,7 @@ const ProfilePicComponent = (props) => {
     if(props.handleProfilePicChange){
       props.handleProfilePicChange(profilepicInfo);
     }
-  },[profilepicInfo])
+  },[profilepicInfo,props])
 
   //handle updating the profile pic status
   const handleProfilePicSelection = (picinfo) => {
@@ -78,15 +78,15 @@ const ProfilePicComponent = (props) => {
     <div className='profile_pic'>
         <>
           <div className="relative">
-            <img src="./base/1x1.png" className="w" />
+            <img src="./base/1x1.png" className="w" alt="scale" />
             <label className='abs trbl flex grow padoff align-items-stretch justify-center circle oh' >
                 <div className="relative">
                   {
-                    (profilepicInfo) && (
+                    (profilepicInfo) ? (
                       <>
                           <span className="abs trbl bg-cover bg-center marg-pull-2x hinherit" style={{backgroundImage:["url(",previewImg,")"].join("")}}></span>
                       </>
-                    )||(
+                    ):(
                       <div className="flex align-items-center justify-center h">
                         <div>
                           <PersonIcon sx={{fontSize: "5rem"}} />
@@ -99,9 +99,9 @@ const ProfilePicComponent = (props) => {
             <div className="flex align-items-end justify-end hinherit abs trbl">
               <div>
                 {
-                  (profilepicInfo) && (
+                  (profilepicInfo) ? (
                     <PersonRemoveIcon className='profile-icon-sized remove-icon' onClick={handleRemoveProfilePic} />
-                  )||(
+                  ):(
                     <CameraAltIcon className='profile-icon-sized camera-icon' onClick={handleCameraClick} />
                   )
                 }

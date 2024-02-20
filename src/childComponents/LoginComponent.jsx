@@ -18,6 +18,7 @@ import { IconButton, InputAdornment, TextField } from "@mui/material";
 import clearErrorMessageAction from "../actions/clearErrorMessageAction";
 
 import { SlideLayoutTemplate } from "./SlideLayoutComponent/template";
+import { SITECONF } from "../helper/siteconf";
 
 //component which is used to login 
 const LoginComponent = () => {
@@ -119,7 +120,7 @@ const LoginComponent = () => {
                                             helperText={(loginData.whatsapp_number_status) ? "Whatsapp Number is not correct or not entered" : ""}
                                             sx={{ '& fieldset': { borderRadius: 33 } }}
                                             InputProps={{
-                                                sx: { height: 50 },
+                                                sx: { height: SITECONF.INPUT_HEIGHT },
                                                 startAdornment: <InputAdornment position="start">
                                                     <IconButton>
                                                         <WhatsAppIcon />
@@ -140,7 +141,7 @@ const LoginComponent = () => {
                                                 onChange={(evt) => handlechange(evt, "encrypted_password")}
                                                 sx={{ '& fieldset': { borderRadius: 33 } }}
                                                 InputProps={{
-                                                    sx: { height: 50 },
+                                                    sx: { height: SITECONF.INPUT_HEIGHT },
                                                     startAdornment: <InputAdornment position="start">
                                                         <IconButton>
                                                             <LockIcon />
@@ -168,7 +169,7 @@ const LoginComponent = () => {
                                 <div className="text-center pad padya">
                                         <Link to="/forgetpassword" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Forget Password ?</Link>
                                         <div className="pad padtb">
-                                            Don't have an account ? <Link to="/signupform1" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Create Account</Link>
+                                            <span>Don't have an account ?</span> <Link to="/signupform1" className="anchor-outline ao-link-lightblack inlineblock pad padd rounded">Create Account</Link>
                                         </div>
                                     </div>
                                 <div className="pad padyc"></div>

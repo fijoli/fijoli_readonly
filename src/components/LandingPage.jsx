@@ -1,7 +1,7 @@
 
-import React, { useEffect, useState } from 'react'
+import React, {  } from 'react'
 import { useNavigate } from 'react-router-dom';
-import "./LandingPage.css";
+// import "./LandingPage.css";
 
 import { SlideLayoutTemplate } from '../childComponents/SlideLayoutComponent/template';
 

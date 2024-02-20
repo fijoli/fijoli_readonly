@@ -52,7 +52,7 @@ const SignUpFormFinal = () => {
             }
             setShowbackdrop(false);
         }
-    }, [confirmRegState]);
+    }, [confirmRegState,dispatch,navigate]);
 
     var trainerType = "";
     if (userInfo) {
@@ -117,11 +117,11 @@ const SignUpFormFinal = () => {
                     <div className="flex wrap align-items-stretch relative justify-center h">
                         <div className="flex--12">
                             <div className="pad padd">
-                                <a href={null} className="anchor-outline ao-black-theme inlineblock circle nolh"  >
+                                <button type="button" className="anchor-outline ao-black-theme inlineblock circle nolh"  >
                                     <span className="flex justify-center align-items-center h text-center">
                                         <span><i className="pad padx1 fa5 fa5-arrow-left"></i></span>
                                     </span>
-                                </a>
+                                </button>
                             </div>
                         </div>
                         <div className="flex--12">

@@ -49,7 +49,7 @@ const SubmitterReview = ({ reviewComment, menuoption }) => {
             <div className="flex grow">
                 <div className="icon-sized-xsm">
                     <span className="relative oh block circle nolh">
-                        <img src="./base/1x1.png" alt="Picture" className='w' />
+                        <img src="./base/1x1.png" alt="scale" className='w' />
                         <span className="abs trbl bg-cover bg-center" style={{ backgroundImage: ["url(", img2, ")"].join("") }}></span>
                     </span>
                 </div>

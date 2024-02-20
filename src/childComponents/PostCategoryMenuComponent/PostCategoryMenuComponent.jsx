@@ -1,20 +1,11 @@
 
 
-import React, { useEffect, useState } from 'react'
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CoffeeIcon from '@mui/icons-material/Coffee';
-import FilterTwoToneIcon from '@mui/icons-material/FilterTwoTone';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import SettingsAccessibilityIcon from '@mui/icons-material/SettingsAccessibility';
-import ManIcon from '@mui/icons-material/Man';
+import React, { useState } from 'react'
 import EnumPostCategory from '../enums/EnumPostCategory';
-import { IconButton, Menu, MenuItem, useStepContext } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { Menu, MenuItem } from '@mui/material';
+import { useSelector } from 'react-redux';
 import EnumNavigate from '../../singletonControllers/NavigateController';
-import navigateItem from '../../actions/navigateItemAction';
 
-const iconStyle = { fontSize: '30px', color: "black" };
-const rediconStyle = { fontSize: '30px', color: "red" };
 
 let menus = {}
 menus[EnumPostCategory.FitRecipesPost] = {
@@ -37,7 +28,6 @@ menus[EnumPostCategory.TransformationStoriesPost] = {
 // }
 const PostCategoryMenuComponent = ({ menuOptions, handleClick, children }) => {
 
-    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const navigateItemtype = useSelector((state) => state.storeComponent.navigateItemType);
@@ -75,12 +65,12 @@ const PostCategoryMenuComponent = ({ menuOptions, handleClick, children }) => {
                                                 <span>
                                                     {
                                                         (havemenu.img) && (
-                                                            <img src={havemenu.img} style={{ width: "25px", height: "25px" }} />
+                                                            <img alt="" src={havemenu.img} style={{ width: "25px", height: "25px" }} />
                                                         )
                                                     }
                                                     {
                                                         (havemenu.imgcomponent) && (
-                                                            <img src={havemenu.imgcomponent} style={{ width: "25px", height: "25px" }} />
+                                                            <img alt="" src={havemenu.imgcomponent} style={{ width: "25px", height: "25px" }} />
                                                         )
                                                     }
                                                 </span>
